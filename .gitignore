@@ -1,2 +1,5 @@
 /venv
-
+.env
+/arxiv_vdb
+/grobid_client_python
+/models
