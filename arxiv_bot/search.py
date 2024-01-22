@@ -107,17 +107,22 @@ class IndexNewArxivPapers:
     
     """
     def __init__(self, 
-                 vectordb: VectorStore,
-                 n_search_results: int = 2,
-                 pdf_parser: Literal["grobid", "pymupdf"] = "grobid"
-                 ):
-        
+                vectordb: VectorStore,
+                n_search_results: int = 2,
+                pdf_parser: Literal["grobid", "pymupdf"] = "grobid",
+                chunk_size: int = 1024,
+                chunk_overlap: int = 100,
+                ):
+    
         self.google_api = GoogleSearchAPIWrapper()
         self.arxiv_client = arxiv.Client(delay_seconds=0)
         self.vectordb = vectordb
         self.chromadb_client = chromadb.PersistentClient("arxiv_vdb").get_collection("arxiv")
         self.n_search_results = n_search_results
-        self.splitter = SpacyTextSplitter(chunk_size = 1024, chunk_overlap = 128, separator="\n\n")
+        self.splitter = SpacyTextSplitter(
+            chunk_size = chunk_size,
+            chunk_overlap = chunk_overlap,
+            separator="\n\n")
         self.pdf_parser = pdf_parser
     
     def _get_paper_ids(self, query: str) -> List[str]:

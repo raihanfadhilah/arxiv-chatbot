@@ -220,7 +220,6 @@ def document_evaluator(documents: List[Document], query: str):
     
 class Retriever(BaseTool):
     vectordb: VectorStore
-    search_k: int = 10
     fetch_k: int = 10
     k: int = 3
     name: str = "Retriever"
@@ -316,6 +315,8 @@ class RetrieverWithSearch(BaseTool):
     search_k: int = 10
     fetch_k: int = 10
     k: int = 3
+    chunk_size: int = 1024
+    chunk_overlap: int = 100
     name: str = "RetrieverWithSearch"
     description: str = "Retriever that uses a search engine to find relevant documents and then uses a retriever to get the documents from the vectorstore."
     args_schema: Optional[Type[BaseModel]] = RetrievalInput
@@ -352,7 +353,9 @@ class RetrieverWithSearch(BaseTool):
             # )
             # query_keywords = kwchain.run(query)
             #Index new papers using the tool
-            index_tool = IndexNewArxivPapers(self.vectordb, pdf_parser=self.pdf_parser, n_search_results=self.search_k)
+            index_tool = IndexNewArxivPapers(self.vectordb, 
+                                             pdf_parser=self.pdf_parser,
+                                             n_search_results=self.search_k)
             index_tool._run(query)
             step.input = "Query: " + query
             

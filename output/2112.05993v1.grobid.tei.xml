@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">OBJECT COUNTING: YOU ONLY NEED TO LOOK AT ONE</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2021-12-11">11 Dec 2021</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName coords="1,208.16,126.78,91.33,10.29"><roleName>Xiaopeng</roleName><forename type="first">Hui</forename><surname>Lin</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Cyber Science and Engineering</orgName>
+								<orgName type="institution">Xi&apos;an Jiaotong University</orgName>
+								<address>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName coords="1,302.47,126.78,66.65,10.29"><forename type="first">Yabin</forename><surname>Hong</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Cyber Science and Engineering</orgName>
+								<orgName type="institution">Xi&apos;an Jiaotong University</orgName>
+								<address>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName coords="1,372.11,126.78,33.15,10.29"><surname>Wang</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Cyber Science and Engineering</orgName>
+								<orgName type="institution">Xi&apos;an Jiaotong University</orgName>
+								<address>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">OBJECT COUNTING: YOU ONLY NEED TO LOOK AT ONE</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date type="published" when="2021-12-11">11 Dec 2021</date>
+						</imprint>
+					</monogr>
+					<idno type="MD5">998BEAD201C7008EB5535818EE1FAC3C</idno>
+					<idno type="arXiv">arXiv:2112.05993v1[cs.CV]</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.0" ident="GROBID" when="2024-01-22T20:13+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Object Counting</term>
+					<term>One-Shot Learning</term>
+					<term>Attention Mechanism</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>This paper aims to tackle the challenging task of oneshot object counting. Given an image containing novel, previously unseen category objects, the goal of the task is to count all instances in the desired category with only one supporting bounding box example. To this end, we propose a counting model by which you only need to Look At One instance (LaoNet). First, a feature correlation module combines the Self-Attention and Correlative-Attention modules to learn both inner-relations and inter-relations. It enables the network to be robust to the inconsistency of rotations and sizes among different instances. Second, a Scale Aggregation mechanism is designed to help extract features with different scale information. Compared with existing few-shot counting methods, LaoNet achieves state-of-the-art results while learning with a high convergence speed. The code will be available soon.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<facsimile>
+		<surface n="1" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+		<surface n="2" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+		<surface n="3" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+		<surface n="4" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+		<surface n="5" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+		<surface n="6" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+		<surface n="7" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+	</facsimile>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1.">INTRODUCTION</head><p>Object counting has become increasingly important due to its wide range of applications such as crowd surveillance, traffic monitoring, wildlife conservation and inventory management. Most of the existing counting methods <ref type="bibr" coords="1,207.63,510.96,10.79,8.64" target="#b0">[1,</ref><ref type="bibr" coords="1,220.45,510.96,7.47,8.64" target="#b1">2,</ref><ref type="bibr" coords="1,229.96,510.96,8.30,8.64" target="#b2">3]</ref> focus on a particular, single category. However, when applying them into new categories, their performances will drop catastrophically. Meanwhile, it is extremely difficult and costly to collect all categories and label them for training.</p><p>For humans, the generalization ability allows them to learn and deal with various vision tasks without much prior knowledge and experience. We are amazed by this remarkable ability and in this work, we focus on this learning paradigm and design a network to efficiently recognize and count new categories given only one example. We follow the few-shot setting in <ref type="bibr" coords="1,131.60,642.69,11.62,8.64" target="#b3">[4]</ref> and modify it to one-shot object counting. That is, the model takes an image with unseen novel categories and a supporting bounding box containing an example instance of desired category as input, and then predicts the object count in the image.</p><p>However, there are two main challenges. First, the object counting task includes many different categories, and even several categories exist within a same image. Moreover in few-shot setting, these categories will not overlap between training and inference. This means that the model needs to have a strong distinguishing ability between features of different categories, and meanwhile, an effective associating ability among instances sharing the same category. Second, in one-shot counting, the model learns from only one supporting instance. Much of the difficulty results from the fact that the supporting sample may differ from other instances in, for example, sizes and poses. Hence, the model is required to be invariant towards these variations without seeing the commonalities across different instances.</p><p>Therefore, in this paper, we propose an effective network named LaoNet for one-shot object counting. It consists of three main parts: feature extraction, feature correlation and the density regressor, as shown in Figure <ref type="figure" coords="1,477.38,389.17,3.74,8.64" target="#fig_0">1</ref>. The feature correlation model and the feature extraction model are elaborately designed to address the above two challenges.</p><p>We propose the feature correlation based on Self-Attention and Correlative-Attention modules to learn innerrelations and inter-relations respectively. The Self-Attention encourages the model to focus more on important features and their correlations, improving the efficiency of information refinement. Previous few-shot counting methods <ref type="bibr" coords="1,505.55,485.48,10.79,8.64" target="#b3">[4,</ref><ref type="bibr" coords="1,519.13,485.48,8.30,8.64" target="#b4">5]</ref> usually leverage on a convolution operation to match the similarities between image features and supporting features. However, as the kernel is derived from supporting features with the default size and rotation angle, the convolution operation will greatly depend on the quality of supporting features and the consistency of physical properties among different instances. Instead, our designed feature correlation model benefits from two kinds of attention modules and addresses the above problem by considering all correlations.</p><p>We further propose a Scale Aggregation mechanism in scale extraction to deal with scale variations among different categories and different instances. By learning features from multi-subspace, the model aggregates various scale information while maintaining a spatial consistency.</p><p>To summarize, our contribution is threefold.</p><p>• We design a novel network named LaoNet (A network by which you only need to Look At One instance) for one-shot object counting. By combining Self-Attention and Correlative-Attention modules, LaoNet exploits the correlation among novel category objects with high accuracy and efficiency.</p><p>• We propose a Scale Aggregation mechanism to extract more comprehensive features and fuse multi-scale information from the supporting box.</p><p>• The experimental results show that our model achieves state-of-the-art results with significant improvements on FSC-147 <ref type="bibr" coords="2,130.51,424.87,11.62,8.64" target="#b3">[4]</ref> and COCO <ref type="bibr" coords="2,192.03,424.87,11.62,8.64" target="#b5">[6]</ref> datasets under the oneshot setting without fine-tuning.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.">RELATED WORKS</head><p>Object counting methods can be briefly divided into two types. Detection based methods <ref type="bibr" coords="2,185.94,499.29,11.62,8.64" target="#b6">[7]</ref> count the number of objects by exhaustively detecting every target in images. But they rely on the complex labels such as bounding boxes. Regression based methods <ref type="bibr" coords="2,153.21,535.16,10.79,8.64" target="#b0">[1,</ref><ref type="bibr" coords="2,167.05,535.16,8.30,8.64" target="#b1">2]</ref> learn to count by predicting a density map, in which each value represents the density of target objects at the corresponding location. The count prediction equals to the total sum of density map. Nevertheless, most of the counting methods are category specifically, e.g. for human crowd <ref type="bibr" coords="2,202.00,595.02,10.79,8.64" target="#b0">[1,</ref><ref type="bibr" coords="2,216.60,595.02,7.47,8.64" target="#b1">2,</ref><ref type="bibr" coords="2,227.87,595.02,7.47,8.64" target="#b7">8,</ref><ref type="bibr" coords="2,239.15,595.02,7.47,8.64" target="#b8">9,</ref><ref type="bibr" coords="2,250.43,595.02,12.45,8.64" target="#b9">10,</ref><ref type="bibr" coords="2,266.69,595.02,11.83,8.64" target="#b10">11]</ref>, for cars <ref type="bibr" coords="2,73.45,606.97,10.79,8.64" target="#b2">[3,</ref><ref type="bibr" coords="2,87.22,606.97,11.83,8.64" target="#b11">12]</ref>, for plants <ref type="bibr" coords="2,147.50,606.97,16.60,8.64" target="#b12">[13]</ref> or for cells <ref type="bibr" coords="2,214.22,606.97,15.77,8.64" target="#b13">[14,</ref><ref type="bibr" coords="2,232.97,606.97,11.83,8.64" target="#b14">15]</ref>. They focus on only one category and will loss the original satisfied performance when transferring to other categories. Moreover, most traditional approaches usually rely on tens of thousands of instances to train a counting model <ref type="bibr" coords="2,206.89,654.79,10.79,8.64" target="#b1">[2,</ref><ref type="bibr" coords="2,220.17,654.79,7.47,8.64" target="#b7">8,</ref><ref type="bibr" coords="2,230.14,654.79,7.47,8.64" target="#b8">9,</ref><ref type="bibr" coords="2,240.10,654.79,12.45,8.64" target="#b10">11,</ref><ref type="bibr" coords="2,255.04,654.79,7.47,8.64" target="#b2">3,</ref><ref type="bibr" coords="2,265.00,654.79,11.83,8.64" target="#b11">12]</ref>.</p><p>To reduce considerably the number of samples needed to train a counting model for a particular category, recently, fewshot counting task has been developed. The key lies in the generalization ability of the model to deal with novel categories from few labeled examples. The study <ref type="bibr" coords="2,236.77,714.65,16.60,8.64" target="#b15">[16]</ref> proposes a Generic Matching Network (GMN) for class-agnostic counting. However it still needs several dozens to hundreds examples of a novel category for adaptation and good performance. CFOCNet is introduced to match and utilize the similarity between objects within the same category <ref type="bibr" coords="2,482.56,360.46,10.58,8.64" target="#b4">[5]</ref>. The work <ref type="bibr" coords="2,547.37,360.46,11.62,8.64" target="#b3">[4]</ref> presents a Few Shot Adaptation and Matching Network (Fam-Net) to learn feature correlations and few-shot adaptation and also introduces a few-shot counting dataset named FSC-147.</p><p>When the number of labeled example decreases to one, the task evolves into one-shot counting. In other visual tasks, researchers develop methods for one-shot segmentation <ref type="bibr" coords="2,542.39,433.13,16.60,8.64" target="#b16">[17]</ref> and one-shot object detection <ref type="bibr" coords="2,434.82,445.09,15.77,8.64" target="#b17">[18,</ref><ref type="bibr" coords="2,453.11,445.09,11.83,8.64" target="#b18">19]</ref>. Compared to the fewshot setting which usually uses at least three instances for each object <ref type="bibr" coords="2,362.79,469.00,10.58,8.64" target="#b3">[4]</ref>, the one-shot setting, where only one instance is available, is clearly more challenging.</p><p>It is worth mentioning that detection based approaches <ref type="bibr" coords="2,315.21,505.80,15.77,8.64" target="#b19">[20,</ref><ref type="bibr" coords="2,333.25,505.80,12.45,8.64" target="#b20">21,</ref><ref type="bibr" coords="2,347.97,505.80,13.28,8.64" target="#b21">22]</ref> are inferior for the tasks of few-shot and one-shot counting. One main reason is that it requires extra and costly bounding-box annotations of all instances in the training stage while one-shot counting approach which we focus on depends on dot annotations and only one supporting box. To illustrate this point further, we perform experiments in Section 4.3 to compare with detection based approaches and validate the proposed network for one-shot counting.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.">APPROACH</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.">Problem Definition</head><p>One-shot object counting consists of a training set (I t , s t , y t ) ∈ T and a query set (I q , s q ) ∈ Q, in which categories are mutually exclusive. Each input for the model contains an image I and a supporting bounding box s annotating one object of the desired category. In training set, abundant point annotations y t are available to supervise the model. In inference stage, we aim the model to learn to count the novel objects in I q with a supporting category instance sampled by s q .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.">Feature Correlation</head><p>As the model is required to learn to count from only one supporting object, seizing the correlation between features with high efficiency is quite important. Therefore, we build the feature correlation model in our one-shot network based on Self-Attention and Correlative-Attention modules, for learning the inner-relations and inter-relations respectively.</p><p>As illustrated in Figure <ref type="figure" coords="3,179.84,229.55,4.98,8.64" target="#fig_0">1</ref> (violet block), our Self-Attention module consists of a Multi-head Attention (MA) and a layer normalization (LN). We first introduce the definition of attention <ref type="bibr" coords="3,129.59,265.42,15.27,8.64" target="#b22">[23]</ref>, given the query Q, key K and value vector V :</p><formula xml:id="formula_0" coords="3,58.14,295.26,240.06,34.33">A(Q, K, V | W ) = S( (QW Q )(KW K ) T √ d + P E)(V W V ),<label>(1)</label></formula><p>where S is the softmax function and 1 √ d is a scaling factor based on the vector dimension d. W : W Q , W K , W V ∈ R d×d are weight matrices for projections and P E is the position embedding.</p><p>To leverage on more representation subspaces, we adopt the extending form with multi attention heads:</p><formula xml:id="formula_1" coords="3,78.59,415.58,195.45,26.67">M A(Q, K, V ) = Concat(head 1 , .., head h )W O where head i = A(Q, K, V | W i ).</formula><p>(</p><formula xml:id="formula_2" coords="3,290.46,425.29,7.74,8.64">)<label>2</label></formula><p>The representation dimensions are divided by parallel attention heads, where parameter matrices</p><formula xml:id="formula_3" coords="3,54.43,463.45,243.78,24.35">W i : W Q i , W K i , W V i ∈ R d×d/h and W O ∈ R d×d .</formula><p>One challenging problem in counting task is the existence of many complex interfering things. To efficiently weaken the negative influence by those irrelevant background, we apply Multi-head Self-Attention in image features to learn innerrelations and encourage the model to focus more on repetitive objects that can be counted.</p><p>We denote the feature sequences of the query image and the supporting box region as X and S, with sizes X ∈ R HW ×C and S ∈ R hw×C . And the refined query feature is calculated by:</p><formula xml:id="formula_4" coords="3,103.73,617.71,194.47,12.17">X = LN (M A(X Q , X K , X V ) + X).<label>(3)</label></formula><p>A layer normalization (LN) is adopted to balance the value scales.</p><p>Meanwhile, as there is only one supporting object in oneshot counting problem, refining the salient features within the object is necessary and helpful for counting efficiency and accuracy. Therefore we apply another Self-Attention module to supporting feature and get refined S.</p><p>Previous few-shot counting methods <ref type="bibr" coords="3,480.00,75.48,10.79,8.64" target="#b3">[4,</ref><ref type="bibr" coords="3,493.78,75.48,8.30,8.64" target="#b4">5]</ref> usually adopt a convolution operation where the supporting features act as kernels to match the similarities for target category. However, the results will greatly depend on the quality of supporting features and the consistency of objects' properties, including rotations and scales.</p><p>To this end, we propose a Correlative-Attention module to learn inter-relations between query and supporting features and alleviate the constraints of irrelevant properties.</p><p>Specifically, we extend the MA by learning correlations between different feature sequences and add a feed-forward network (FFN) to fuse the features, i.e.,</p><formula xml:id="formula_5" coords="3,328.69,223.83,230.30,11.47">X * = Corr( X, S) = G(M A( XQ , SK , SV ) + X). (4)</formula><p>G includes two LNs and a FFN in the form of residual (light blue block in Figure <ref type="figure" coords="3,397.20,258.31,3.60,8.64" target="#fig_0">1</ref>). Finally, X * and S will be fed into the cycle as new feature sequences where each cycle consists of two Self-Attention modules and a Correlative-Attention module.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.">Feature Extraction and Scale Aggregation</head><p>To extract feature sequences from images, we use VGG-19 as our backbone. For query image, the output of the final level is directly flattened and transmitted into Self-Attention module. For the supporting box, as there are uncontrollable scale variations among instances due to the perspective, we propose a Scale Aggregation mechanism to fuse different scale information.</p><p>Given l as the number of layers in CNN, we aggregate the feature maps among different scales:</p><formula xml:id="formula_6" coords="3,344.53,451.92,214.47,11.03">S = Concat(F l (s), F l-1 (s), ..., F l+1-δ (s)),<label>(5)</label></formula><p>where F i represents a feature map at i th level and δ ∈ [1, l] decides the number of layers taken for aggregation. Meanwhile, we leverage on identifying position embedding to help the model distinguish the integrated scale information in attention model. By adopting the fixed sinusoidal absolute position embedding <ref type="bibr" coords="3,463.88,533.77,15.27,8.64" target="#b22">[23]</ref>, feature sequences from different scales can still maintain the consistency between positions, i.e., P E (posj ,2i) = sin(pos j /10000 2i/d ), P E (posj ,2i+1) = cos(pos j /10000 2i/d ).</p><p>(</p><formula xml:id="formula_7" coords="3,551.25,586.16,7.74,8.64">)<label>6</label></formula><p>i is the dimension and pos j is the position for j th feature map.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4.">Training Loss</head><p>We use Euclidean distance to measure the difference between estimated density map and ground truth density map, which is generated based on annotated points following <ref type="bibr" coords="3,507.33,683.01,10.58,8.64" target="#b0">[1]</ref>. The loss is defined as follows:</p><formula xml:id="formula_8" coords="3,396.07,712.26,159.05,12.69">L E = ||D gt -D|| 2 2 , (<label>7</label></formula><formula xml:id="formula_9" coords="3,555.12,714.65,3.87,8.64">)</formula><p>where D is the estimated density map and D gt is the ground truth density map. To improve the local pattern consistency, we also adopt a SSIM loss followed the calculation in <ref type="bibr" coords="4,269.51,99.39,10.58,8.64" target="#b7">[8]</ref>. By integrating the above two loss functions, we have</p><formula xml:id="formula_10" coords="4,133.89,133.55,164.31,9.65">L = L E + λL SSIM ,<label>(8)</label></formula><p>where λ is the balanced weight.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">EXPERIMENTS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.">Implement Details and Evaluation Metrics</head><p>We design the density regressor by an upsampling layer and three convolution layers with ReLU activation. The kernel sizes of first two layers are 3 × 3 and that of last is 1 × 1. Random scaling and flipping are adopted for each training image. Adam <ref type="bibr" coords="4,80.99,275.63,16.60,8.64" target="#b23">[24]</ref> with a learning rate 0.5 × 10 -5 is used to optimize the parameters. We set the number of attention heads h as 4, the correlation cycle T as 2, the number of aggregated layers δ as 2, and the loss balanced parameter λ as 10 -4 . Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE) are used to measure the performance of our methods. They are defined by:</p><formula xml:id="formula_11" coords="4,102.52,368.87,195.68,69.06">M AE = 1 M M i=1 N gt i -N i , RM SE = 1 M M i=1 (N gt i -N i ) 2 ),<label>(9)</label></formula><p>where M and N gt are the number of images and the groundtruth count, respectively. The predicted count N is calculated by integrating the estimated density map D. MS-COCO <ref type="bibr" coords="4,104.95,607.03,11.62,8.96" target="#b5">[6]</ref> is a large dataset widely used in object detection and instance segmentation. In val2017 set, there are 80 common object categories with 5,000 images in complex everyday scenes. We follow <ref type="bibr" coords="4,157.69,643.29,16.60,8.64" target="#b16">[17]</ref> to generate four train/test splits which each contains 60 training and 20 testing categories.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.">Comparison with Few-Shot Approaches</head><p>We hold experiments on above two few-shot counting datasets to evaluate the proposed network. As there are few existing  methods specifically designed for one-shot counting, for comprehensive evaluation, we modify FamNet <ref type="bibr" coords="4,495.25,592.03,11.62,8.64" target="#b3">[4]</ref> and CFOC-Net <ref type="bibr" coords="4,332.37,603.99,11.62,8.64" target="#b4">[5]</ref> for this setting and also compare with other few-shot counting approaches <ref type="bibr" coords="4,399.88,615.95,15.77,8.64" target="#b24">[25,</ref><ref type="bibr" coords="4,418.14,615.95,12.45,8.64" target="#b25">26,</ref><ref type="bibr" coords="4,433.08,615.95,12.45,8.64" target="#b15">16,</ref><ref type="bibr" coords="4,448.02,615.95,12.45,8.64" target="#b26">27,</ref><ref type="bibr" coords="4,462.97,615.95,11.83,8.64" target="#b16">17]</ref>. First, quantitative results on FSC-147 are shown in Table 1. We list seven results of previous few-shot detection and counting methods in 3-shot setting and two results of stateof-the-art counting methods in 1-shot setting for comparison. The result of FamNet <ref type="bibr" coords="4,404.67,677.25,11.62,8.64" target="#b3">[4]</ref> uses the adaptation strategy during testing.</p><p>It is worth noticing that our one-shot LaoNet outperforms all of previous few-shot methods, even those in 3 shot set- Second, Table <ref type="table" coords="5,127.82,463.42,4.98,8.64" target="#tab_1">2</ref> shows the results on each of four folds of COCO val2017. Methods with † in the upper part of the table follow the experiment setting in <ref type="bibr" coords="5,188.77,487.33,10.58,8.64" target="#b4">[5]</ref>. That is, the supporting examples are chosen from all instances in the dataset during training and testing, which is laborious and costly under the need of all instances annotated by bounding boxes. While our setting allows only one fixed instance for each image, we reconduct the experiment of CFOCNet <ref type="bibr" coords="5,202.20,547.11,10.58,8.64" target="#b4">[5]</ref>. As the result shows, our method maintains a great performance on COCO dataset.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.">Discussions</head><p>Contribution of Different Terms. We study the accuracy contributions of different terms in FSC-147. The result is shown in Table <ref type="table" coords="5,121.09,630.63,3.74,8.64" target="#tab_2">3</ref>, each row whereof reports the results after removing one component or one term from LaoNet. The Self-Attention modules for the two feature sequences to learn inner-relations increase the accuracy in testing set by 19.9% and 15.7% for MAE, 9.5% and 13.1% for RMSE, respectively. Compared to other two terms, the Self-Attention modules contribute most to the performance of our model.</p><p>The Scale Aggregation mechanism helps more on RMSE. The result demonstrates a robustness contribution under the multi-scale aggregation. Finally, the SSIM loss further improves the counting accuracy by both lower MAE and RMSE. Convergence Speed. We hold experiments to measure the convergence speed and the performance stability. We pick FamNet <ref type="bibr" coords="5,351.58,482.65,11.62,8.64" target="#b3">[4]</ref> as the baseline for LaoNet with a pre-trained CNN backbone and an Adam optimizer. We train both two models on FSC-147 and report the validation MAE for 100 epochs.</p><p>As shown in Figure <ref type="figure" coords="5,412.99,532.09,3.74,8.64" target="#fig_3">3</ref>, our model has faster convergence speed and better stability than FamNet. With just 2 epoches, our method achieves a low counting error which FamNet has to reach after 40 epochs. Meanwhile, the convergence of our method is smooth and stable, while that of Famet is jagged, with multiple sharp peaks and the highest error of 70. Comparison with Object Detectors. Object detectors can be used for counting task with the number of predicted detections. However, even these detectors work with categories which they are trained on instead of one-shot setting, their counting performances are still limited. We select images of FSC-147-COCO subset from FSC147 Val and Test sets which share categories with MS-COCO dataset and conduct quantitative experiments.</p><p>As the results shown in Table <ref type="table" coords="5,448.71,702.69,3.74,8.64" target="#tab_3">4</ref>, we compare LaoNet with several object detectors which are well pre-trained with thou- </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">CONCLUSION</head><p>This paper targets one-shot object counting, which requires the counting model to count objects of new categories by looking at only one instance. We propose an efficient network named LaoNet to address this challenge. LaoNet includes a feature correlation module to learn both inner-relations and inter-relations and a scale aggregation module to extract multi-scale information for improving robustness. Without any fine-tuning in inference, our LaoNet outperforms previous state-of-the-art few-shot counting methods with a high convergence speed. In the future, we consider applying our model to a wider range of one-shot vision tasks.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0" coords="2,54.43,244.34,504.57,9.03;2,54.43,256.68,504.57,8.64;2,54.43,268.64,504.57,8.64;2,54.43,280.59,239.48,8.64;2,67.04,72.00,479.33,157.29"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. The overall architecture of the proposed LaoNet for one-shot object counting. Both the query image and the supporting box are fed into CNN to extract features. Supporting features are aggregated among scales. Then the flatten features with unique position embedding are transmitted into feature correlation model with Self-Attentions and Correlative Attentions. Finally, a density regressor is adopted to predict the final density map.</figDesc><graphic coords="2,67.04,72.00,479.33,157.29" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1" coords="4,54.43,503.79,56.33,8.96;4,54.43,523.04,243.78,9.03;4,54.43,535.39,243.77,8.64;4,54.43,547.34,243.77,8.64;4,54.43,559.30,243.78,8.64;4,54.43,571.25,243.77,8.64;4,54.43,583.21,243.77,8.64;4,54.43,595.16,151.70,8.64"><head>4. 2</head><label>2</label><figDesc>. Datesets FSC-147 [4] contains a total of 6135 images collected for few-shot counting problem. In each image, three randomly selected object instances are annotated by bounding boxes while other instances are annotated by points. 89 object categories with 3,659 images are divided for training set. Each 29 categories with 1,286 and 1,190 images respectively are divided for validation and testing sets.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2" coords="4,315.21,500.77,243.78,9.03;4,315.21,513.12,243.77,8.64;4,315.21,525.07,243.77,8.64;4,315.21,537.03,115.67,8.64;4,319.20,420.65,80.44,53.63"><head>Fig. 2 .</head><label>2</label><figDesc>Fig. 2. Visualizations of one-shot counting inputs and corresponding predicted density maps. The model can perform great counting accuracy even it has never seen strawberry, hot air balloon or cashew before.</figDesc><graphic coords="4,319.20,420.65,80.44,53.63" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3" coords="6,54.43,147.52,243.78,9.03;6,54.43,159.86,243.77,8.64;6,54.43,171.82,243.78,8.64;6,54.43,183.77,112.34,8.64;6,55.22,72.00,242.17,60.47"><head>Fig. 3 .</head><label>3</label><figDesc>Fig. 3. Comparisons of validation MAE during training. The blue line represents our proposed LaoNet. With just one epoch, it can perform a great accuracy which FamNet needs to train for about 20 epochs.</figDesc><graphic coords="6,55.22,72.00,242.17,60.47" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0" coords="4,315.21,77.62,243.78,410.34"><head>Table 1 .</head><label>1</label><figDesc>Comparisons with previous state-of-the-art few-shot methods on FSC-147. The upper part of the table presents the</figDesc><table coords="4,324.78,77.62,224.64,410.34"><row><cell>Methods</cell><cell>MAE</cell><cell>Val RMSE</cell><cell>MAE</cell><cell>Test RMSE</cell></row><row><cell>3-shot</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Mean</cell><cell>53.38</cell><cell>124.53</cell><cell>47.55</cell><cell>147.67</cell></row><row><cell>Median</cell><cell>48.68</cell><cell>129.70</cell><cell>47.73</cell><cell>152.46</cell></row><row><cell>FR detector [25]</cell><cell>45.45</cell><cell>112.53</cell><cell>41.64</cell><cell>141.04</cell></row><row><cell>FSOD detector [26]</cell><cell>36.36</cell><cell>115.00</cell><cell>32.53</cell><cell>140.65</cell></row><row><cell>GMN [16]</cell><cell>29.66</cell><cell>89.81</cell><cell>26.52</cell><cell>124.57</cell></row><row><cell>MAML [27]</cell><cell>25.54</cell><cell>79.44</cell><cell>24.90</cell><cell>112.68</cell></row><row><cell>FamNet [4]</cell><cell>23.75</cell><cell>69.07</cell><cell>22.08</cell><cell>99.54</cell></row><row><cell>1-shot</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>CFOCNet [5]</cell><cell>27.82</cell><cell>71.99</cell><cell>28.60</cell><cell>123.96</cell></row><row><cell>FamNet [4]</cell><cell>26.55</cell><cell>77.01</cell><cell>26.76</cell><cell>110.95</cell></row><row><cell>LaoNet (Ours)</cell><cell>17.11</cell><cell>56.81</cell><cell>15.78</cell><cell>97.15</cell></row><row><cell>GT: 33</cell><cell></cell><cell>GT: 14</cell><cell></cell><cell>GT: 35</cell></row><row><cell>Pre: 35</cell><cell></cell><cell>Pre: 14</cell><cell></cell><cell>Pre: 37</cell></row></table><note coords="4,315.21,269.04,243.77,8.64;4,315.21,280.99,243.77,8.64;4,315.21,292.95,243.77,8.64;4,315.21,304.90,243.77,8.64;4,315.21,316.86,96.18,8.64"><p><p><p>results in 3-shot setting while the lower part presents 1-shot results. FamNet</p><ref type="bibr" coords="4,383.57,280.99,11.62,8.64" target="#b3">[4]</ref> </p>uses the adaptation strategy during testing. It is worth noticing that our one-shot LaoNet outperforms all of previous methods, even those in 3-shot setting, without any fine-tuning strategy.</p></note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1" coords="5,54.43,77.62,504.56,232.71"><head>Table 2 .</head><label>2</label><figDesc>Results on each of four folds of COCO val2017. Methods with † follow the experiment setting in<ref type="bibr" coords="5,492.36,180.30,10.58,8.64" target="#b4">[5]</ref>. Our method achieves great accuracy without any fine-tuning on testing categories.</figDesc><table coords="5,69.07,77.62,474.61,232.71"><row><cell>Methods</cell><cell cols="2">MAE</cell><cell cols="2">Fold 0 RMSE</cell><cell>MAE</cell><cell>Fold 1 RMSE</cell><cell>MAE</cell><cell>Fold 2 RMSE</cell><cell>MAE</cell><cell>Fold 3 RMSE</cell><cell>Average MAE RMSE</cell></row><row><cell>Segment [17]  †</cell><cell cols="2">2.91</cell><cell></cell><cell>4.20</cell><cell>2.47</cell><cell>3.67</cell><cell>2.64</cell><cell>3.79</cell><cell>2.82</cell><cell>4.09</cell><cell>2.71</cell><cell>3.94</cell></row><row><cell>GMN [16]  †</cell><cell cols="2">2.97</cell><cell></cell><cell>4.02</cell><cell>3.39</cell><cell>4.56</cell><cell>3.00</cell><cell>3.94</cell><cell>3.30</cell><cell>4.40</cell><cell>3.17</cell><cell>4.23</cell></row><row><cell>CFOCNet [5]  †</cell><cell cols="2">2.24</cell><cell></cell><cell>3.50</cell><cell>1.78</cell><cell>2.90</cell><cell>2.66</cell><cell>3.82</cell><cell>2.16</cell><cell>3.27</cell><cell>2.21</cell><cell>3.37</cell></row><row><cell>FamNet [4]</cell><cell cols="2">2.34</cell><cell></cell><cell>3.78</cell><cell>1.41</cell><cell>2.85</cell><cell>2.40</cell><cell>2.75</cell><cell>2.27</cell><cell>3.66</cell><cell>2.11</cell><cell>3.26</cell></row><row><cell>CFOCNet [5]</cell><cell cols="2">2.23</cell><cell></cell><cell>4.04</cell><cell>1.62</cell><cell>2.72</cell><cell>1.83</cell><cell>3.02</cell><cell>2.13</cell><cell>3.03</cell><cell>1.95</cell><cell>3.20</cell></row><row><cell>LaoNet (Ours)</cell><cell cols="2">2.20</cell><cell></cell><cell>3.78</cell><cell>1.32</cell><cell>2.66</cell><cell>1.58</cell><cell>2.19</cell><cell>1.84</cell><cell>2.90</cell><cell>1.73</cell><cell>2.93</cell></row><row><cell>Methods</cell><cell></cell><cell cols="5">Val MAE RMSE MAE RMSE Test</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>LaoNet</cell><cell></cell><cell cols="2">17.11</cell><cell>56.81</cell><cell>15.78</cell><cell>97.15</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="4">-Self-Attention (X) 19.83</cell><cell>64.84</cell><cell cols="2">19.71 107.32</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="2">-Self-Attention (S)</cell><cell cols="2">19.67</cell><cell>63.79</cell><cell cols="2">18.71 111.83</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="2">-Scale Aggregation</cell><cell cols="2">18.82</cell><cell>63.74</cell><cell cols="2">17.16 106.40</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>-SSIM</cell><cell></cell><cell cols="2">17.82</cell><cell>57.66</cell><cell cols="2">16.11 100.59</cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2" coords="5,54.43,326.41,243.78,133.36"><head>Table 3 .</head><label>3</label><figDesc>Ablation study for different terms. X stands for feature sequences of query image and S stands for that of supporting box region. Experiments are performed in FSC-147 val and test.</figDesc><table coords="5,54.43,403.32,243.77,56.46"><row><cell>ting, without any fine-tuning strategy. We have generated new</cell></row><row><cell>records by reducing the error of FamNet from 26.55 to 17.11</cell></row><row><cell>for MAE and from 77.01 to 56.81 for RMSE in validation set,</cell></row><row><cell>from 26.76 to 15.78 for MAE and from 110.95 to 97.15 for</cell></row><row><cell>RMSE in testing set.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3" coords="5,315.21,237.40,243.78,147.26"><head>Table 4 .</head><label>4</label><figDesc>Comparisons with pre-trained object detectors on FSC147-COCO splits of FSC147 which contain images with COCO categories. Even pre-trained with thousands of annotated examples on MS-COCO dataset, these object detectors still perform unsatisfied accuracy on counting task.</figDesc><table coords="5,320.19,237.40,234.86,74.32"><row><cell>Methods</cell><cell cols="4">FSC147-COCO Val FSC147-COCO Test MAE RMSE MAE RMSE</cell></row><row><cell>RetinaNet [20]</cell><cell>63.57</cell><cell>174.36</cell><cell>52.67</cell><cell>85.86</cell></row><row><cell cols="2">Faster R-CNN [21] 52.79</cell><cell>172.46</cell><cell>36.20</cell><cell>79.59</cell></row><row><cell cols="2">Mask R-CNN [22] 52.51</cell><cell>172.21</cell><cell>35.56</cell><cell>80.00</cell></row><row><cell>FamNet [4]</cell><cell>39.82</cell><cell>108.13</cell><cell>22.76</cell><cell>45.92</cell></row><row><cell>LaoNet (Ours)</cell><cell>31.12</cell><cell>97.15</cell><cell>12.89</cell><cell>26.64</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct coords="6,76.00,482.58,222.21,8.64;6,76.00,494.53,222.20,8.64;6,76.00,506.32,222.20,8.81;6,76.00,518.44,22.42,8.64" xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Single-Image Crowd Counting via Multi-Column Convolutional Neural Network</title>
+		<author>
+			<persName coords=""><forename type="first">Yingying</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Desen</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Siqin</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Shenghua</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yi</forename><surname>Ma</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/cvpr.2016.70</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2016-06">2016</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Yingying Zhang, Desen Zhou, Siqin Chen, Shenghua Gao, and Yi Ma, &quot;Single-image crowd counting via multi-column convolutional neural network,&quot; in CVPR, 2016.</note>
+</biblStruct>
+
+<biblStruct coords="6,76.00,531.38,222.21,8.64;6,76.00,543.34,222.20,8.64;6,76.00,555.13,139.05,8.81" xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Bayesian Loss for Crowd Count Estimation With Point Supervision</title>
+		<author>
+			<persName coords=""><forename type="first">Zhiheng</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Xing</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Xiaopeng</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yihong</forename><surname>Gong</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/iccv.2019.00624</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2019 IEEE/CVF International Conference on Computer Vision (ICCV)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019-10">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Zhiheng Ma, Xing Wei, Xiaopeng Hong, and Yihong Gong, &quot;Bayesian loss for crowd count estimation with point supervision,&quot; in ICCV, 2019.</note>
+</biblStruct>
+
+<biblStruct coords="6,76.00,568.23,222.21,8.64;6,76.00,580.19,222.20,8.64;6,76.00,592.14,222.19,8.64;6,76.00,603.93,89.55,8.81" xml:id="b2">
+	<analytic>
+		<title level="a" type="main">An Automatic Car Counting System Using OverFeat Framework</title>
+		<author>
+			<persName coords=""><forename type="first">Debojit</forename><surname>Biswas</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Hongbo</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Chengyi</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Jason</forename><surname>Blankenship</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Aleksandar</forename><surname>Stevanovic</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/s17071535</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Sensors</title>
+		<title level="j" type="abbrev">Sensors</title>
+		<idno type="ISSNe">1424-8220</idno>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page">1535</biblScope>
+			<date type="published" when="2017-06-30">2017</date>
+			<publisher>MDPI AG</publisher>
+			<pubPlace>Basel)</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Debojit Biswas, Hongbo Su, Chengyi Wang, Jason Blankenship, and Aleksandar Stevanovic, &quot;An auto- matic car counting system using overfeat framework,&quot; Sensors (Basel), 2017.</note>
+</biblStruct>
+
+<biblStruct coords="6,76.00,617.04,222.21,8.64;6,76.00,628.82,217.75,8.81" xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Learning to count everything</title>
+		<author>
+			<persName coords=""><forename type="first">Udbhav</forename><surname>Viresh Ranjan</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Thu</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Minh</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><surname>Hoai</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CVPR</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Viresh Ranjan, Udbhav Sharma, Thu Nguyen, and Minh Hoai, &quot;Learning to count everything,&quot; in CVPR, 2021.</note>
+</biblStruct>
+
+<biblStruct coords="6,76.00,641.93,222.20,8.64;6,76.00,653.89,222.20,8.64;6,76.00,665.67,86.40,8.81" xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Class-agnostic Few-shot Object Counting</title>
+		<author>
+			<persName coords=""><forename type="first">Shuo-Diao</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Hung-Ting</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Winston</forename><forename type="middle">H</forename><surname>Hsu</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Wen-Chin</forename><surname>Chen</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/wacv48630.2021.00091</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2021 IEEE Winter Conference on Applications of Computer Vision (WACV)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2021-01">2021</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Shuo-Diao Yang, Hung-Ting Su, Winston H Hsu, and Wen-Chin Chen, &quot;Class-agnostic few-shot object count- ing,&quot; in WACV, 2021.</note>
+</biblStruct>
+
+<biblStruct coords="6,76.00,678.78,222.20,8.64;6,76.00,690.74,222.20,8.64;6,76.00,702.69,222.20,8.64;6,76.00,714.48,151.22,8.81" xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Microsoft COCO: Common Objects in Context</title>
+		<author>
+			<persName coords=""><forename type="first">Tsung-Yi</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Michael</forename><surname>Maire</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Serge</forename><surname>Belongie</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">James</forename><surname>Hays</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Pietro</forename><surname>Perona</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Deva</forename><surname>Ramanan</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Piotr</forename><surname>Dollár</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">Lawrence</forename><surname>Zitnick</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-10602-1_48</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Computer Vision – ECCV 2014</title>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="740" to="755" />
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Dollár, and C Lawrence Zitnick, &quot;Microsoft coco: Common objects in context,&quot; in ECCV. Springer, 2014.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,75.48,222.20,8.64;6,336.79,87.43,222.20,8.64;6,336.79,99.39,28.35,8.64;6,382.89,99.39,176.10,8.64;6,336.79,111.17,163.11,8.81" xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Counting Everyday Objects in Everyday Scenes</title>
+		<author>
+			<persName coords=""><forename type="first">Prithvijit</forename><surname>Chattopadhyay</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Ramakrishna</forename><surname>Vedantam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ramprasaath</forename><forename type="middle">R</forename><surname>Selvaraju</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dhruv</forename><surname>Batra</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Devi</forename><surname>Parikh</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/cvpr.2017.471</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017-07">2017</date>
+			<biblScope unit="page" from="1135" to="1144" />
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Prithvijit Chattopadhyay, Ramakrishna Vedantam, Ramprasaath R Selvaraju, Dhruv Batra, and Devi Parikh, &quot;Counting everyday objects in everyday scenes,&quot; in CVPR, 2017, pp. 1135-1144.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,124.46,222.20,8.64;6,336.79,136.42,222.20,8.64;6,336.79,148.21,134.91,8.81" xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Scale Aggregation Network for Accurate and Efficient Crowd Counting</title>
+		<author>
+			<persName coords=""><forename type="first">Xinkun</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Zhipeng</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yanyun</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Fei</forename><surname>Su</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-01228-1_45</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Computer Vision – ECCV 2018</title>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="757" to="773" />
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Xinkun Cao, Zhipeng Wang, Yanyun Zhao, and Fei Su, &quot;Scale aggregation network for accurate and efficient crowd counting,&quot; in ECCV, 2018.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,161.50,222.20,8.64;6,336.79,173.28,199.52,8.81" xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Context-Aware Crowd Counting</title>
+		<author>
+			<persName coords=""><forename type="first">Weizhe</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Mathieu</forename><surname>Salzmann</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Pascal</forename><surname>Fua</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/cvpr.2019.00524</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019-06">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Weizhe Liu, Mathieu Salzmann, and Pascal Fua, &quot;Context-aware crowd counting,&quot; in CVPR, 2019.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,186.57,222.20,8.64;6,336.79,198.53,222.20,8.64;6,336.79,210.32,222.20,8.81;6,336.79,222.27,91.40,8.81" xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Distribution matching for crowd counting</title>
+		<author>
+			<persName coords=""><forename type="first">Boyu</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Huidong</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Dimitris</forename><surname>Samaras</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Minh</forename><forename type="middle">Hoai</forename><surname>Nguyen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Boyu Wang, Huidong Liu, Dimitris Samaras, and Minh Hoai Nguyen, &quot;Distribution matching for crowd counting,&quot; Advances in Neural Information Processing Systems, vol. 33, 2020.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,235.56,222.20,8.64;6,336.79,247.52,222.19,8.64;6,336.79,259.30,222.20,8.81" xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Direct Measure Matching for Crowd Counting</title>
+		<author>
+			<persName coords=""><forename type="first">Hui</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Xiaopeng</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Zhiheng</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Xing</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yunfeng</forename><surname>Qiu</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yaowei</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yihong</forename><surname>Gong</surname></persName>
+		</author>
+		<idno type="DOI">10.24963/ijcai.2021/116</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Thirtieth International Joint Conference on Artificial Intelligence</title>
+		<meeting>the Thirtieth International Joint Conference on Artificial Intelligence</meeting>
+		<imprint>
+			<publisher>International Joint Conferences on Artificial Intelligence Organization</publisher>
+			<date type="published" when="2021-08">2021</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Hui Lin, Xiaopeng Hong, Zhiheng Ma, Xing Wei, Yun- feng Qiu, Yaowei Wang, and Yihong Gong, &quot;Direct measure matching for crowd counting,&quot; in IJCAI, 2021.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,272.59,222.20,8.64;6,336.79,284.55,222.20,8.64;6,336.79,296.34,78.70,8.81" xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Automatic Car Counting Method for Unmanned Aerial Vehicle Images</title>
+		<author>
+			<persName coords=""><forename type="first">Thomas</forename><surname>Moranduzzo</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Farid</forename><surname>Melgani</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/tgrs.2013.2253108</idno>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Geoscience and Remote Sensing</title>
+		<title level="j" type="abbrev">IEEE Trans. Geosci. Remote Sensing</title>
+		<idno type="ISSN">0196-2892</idno>
+		<idno type="ISSNe">1558-0644</idno>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1635" to="1647" />
+			<date type="published" when="2013">2013</date>
+			<publisher>Institute of Electrical and Electronics Engineers (IEEE)</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Thomas Moranduzzo and Farid Melgani, &quot;Automatic car counting method for unmanned aerial vehicle im- ages,&quot; TGRS, 2013.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,309.63,222.20,8.64;6,336.79,321.58,222.20,8.64;6,336.79,333.54,222.20,8.64;6,336.79,345.32,222.20,8.81;6,336.79,357.45,22.42,8.64" xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Mask R-CNN Refitting Strategy for Plant Counting and Sizing in UAV Imagery</title>
+		<author>
+			<persName coords=""><forename type="first">Mélissande</forename><surname>Machefer</surname></persName>
+			<idno type="ORCID">0000-0002-9359-3946</idno>
+		</author>
+		<author>
+			<persName><forename type="first">François</forename><surname>Lemarchand</surname></persName>
+			<idno type="ORCID">0000-0003-3019-2544</idno>
+		</author>
+		<author>
+			<persName><forename type="first">Virginie</forename><surname>Bonnefond</surname></persName>
+			<idno type="ORCID">0000-0002-8844-1710</idno>
+		</author>
+		<author>
+			<persName><forename type="first">Alasdair</forename><surname>Hitchins</surname></persName>
+			<idno type="ORCID">0000-0002-0672-9885</idno>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Panagiotis</forename><surname>Sidiropoulos</surname></persName>
+			<idno type="ORCID">0000-0003-3605-3908</idno>
+		</author>
+		<idno type="DOI">10.3390/rs12183015</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Remote Sensing</title>
+		<title level="j" type="abbrev">Remote Sensing</title>
+		<idno type="ISSNe">2072-4292</idno>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">18</biblScope>
+			<biblScope unit="page">3015</biblScope>
+			<date type="published" when="2020-09-16">2020</date>
+			<publisher>MDPI AG</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Mélissande Machefer, Franc ¸ois Lemarchand, Vir- ginie Bonnefond, Alasdair Hitchins, and Panagiotis Sidiropoulos, &quot;Mask r-cnn refitting strategy for plant counting and sizing in uav imagery,&quot; Remote Sensing, 2020.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,368.26,222.20,10.95;6,336.79,382.52,222.20,8.64;6,336.79,394.48,222.20,8.64;6,336.79,406.43,222.20,8.64;6,336.79,418.22,191.15,8.81" xml:id="b13">
+	<analytic>
+		<title level="a" type="main">U-Net: deep learning for cell counting, detection, and morphometry</title>
+		<author>
+			<persName coords=""><forename type="first">Thorsten</forename><surname>Falk</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Dominic</forename><surname>Mai</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Robert</forename><surname>Bensch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Özgün</forename><surname>Çiçek</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Ahmed</forename><surname>Abdulkadir</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yassine</forename><surname>Marrakchi</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Anton</forename><surname>Böhm</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Jan</forename><surname>Deubner</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Zoe</forename><surname>Jäckel</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Katharina</forename><surname>Seiwald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Dovzhenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olaf</forename><surname>Tietz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cristina</forename><surname>Dal Bosco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Walsh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deniz</forename><surname>Saltukoglu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tuan</forename><forename type="middle">Leng</forename><surname>Tay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Prinz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Palme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matias</forename><surname>Simons</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilka</forename><surname>Diester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Brox</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olaf</forename><surname>Ronneberger</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/s41592-018-0261-2</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Methods</title>
+		<title level="j" type="abbrev">Nat Methods</title>
+		<idno type="ISSN">1548-7091</idno>
+		<idno type="ISSNe">1548-7105</idno>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="67" to="70" />
+			<date type="published" when="2019">2019</date>
+			<publisher>Springer Science and Business Media LLC</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Thorsten Falk, Dominic Mai, Robert Bensch, Özgün C ¸ic ¸ek, Ahmed Abdulkadir, Yassine Marrakchi, Anton Böhm, Jan Deubner, Zoe Jäckel, Katharina Seiwald, et al., &quot;U-net: deep learning for cell counting, detec- tion, and morphometry,&quot; Nature methods, 2019.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,431.51,222.20,8.64;6,336.79,443.47,222.20,8.64;6,336.79,455.25,222.20,8.81;6,336.79,467.21,222.20,8.58;6,336.79,479.16,79.25,8.81" xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Microscopy cell counting and detection with fully convolutional regression networks</title>
+		<author>
+			<persName coords=""><forename type="first">Weidi</forename><surname>Xie</surname></persName>
+			<idno type="ORCID">0000-0003-3804-2639</idno>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">Alison</forename><surname>Noble</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Andrew</forename><surname>Zisserman</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/21681163.2016.1149104</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Methods in Biomechanics and Biomedical Engineering: Imaging &amp; Visualization</title>
+		<title level="j" type="abbrev">Computer Methods in Biomechanics and Biomedical Engineering: Imaging &amp; Visualization</title>
+		<idno type="ISSN">2168-1163</idno>
+		<idno type="ISSNe">2168-1171</idno>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="283" to="292" />
+			<date type="published" when="2018">2018</date>
+			<publisher>Informa UK Limited</publisher>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Weidi Xie, J Alison Noble, and Andrew Zisserman, &quot;Microscopy cell counting and detection with fully con- volutional regression networks,&quot; Computer methods in biomechanics and biomedical engineering: Imaging &amp; Visualization, 2018.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,492.45,222.20,8.64;6,336.79,504.24,143.17,8.81" xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Class-Agnostic Counting</title>
+		<author>
+			<persName coords=""><forename type="first">Erika</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Weidi</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Andrew</forename><surname>Zisserman</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-20893-6_42</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Computer Vision – ACCV 2018</title>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="669" to="684" />
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Erika Lu, Weidi Xie, and Andrew Zisserman, &quot;Class- agnostic counting,&quot; in ACCV, 2018.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,517.53,222.20,8.64;6,336.79,529.49,222.20,8.64;6,336.79,541.27,133.97,8.81" xml:id="b16">
+	<monogr>
+		<title level="m" type="main">One-shot instance segmentation</title>
+		<author>
+			<persName coords=""><forename type="first">Claudio</forename><surname>Michaelis</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Ivan</forename><surname>Ustyuzhaninov</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Matthias</forename><surname>Bethge</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Alexander</forename><forename type="middle">S</forename><surname>Ecker</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+	<note type="raw_reference">Claudio Michaelis, Ivan Ustyuzhaninov, Matthias Bethge, and Alexander S Ecker, &quot;One-shot instance seg- mentation,&quot; arXiv preprint, 2018.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,554.56,222.20,8.64;6,336.79,566.52,222.20,8.64;6,336.79,578.31,174.57,8.81" xml:id="b17">
+	<analytic>
+		<title level="a" type="main">One-shot object detection with coattention and co-excitation</title>
+		<author>
+			<persName coords=""><forename type="first">Ting-I</forename><surname>Hsieh</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yi-Chen</forename><surname>Lo</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Hwann-Tzong</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Tyng-Luh</forename><surname>Liu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NIPS</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Ting-I Hsieh, Yi-Chen Lo, Hwann-Tzong Chen, and Tyng-Luh Liu, &quot;One-shot object detection with co- attention and co-excitation,&quot; in NIPS, 2019.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,591.60,222.20,8.64;6,336.79,603.55,222.20,8.64;6,336.79,615.34,137.84,8.81" xml:id="b18">
+	<monogr>
+		<title level="m" type="main">One-shot object detection without fine-tuning</title>
+		<author>
+			<persName coords=""><forename type="first">Xiang</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Lin</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yu-Wing</forename><surname>Yau Pun Chen</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Chi-Keung</forename><surname>Tai</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><surname>Tang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+	<note type="raw_reference">Xiang Li, Lin Zhang, Yau Pun Chen, Yu-Wing Tai, and Chi-Keung Tang, &quot;One-shot object detection without fine-tuning,&quot; arXiv preprint, 2020.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,628.63,222.20,8.64;6,336.79,640.58,222.20,8.64;6,336.79,652.37,60.33,8.81" xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Focal Loss for Dense Object Detection</title>
+		<author>
+			<persName coords=""><forename type="first">Tsung-Yi</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Priya</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Ross</forename><surname>Girshick</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Kaiming</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Piotr</forename><surname>Dollar</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/iccv.2017.324</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2017 IEEE International Conference on Computer Vision (ICCV)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017-10">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Dollár, &quot;Focal loss for dense object detection,&quot; in ICCV, 2017.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,665.66,222.20,8.64;6,336.79,677.62,222.20,8.64;6,336.79,689.40,179.45,8.81" xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Faster r-cnn: Towards real-time object detection with region proposal networks</title>
+		<author>
+			<persName coords=""><forename type="first">Kaiming</forename><surname>Shaoqing Ren</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Ross</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Jian</forename><surname>Girshick</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><surname>Sun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NIPS</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun, &quot;Faster r-cnn: Towards real-time object detection with region proposal networks,&quot; NIPS, 2015.</note>
+</biblStruct>
+
+<biblStruct coords="6,336.79,702.69,222.20,8.64;6,336.79,714.48,160.40,8.81" xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Mask R-CNN</title>
+		<author>
+			<persName coords=""><forename type="first">Kaiming</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Georgia</forename><surname>Gkioxari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Piotr</forename><surname>Dollar</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Ross</forename><surname>Girshick</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/iccv.2017.322</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2017 IEEE International Conference on Computer Vision (ICCV)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017-10">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Kaiming He, Georgia Gkioxari, Piotr Dollár, and Ross Girshick, &quot;Mask r-cnn,&quot; in ICCV, 2017.</note>
+</biblStruct>
+
+<biblStruct coords="7,76.00,75.48,222.20,8.64;7,76.00,87.43,222.20,8.64;7,76.00,99.39,222.20,8.64;7,76.00,111.17,48.43,8.81" xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Attention is all you need</title>
+		<author>
+			<persName coords=""><forename type="first">Ashish</forename><surname>Vaswani</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Noam</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Niki</forename><surname>Parmar</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Jakob</forename><surname>Uszkoreit</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Llion</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Aidan</forename><forename type="middle">N</forename><surname>Gomez</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Łukasz</forename><surname>Kaiser</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Illia</forename><surname>Polosukhin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NIPS</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin, &quot;Attention is all you need,&quot; in NIPS, 2017.</note>
+</biblStruct>
+
+<biblStruct coords="7,76.00,123.30,176.16,8.64;7,267.47,123.30,30.73,8.64;7,76.00,135.25,158.13,8.64" xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Adam: Amethod for stochastic optimization</title>
+		<author>
+			<persName coords=""><forename type="first">P</forename><surname>Diederik</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Jimmy</forename><forename type="middle">Lei</forename><surname>Kingma</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><surname>Ba</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note type="raw_reference">Diederik P Kingma and Jimmy Lei Ba, &quot;Adam: Amethod for stochastic optimization,&quot; .</note>
+</biblStruct>
+
+<biblStruct coords="7,76.00,147.21,222.20,8.64;7,76.00,159.16,222.19,8.64;7,76.00,170.95,162.29,8.81" xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Few-Shot Object Detection via Feature Reweighting</title>
+		<author>
+			<persName coords=""><forename type="first">Bingyi</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Zhuang</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Xin</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Fisher</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Jiashi</forename><surname>Feng</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Trevor</forename><surname>Darrell</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/iccv.2019.00851</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2019 IEEE/CVF International Conference on Computer Vision (ICCV)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019-10">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Bingyi Kang, Zhuang Liu, Xin Wang, Fisher Yu, Jiashi Feng, and Trevor Darrell, &quot;Few-shot object detection via feature reweighting,&quot; in ICCV, 2019.</note>
+</biblStruct>
+
+<biblStruct coords="7,76.00,183.07,222.20,8.64;7,76.00,195.03,222.20,8.64;7,76.00,206.82,136.96,8.81" xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Few-Shot Object Detection With Attention-RPN and Multi-Relation Detector</title>
+		<author>
+			<persName coords=""><forename type="first">Qi</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Wei</forename><surname>Zhuo</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Chi-Keung</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Yu-Wing</forename><surname>Tai</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/cvpr42600.2020.00407</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2020-06">2020</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Qi Fan, Wei Zhuo, Chi-Keung Tang, and Yu-Wing Tai, &quot;Few-shot object detection with attention-rpn and multi- relation detector,&quot; in CVPR, 2020.</note>
+</biblStruct>
+
+<biblStruct coords="7,76.00,218.94,222.20,8.64;7,76.00,230.89,222.20,8.64;7,76.00,242.68,128.96,8.81" xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Model-agnostic meta-learning for fast adaptation of deep networks</title>
+		<author>
+			<persName coords=""><forename type="first">Chelsea</forename><surname>Finn</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Pieter</forename><surname>Abbeel</surname></persName>
+		</author>
+		<author>
+			<persName coords=""><forename type="first">Sergey</forename><surname>Levine</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICML</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Chelsea Finn, Pieter Abbeel, and Sergey Levine, &quot;Model-agnostic meta-learning for fast adaptation of deep networks,&quot; in ICML, 2017.</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

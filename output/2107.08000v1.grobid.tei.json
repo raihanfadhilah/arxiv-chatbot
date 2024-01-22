@@ -1,0 +1,2298 @@
+{
+  "grobid_version": "0.8.0",
+  "grobid_timestamp": "2024-01-22T19:40+0000",
+  "header": {
+    "authors": [
+      {
+        "full_name": "Chull Hwan Song",
+        "given_name": "Chull",
+        "middle_name": "Hwan",
+        "surname": "Song",
+        "affiliation": {
+          "institution": "IRISA"
+        }
+      },
+      {
+        "full_name": "Hye Joo",
+        "given_name": "Hye",
+        "surname": "Joo",
+        "affiliation": {
+          "institution": "IRISA"
+        }
+      },
+      {
+        "full_name": "Han Odd Concepts",
+        "given_name": "Han",
+        "middle_name": "Odd",
+        "surname": "Concepts",
+        "affiliation": {
+          "institution": "IRISA"
+        }
+      },
+      {
+        "full_name": "Yannis Avrithis",
+        "given_name": "Yannis",
+        "surname": "Avrithis",
+        "affiliation": {
+          "institution": "IRISA"
+        }
+      }
+    ],
+    "date": "2021-07-16",
+    "title": "All the attention you need: Global-local, spatial-channel attention for image retrieval",
+    "arxiv_id": "2107.08000v1[cs.CV]"
+  },
+  "pdf_md5": "74C3ED5A317EEC98581242178860A8D4",
+  "language_code": "en",
+  "citations": [
+    {
+      "authors": [
+        {
+          "full_name": "Relja Arandjelovic",
+          "given_name": "Relja",
+          "surname": "Arandjelovic"
+        },
+        {
+          "full_name": "Petr Gronat",
+          "given_name": "Petr",
+          "surname": "Gronat"
+        },
+        {
+          "full_name": "Akihiko Torii",
+          "given_name": "Akihiko",
+          "surname": "Torii"
+        },
+        {
+          "full_name": "Tomas Pajdla",
+          "given_name": "Tomas",
+          "surname": "Pajdla"
+        },
+        {
+          "full_name": "Josef Sivic",
+          "given_name": "Josef",
+          "surname": "Sivic"
+        }
+      ],
+      "index": 0,
+      "id": "b0",
+      "unstructured": "Relja Arandjelovi\u00c4\u2021, Petr Gronat, Akihiko Torii, Tomas Pa- jdla, and Josef Sivic. NetVLAD: CNN architecture for weakly supervised place recognition. In CVPR, 2016.",
+      "date": "2016-06",
+      "title": "NetVLAD: CNN Architecture for Weakly Supervised Place Recognition",
+      "book_title": "2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "doi": "10.1109/cvpr.2016.572"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Artem Babenko",
+          "given_name": "Artem",
+          "surname": "Babenko"
+        },
+        {
+          "full_name": "Victor Lempitsky",
+          "given_name": "Victor",
+          "surname": "Lempitsky"
+        }
+      ],
+      "index": 1,
+      "id": "b1",
+      "unstructured": "Artem Babenko and Victor Lempitsky. Aggregating Local Deep Features for Image Retrieval. In ICCV, 2015. 1, 2, 7",
+      "date": "2015",
+      "title": "Aggregating Local Deep Features for Image Retrieval",
+      "book_title": "ICCV",
+      "volume": "1",
+      "pages": "7"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Artem Babenko",
+          "given_name": "Artem",
+          "surname": "Babenko"
+        },
+        {
+          "full_name": "Anton Slesarev",
+          "given_name": "Anton",
+          "surname": "Slesarev"
+        },
+        {
+          "full_name": "Alexandr Chigorin",
+          "given_name": "Alexandr",
+          "surname": "Chigorin"
+        },
+        {
+          "full_name": "Victor Lempitsky",
+          "given_name": "Victor",
+          "surname": "Lempitsky"
+        }
+      ],
+      "index": 2,
+      "id": "b2",
+      "unstructured": "Artem Babenko, Anton Slesarev, Alexandr Chigorin, and Victor Lempitsky. Neural Codes for Image Retrieval. In ECCV, 2014. 1, 2, 5",
+      "date": "2014",
+      "title": "Neural Codes for Image Retrieval",
+      "book_title": "Computer Vision \u00e2\u20ac\u201c ECCV 2014",
+      "publisher": "Springer International Publishing",
+      "volume": "1",
+      "pages": "584-599",
+      "first_page": "584",
+      "last_page": "599",
+      "doi": "10.1007/978-3-319-10590-1_38"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Irwan Bello",
+          "given_name": "Irwan",
+          "surname": "Bello"
+        },
+        {
+          "full_name": "Barret Zoph",
+          "given_name": "Barret",
+          "surname": "Zoph"
+        },
+        {
+          "full_name": "Quoc V Le",
+          "given_name": "Quoc",
+          "middle_name": "V",
+          "surname": "Le"
+        },
+        {
+          "full_name": "Ashish Vaswani",
+          "given_name": "Ashish",
+          "surname": "Vaswani"
+        },
+        {
+          "full_name": "Jonathon Shlens",
+          "given_name": "Jonathon",
+          "surname": "Shlens"
+        }
+      ],
+      "index": 3,
+      "id": "b3",
+      "unstructured": "Irwan Bello, Barret Zoph, Ashish Vaswani, Jonathon Shlens, and Quoc V. Le. Attention augmented convolutional net- works. In ICCV, 2019. 2, 3",
+      "date": "2019-10",
+      "title": "Attention Augmented Convolutional Networks",
+      "book_title": "2019 IEEE/CVF International Conference on Computer Vision (ICCV)",
+      "publisher": "IEEE",
+      "volume": "2",
+      "pages": "3",
+      "doi": "10.1109/iccv.2019.00338"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Bingyi Cao",
+          "given_name": "Bingyi",
+          "surname": "Cao"
+        },
+        {
+          "full_name": "Andr\u00c3\u00a9 Araujo",
+          "given_name": "Andr\u00c3\u00a9",
+          "surname": "Araujo"
+        },
+        {
+          "full_name": "Jack Sim",
+          "given_name": "Jack",
+          "surname": "Sim"
+        }
+      ],
+      "index": 4,
+      "id": "b4",
+      "unstructured": "Bingyi Cao, Andr\u00c3\u00a9 Araujo, and Jack Sim. Unifying deep local and global features for image search. In ECCV, 2020. 2, 3, 7",
+      "date": "2020",
+      "title": "Unifying Deep Local and Global Features for Image Search",
+      "book_title": "Computer Vision \u00e2\u20ac\u201c ECCV 2020",
+      "publisher": "Springer International Publishing",
+      "volume": "2",
+      "pages": "726-743",
+      "first_page": "726",
+      "last_page": "743",
+      "doi": "10.1007/978-3-030-58565-5_43"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Yue Cao",
+          "given_name": "Yue",
+          "surname": "Cao"
+        },
+        {
+          "full_name": "Jiarui Xu",
+          "given_name": "Jiarui",
+          "surname": "Xu"
+        },
+        {
+          "full_name": "Stephen Lin",
+          "given_name": "Stephen",
+          "surname": "Lin"
+        },
+        {
+          "full_name": "Fangyun Wei",
+          "given_name": "Fangyun",
+          "surname": "Wei"
+        },
+        {
+          "full_name": "Han Hu",
+          "given_name": "Han",
+          "surname": "Hu"
+        }
+      ],
+      "index": 5,
+      "id": "b5",
+      "unstructured": "Yue Cao, Jiarui Xu, Stephen Lin, Fangyun Wei, and Han Hu. GCNet: Non-Local Networks Meet Squeeze-Excitation Net- works and Beyond. In ICCV, 2019. 2",
+      "date": "2019-10",
+      "title": "GCNet: Non-Local Networks Meet Squeeze-Excitation Networks and Beyond",
+      "book_title": "2019 IEEE/CVF International Conference on Computer Vision Workshop (ICCVW)",
+      "publisher": "IEEE",
+      "volume": "2",
+      "doi": "10.1109/iccvw.2019.00246"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Liang-Chieh Chen",
+          "given_name": "Liang-Chieh",
+          "surname": "Chen"
+        },
+        {
+          "full_name": "Yukun Zhu",
+          "given_name": "Yukun",
+          "surname": "Zhu"
+        },
+        {
+          "full_name": "George Papandreou",
+          "given_name": "George",
+          "surname": "Papandreou"
+        },
+        {
+          "full_name": "Florian Schroff",
+          "given_name": "Florian",
+          "surname": "Schroff"
+        },
+        {
+          "full_name": "Hartwig Adam",
+          "given_name": "Hartwig",
+          "surname": "Adam"
+        }
+      ],
+      "index": 6,
+      "id": "b6",
+      "unstructured": "Liang-Chieh Chen, George Papandreou, Florian Schroff, and Hartwig Adam. Rethinking atrous convolution for seman- tic image segmentation. arXiv preprint arXiv:1706.05587, 2017.",
+      "date": "2017",
+      "title": "Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation",
+      "book_title": "Computer Vision \u00e2\u20ac\u201c ECCV 2018",
+      "publisher": "Springer International Publishing",
+      "pages": "833-851",
+      "first_page": "833",
+      "last_page": "851",
+      "doi": "10.1007/978-3-030-01234-2_49",
+      "arxiv_id": "1706.05587"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Ting Chen",
+          "given_name": "Ting",
+          "surname": "Chen"
+        },
+        {
+          "full_name": "Simon Kornblith",
+          "given_name": "Simon",
+          "surname": "Kornblith"
+        },
+        {
+          "full_name": "Mohammad Norouzi",
+          "given_name": "Mohammad",
+          "surname": "Norouzi"
+        },
+        {
+          "full_name": "Geoffrey Hinton",
+          "given_name": "Geoffrey",
+          "surname": "Hinton"
+        }
+      ],
+      "index": 7,
+      "id": "b7",
+      "unstructured": "Ting Chen, Simon Kornblith, Mohammad Norouzi, and Ge- offrey Hinton. A simple framework for contrastive learning of visual representations. In ICML, 2020. 1",
+      "date": "2020",
+      "title": "A simple framework for contrastive learning of visual representations",
+      "book_title": "ICML",
+      "pages": "1"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Yunpeng Chen",
+          "given_name": "Yunpeng",
+          "surname": "Chen"
+        },
+        {
+          "full_name": "Marcus Rohrbach",
+          "given_name": "Marcus",
+          "surname": "Rohrbach"
+        },
+        {
+          "full_name": "Zhicheng Yan",
+          "given_name": "Zhicheng",
+          "surname": "Yan"
+        },
+        {
+          "full_name": "Yan Shuicheng",
+          "given_name": "Yan",
+          "surname": "Shuicheng"
+        },
+        {
+          "full_name": "Jiashi Feng",
+          "given_name": "Jiashi",
+          "surname": "Feng"
+        },
+        {
+          "full_name": "Yannis Kalantidis",
+          "given_name": "Yannis",
+          "surname": "Kalantidis"
+        }
+      ],
+      "index": 8,
+      "id": "b8",
+      "unstructured": "Yunpeng Chen, Yannis Kalantidis, Jianshu Li, Shuicheng Yan, and Jiashi Feng. A\u00cb\u20202-nets: Double attention networks. In NeurIPS, 2018. 1, 2, 3, 4",
+      "date": "2018",
+      "title": "Graph-Based Global Reasoning Networks",
+      "book_title": "2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "volume": "1",
+      "pages": "4",
+      "doi": "10.1109/cvpr.2019.00052"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Jiankang Deng",
+          "given_name": "Jiankang",
+          "surname": "Deng"
+        },
+        {
+          "full_name": "Jia Guo",
+          "given_name": "Jia",
+          "surname": "Guo"
+        },
+        {
+          "full_name": "Niannan Xue",
+          "given_name": "Niannan",
+          "surname": "Xue"
+        },
+        {
+          "full_name": "Stefanos Zafeiriou",
+          "given_name": "Stefanos",
+          "surname": "Zafeiriou"
+        }
+      ],
+      "index": 9,
+      "id": "b9",
+      "unstructured": "Jiankang Deng, Jia Guo, Niannan Xue, and Stefanos Zafeiriou. ArcFace: Additive Angular Margin Loss for Deep Face Recognition. In CVPR, 2019. 6",
+      "date": "2019-06",
+      "title": "ArcFace: Additive Angular Margin Loss for Deep Face Recognition",
+      "book_title": "2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "volume": "6",
+      "doi": "10.1109/cvpr.2019.00482"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Michael Donoser",
+          "given_name": "Michael",
+          "surname": "Donoser"
+        },
+        {
+          "full_name": "Horst Bischof",
+          "given_name": "Horst",
+          "surname": "Bischof"
+        }
+      ],
+      "index": 10,
+      "id": "b10",
+      "unstructured": "Michael Donoser and Horst Bischof. Diffusion Processes for Retrieval Revisited. In CVPR, 2013. 1, 2, 6",
+      "date": "2013-06",
+      "title": "Diffusion Processes for Retrieval Revisited",
+      "book_title": "2013 IEEE Conference on Computer Vision and Pattern Recognition",
+      "publisher": "IEEE",
+      "volume": "1",
+      "pages": "6",
+      "doi": "10.1109/cvpr.2013.174"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Alexey Dosovitskiy",
+          "given_name": "Alexey",
+          "surname": "Dosovitskiy"
+        },
+        {
+          "full_name": "Lucas Beyer",
+          "given_name": "Lucas",
+          "surname": "Beyer"
+        },
+        {
+          "full_name": "Alexander Kolesnikov",
+          "given_name": "Alexander",
+          "surname": "Kolesnikov"
+        },
+        {
+          "full_name": "Dirk Weissenborn",
+          "given_name": "Dirk",
+          "surname": "Weissenborn"
+        },
+        {
+          "full_name": "Xiaohua Zhai",
+          "given_name": "Xiaohua",
+          "surname": "Zhai"
+        },
+        {
+          "full_name": "Thomas Unterthiner",
+          "given_name": "Thomas",
+          "surname": "Unterthiner"
+        },
+        {
+          "full_name": "Mostafa Dehghani",
+          "given_name": "Mostafa",
+          "surname": "Dehghani"
+        },
+        {
+          "full_name": "Matthias Minderer",
+          "given_name": "Matthias",
+          "surname": "Minderer"
+        },
+        {
+          "full_name": "Georg Heigold",
+          "given_name": "Georg",
+          "surname": "Heigold"
+        },
+        {
+          "full_name": "Sylvain Gelly",
+          "given_name": "Sylvain",
+          "surname": "Gelly"
+        }
+      ],
+      "index": 11,
+      "id": "b11",
+      "unstructured": "Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Syl- vain Gelly, et al. An image is worth 16x16 words: Trans- formers for image recognition at scale. arXiv preprint arXiv:2010.11929, 2020. 8",
+      "date": "2020",
+      "title": "An image is worth 16x16 words: Transformers for image recognition at scale",
+      "arxiv_id": "2010.11929"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Alaaeldin El-Nouby",
+          "given_name": "Alaaeldin",
+          "surname": "El-Nouby"
+        },
+        {
+          "full_name": "Natalia Neverova",
+          "given_name": "Natalia",
+          "surname": "Neverova"
+        },
+        {
+          "full_name": "Ivan Laptev",
+          "given_name": "Ivan",
+          "surname": "Laptev"
+        },
+        {
+          "full_name": "Herv\u00c3\u00a9 J\u00c3\u00a9gou",
+          "given_name": "Herv\u00c3\u00a9",
+          "surname": "J\u00c3\u00a9gou"
+        }
+      ],
+      "index": 12,
+      "id": "b12",
+      "unstructured": "Alaaeldin El-Nouby, Natalia Neverova, Ivan Laptev, and Herv\u00c3\u00a9 J\u00c3\u00a9gou. Training vision transformers for image re- trieval. Technical report, 2021. 8",
+      "date": "2021",
+      "title": "Training vision transformers for image retrieval",
+      "pages": "8"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Zilin Gao",
+          "given_name": "Zilin",
+          "surname": "Gao"
+        },
+        {
+          "full_name": "Jiangtao Xie",
+          "given_name": "Jiangtao",
+          "surname": "Xie"
+        },
+        {
+          "full_name": "Qilong Wang",
+          "given_name": "Qilong",
+          "surname": "Wang"
+        },
+        {
+          "full_name": "Peihua Li",
+          "given_name": "Peihua",
+          "surname": "Li"
+        }
+      ],
+      "index": 13,
+      "id": "b13",
+      "unstructured": "Zilin Gao, Jiangtao Xie, Qilong Wang, and Peihua Li. Global second-order pooling convolutional networks. In CVPR, 2019. 2, 3, 4",
+      "date": "2019-06",
+      "title": "Global Second-Order Pooling Convolutional Networks",
+      "book_title": "2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "volume": "2",
+      "pages": "4",
+      "doi": "10.1109/cvpr.2019.00314"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Albert Gordo",
+          "given_name": "Albert",
+          "surname": "Gordo"
+        },
+        {
+          "full_name": "Jon Almaz\u00c3\u00a1n",
+          "given_name": "Jon",
+          "surname": "Almaz\u00c3\u00a1n"
+        },
+        {
+          "full_name": "Jerome Revaud",
+          "given_name": "Jerome",
+          "surname": "Revaud"
+        },
+        {
+          "full_name": "Diane Larlus",
+          "given_name": "Diane",
+          "surname": "Larlus"
+        }
+      ],
+      "index": 14,
+      "id": "b14",
+      "unstructured": "Albert Gordo, Jon Almazan, Jerome Revaud, and Diane Lar- lus. Deep image retrieval: Learning global representations for image search. In ECCV, 2016. 2",
+      "date": "2016",
+      "title": "Deep Image Retrieval: Learning Global Representations for Image Search",
+      "book_title": "Computer Vision \u00e2\u20ac\u201c ECCV 2016",
+      "publisher": "Springer International Publishing",
+      "pages": "241-257",
+      "first_page": "241",
+      "last_page": "257",
+      "doi": "10.1007/978-3-319-46466-4_15"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Albert Gordo",
+          "given_name": "Albert",
+          "surname": "Gordo"
+        },
+        {
+          "full_name": "Jon Almaz\u00c3\u00a1n",
+          "given_name": "Jon",
+          "surname": "Almaz\u00c3\u00a1n"
+        },
+        {
+          "full_name": "Jerome Revaud",
+          "given_name": "Jerome",
+          "surname": "Revaud"
+        },
+        {
+          "full_name": "Diane Larlus",
+          "given_name": "Diane",
+          "surname": "Larlus"
+        }
+      ],
+      "index": 15,
+      "id": "b15",
+      "unstructured": "Albert Gordo, Jon Almazan, Jerome Revaud, and Diane Lar- lus. End-to-end learning of deep visual representations for image retrieval. IJCV, 2017. 1, 2, 5, 6, 7, 8",
+      "date": "2017-06-05",
+      "title": "End-to-End Learning of Deep Visual Representations for Image Retrieval",
+      "journal": "International Journal of Computer Vision",
+      "journal_abbrev": "Int J Comput Vis",
+      "publisher": "Springer Science and Business Media LLC",
+      "issn": "0920-5691",
+      "volume": "124",
+      "issue": "2",
+      "pages": "237-254",
+      "first_page": "237",
+      "last_page": "254",
+      "doi": "10.1007/s11263-017-1016-8"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Yinzheng Gu",
+          "given_name": "Yinzheng",
+          "surname": "Gu"
+        },
+        {
+          "full_name": "Chuanpeng Li",
+          "given_name": "Chuanpeng",
+          "surname": "Li"
+        },
+        {
+          "full_name": "Jinbin Xie",
+          "given_name": "Jinbin",
+          "surname": "Xie"
+        }
+      ],
+      "index": 16,
+      "id": "b16",
+      "unstructured": "Yinzheng Gu, Chuanpeng Li, and Jinbin Xie. Attention- aware generalized mean pooling for image retrieval. arXiv preprint arXiv:1811.00202, 2018. 2, 3, 7",
+      "date": "2018",
+      "title": "Preprint repository arXiv achieves milestone million uploads",
+      "journal": "Physics Today",
+      "journal_abbrev": "Phys. Today",
+      "publisher": "AIP Publishing",
+      "issue": "3",
+      "pages": "7",
+      "doi": "10.1063/pt.5.028530",
+      "arxiv_id": "1811.00202"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Kaiming He",
+          "given_name": "Kaiming",
+          "surname": "He"
+        },
+        {
+          "full_name": "Xiangyu Zhang",
+          "given_name": "Xiangyu",
+          "surname": "Zhang"
+        },
+        {
+          "full_name": "Shaoqing Ren",
+          "given_name": "Shaoqing",
+          "surname": "Ren"
+        },
+        {
+          "full_name": "Jian Sun",
+          "given_name": "Jian",
+          "surname": "Sun"
+        }
+      ],
+      "index": 17,
+      "id": "b17",
+      "unstructured": "Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In CVPR, 2016. 6",
+      "date": "2016-06",
+      "title": "Deep Residual Learning for Image Recognition",
+      "book_title": "2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "pages": "6",
+      "doi": "10.1109/cvpr.2016.90"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Jie Hu",
+          "given_name": "Jie",
+          "surname": "Hu"
+        },
+        {
+          "full_name": "Li Shen",
+          "given_name": "Li",
+          "surname": "Shen"
+        },
+        {
+          "full_name": "Samuel Albanie",
+          "given_name": "Samuel",
+          "surname": "Albanie"
+        },
+        {
+          "full_name": "Gang Sun",
+          "given_name": "Gang",
+          "surname": "Sun"
+        },
+        {
+          "full_name": "Andrea Vedaldi",
+          "given_name": "Andrea",
+          "surname": "Vedaldi"
+        }
+      ],
+      "index": 18,
+      "id": "b18",
+      "unstructured": "Jie Hu, Li Shen, Samuel Albanie, Gang Sun, and Andrea Vedaldi. Gather-excite: Exploiting feature context in con- volutional neural networks. In NeurIPS, 2018. 2",
+      "date": "2018",
+      "title": "Gather-excite: Exploiting feature context in convolutional neural networks",
+      "journal": "NeurIPS",
+      "volume": "2"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Jie Hu",
+          "given_name": "Jie",
+          "surname": "Hu",
+          "orcid": "0000-0002-5150-1003"
+        },
+        {
+          "full_name": "Li Shen",
+          "given_name": "Li",
+          "surname": "Shen",
+          "orcid": "0000-0002-2283-4976"
+        },
+        {
+          "full_name": "Samuel Albanie",
+          "given_name": "Samuel",
+          "surname": "Albanie",
+          "orcid": "0000-0003-1732-9198"
+        },
+        {
+          "full_name": "Gang Sun",
+          "given_name": "Gang",
+          "surname": "Sun",
+          "orcid": "0000-0001-6913-6799"
+        },
+        {
+          "full_name": "Enhua Wu",
+          "given_name": "Enhua",
+          "surname": "Wu",
+          "orcid": "0000-0002-2174-1428"
+        }
+      ],
+      "index": 19,
+      "id": "b19",
+      "unstructured": "Jie Hu, Li Shen, Samuel Albanie, Gang Sun, and Enhua Wu. Squeeze-and-Excitation Networks. In CVPR, 2018. 1, 2",
+      "date": "2018",
+      "title": "Squeeze-and-Excitation Networks",
+      "journal": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+      "journal_abbrev": "IEEE Trans. Pattern Anal. Mach. Intell.",
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "issn": "0162-8828",
+      "volume": "42",
+      "issue": "8",
+      "pages": "2011-2023",
+      "first_page": "2011",
+      "last_page": "2023",
+      "doi": "10.1109/tpami.2019.2913372"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Ahmet Iscen",
+          "given_name": "Ahmet",
+          "surname": "Iscen"
+        },
+        {
+          "full_name": "Giorgos Tolias",
+          "given_name": "Giorgos",
+          "surname": "Tolias"
+        },
+        {
+          "full_name": "Yannis Avrithis",
+          "given_name": "Yannis",
+          "surname": "Avrithis"
+        },
+        {
+          "full_name": "Teddy Furon",
+          "given_name": "Teddy",
+          "surname": "Furon"
+        },
+        {
+          "full_name": "Ondrej Chum",
+          "given_name": "Ondrej",
+          "surname": "Chum"
+        }
+      ],
+      "index": 20,
+      "id": "b20",
+      "unstructured": "Ahmet Iscen, Giorgos Tolias, Yannis Avrithis, Teddy Furon, and Ondrej Chum. Efficient diffusion on region manifolds: Recovering small objects with compact cnn representations. In CVPR, 2017. 2, 6",
+      "date": "2017-07",
+      "title": "Efficient Diffusion on Region Manifolds: Recovering Small Objects with Compact CNN Representations",
+      "book_title": "2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "volume": "2",
+      "pages": "6",
+      "doi": "10.1109/cvpr.2017.105"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "H Jegou",
+          "given_name": "H",
+          "surname": "Jegou"
+        },
+        {
+          "full_name": "F Perronnin",
+          "given_name": "F",
+          "surname": "Perronnin"
+        },
+        {
+          "full_name": "M Douze",
+          "given_name": "M",
+          "surname": "Douze"
+        },
+        {
+          "full_name": "J Sanchez",
+          "given_name": "J",
+          "surname": "Sanchez"
+        },
+        {
+          "full_name": "P Perez",
+          "given_name": "P",
+          "surname": "Perez"
+        },
+        {
+          "full_name": "C Schmid",
+          "given_name": "C",
+          "surname": "Schmid"
+        }
+      ],
+      "index": 21,
+      "id": "b21",
+      "unstructured": "H. Jegou, F. Perronnin, M. Douze, J. Sanchez, P. Perez, and C. Schmid. Aggregating local image descriptors into com- pact codes. PAMI, (99):1-1, 2011. 2",
+      "date": "2011",
+      "title": "Aggregating Local Image Descriptors into Compact Codes",
+      "journal": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+      "journal_abbrev": "IEEE Trans. Pattern Anal. Mach. Intell.",
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "issn": "0162-8828",
+      "volume": "34",
+      "issue": "9",
+      "pages": "1704-1716",
+      "first_page": "1704",
+      "last_page": "1716",
+      "doi": "10.1109/tpami.2011.235"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Albert Jimenez",
+          "given_name": "Albert",
+          "surname": "Jimenez"
+        },
+        {
+          "full_name": "Jose M Alvarez",
+          "given_name": "Jose",
+          "middle_name": "M",
+          "surname": "Alvarez"
+        },
+        {
+          "full_name": "Xavier Giro-I-Nieto",
+          "given_name": "Xavier",
+          "surname": "Giro-I-Nieto"
+        }
+      ],
+      "index": 22,
+      "id": "b22",
+      "unstructured": "Albert Jimenez, Jose M. Alvarez, and Xavier Gir\u00c3\u00b3-i-Nieto. Class weighted convolutional features for visual instance search. In BMVC, 2017. 2, 3",
+      "date": "2017",
+      "title": "Class Weighted Convolutional Features for Visual Instance Search",
+      "book_title": "Procedings of the British Machine Vision Conference 2017",
+      "publisher": "British Machine Vision Association",
+      "volume": "2",
+      "pages": "3",
+      "doi": "10.5244/c.31.144"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Yannis Kalantidis",
+          "given_name": "Yannis",
+          "surname": "Kalantidis"
+        },
+        {
+          "full_name": "Clayton Mellina",
+          "given_name": "Clayton",
+          "surname": "Mellina"
+        },
+        {
+          "full_name": "Simon Osindero",
+          "given_name": "Simon",
+          "surname": "Osindero"
+        }
+      ],
+      "index": 23,
+      "id": "b23",
+      "unstructured": "Yannis Kalantidis, Clayton Mellina, and Simon Osindero. Crossdimensional weighting for aggregated deep convolu- tional features. In ECCV, 2016. 1, 2, 3, 7",
+      "date": "2016",
+      "title": "Cross-Dimensional Weighting for Aggregated Deep Convolutional Features",
+      "book_title": "Lecture Notes in Computer Science",
+      "publisher": "Springer International Publishing",
+      "volume": "1",
+      "pages": "685-701",
+      "first_page": "685",
+      "last_page": "701",
+      "doi": "10.1007/978-3-319-46604-0_48"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Jin Hyo",
+          "given_name": "Jin",
+          "surname": "Hyo"
+        },
+        {
+          "full_name": "Enrique Kim",
+          "given_name": "Enrique",
+          "surname": "Kim"
+        },
+        {
+          "full_name": "Jan-Michael Dunn",
+          "given_name": "Jan-Michael",
+          "surname": "Dunn"
+        },
+        {
+          "full_name": "Frahm",
+          "surname": "Frahm"
+        }
+      ],
+      "index": 24,
+      "id": "b24",
+      "unstructured": "Hyo Jin Kim, Enrique Dunn, and Jan-Michael Frahm. Learned Contextual Feature Reweighting for Image Geo- Localization. In CVPR, 2017. 1, 2, 3",
+      "date": "2017",
+      "title": "Learned Contextual Feature Reweighting for Image Geo-Localization",
+      "book_title": "CVPR",
+      "volume": "1",
+      "pages": "3"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Sungyeon Kim",
+          "given_name": "Sungyeon",
+          "surname": "Kim"
+        },
+        {
+          "full_name": "Dongwon Kim",
+          "given_name": "Dongwon",
+          "surname": "Kim"
+        },
+        {
+          "full_name": "Minsu Cho",
+          "given_name": "Minsu",
+          "surname": "Cho"
+        },
+        {
+          "full_name": "Suha Kwak",
+          "given_name": "Suha",
+          "surname": "Kwak"
+        }
+      ],
+      "index": 25,
+      "id": "b25",
+      "unstructured": "Sungyeon Kim, Dongwon Kim, Minsu Cho, and Suha Kwak. Proxy anchor loss for deep metric learning. In CVPR, 2020.",
+      "date": "2020-06",
+      "title": "Proxy Anchor Loss for Deep Metric Learning",
+      "book_title": "2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "doi": "10.1109/cvpr42600.2020.00330"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "G David",
+          "given_name": "G",
+          "surname": "David"
+        },
+        {
+          "full_name": "Lowe",
+          "surname": "Lowe"
+        }
+      ],
+      "index": 26,
+      "id": "b26",
+      "unstructured": "David G. Lowe. Distinctive image features from scale- invariant keypoints. In IJCV, 2004. 1, 2",
+      "date": "2004",
+      "title": "Distinctive image features from scaleinvariant keypoints",
+      "journal": "IJCV",
+      "volume": "1",
+      "pages": "2"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Tony Ng",
+          "given_name": "Tony",
+          "surname": "Ng"
+        },
+        {
+          "full_name": "Vassileios Balntas",
+          "given_name": "Vassileios",
+          "surname": "Balntas"
+        },
+        {
+          "full_name": "Yurun Tian",
+          "given_name": "Yurun",
+          "surname": "Tian"
+        },
+        {
+          "full_name": "Krystian Mikolajczyk",
+          "given_name": "Krystian",
+          "surname": "Mikolajczyk"
+        }
+      ],
+      "index": 27,
+      "id": "b27",
+      "unstructured": "Tony Ng, Vassileios Balntas, Yurun Tian, and Krystian Mikolajczyk. SOLAR: Second-Order Loss and Attention for Image Retrieval. In ECCV, 2020. 1, 2, 3, 5, 6, 7",
+      "date": "2020",
+      "title": "SOLAR: Second-Order Loss and Attention for Image Retrieval",
+      "book_title": "Computer Vision \u00e2\u20ac\u201c ECCV 2020",
+      "publisher": "Springer International Publishing",
+      "volume": "1",
+      "pages": "253-270",
+      "first_page": "253",
+      "last_page": "270",
+      "doi": "10.1007/978-3-030-58595-2_16"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Hyeonwoo Noh",
+          "given_name": "Hyeonwoo",
+          "surname": "Noh"
+        },
+        {
+          "full_name": "Andre Araujo",
+          "given_name": "Andre",
+          "surname": "Araujo"
+        },
+        {
+          "full_name": "Jack Sim",
+          "given_name": "Jack",
+          "surname": "Sim"
+        },
+        {
+          "full_name": "Tobias Weyand",
+          "given_name": "Tobias",
+          "surname": "Weyand"
+        },
+        {
+          "full_name": "Bohyung Han",
+          "given_name": "Bohyung",
+          "surname": "Han"
+        }
+      ],
+      "index": 28,
+      "id": "b28",
+      "unstructured": "Hyeonwoo Noh, Andre Araujo, Jack Sim, Tobias Weyand, and Bohyung Han. Large Scale Image Retrieval with Atten- tive Deep Local Features. In ICCV, 2017. 1, 2, 3, 5, 6, 8",
+      "date": "2017-10",
+      "title": "Large-Scale Image Retrieval with Attentive Deep Local Features",
+      "book_title": "2017 IEEE International Conference on Computer Vision (ICCV)",
+      "publisher": "IEEE",
+      "volume": "1",
+      "pages": "8",
+      "doi": "10.1109/iccv.2017.374"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Hyun Oh Song",
+          "given_name": "Hyun",
+          "middle_name": "Oh",
+          "surname": "Song"
+        },
+        {
+          "full_name": "Yu Xiang",
+          "given_name": "Yu",
+          "surname": "Xiang"
+        },
+        {
+          "full_name": "Stefanie Jegelka",
+          "given_name": "Stefanie",
+          "surname": "Jegelka"
+        },
+        {
+          "full_name": "Silvio Savarese",
+          "given_name": "Silvio",
+          "surname": "Savarese"
+        }
+      ],
+      "index": 29,
+      "id": "b29",
+      "unstructured": "Hyun Oh Song, Yu Xiang, Stefanie Jegelka, and Silvio Savarese. Deep metric learning via lifted structured feature embedding. In CVPR, 2016. 1",
+      "date": "2016-06",
+      "title": "Deep Metric Learning via Lifted Structured Feature Embedding",
+      "book_title": "2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "pages": "1",
+      "doi": "10.1109/cvpr.2016.434"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Adam Paszke",
+          "given_name": "Adam",
+          "surname": "Paszke"
+        },
+        {
+          "full_name": "Sam Gross",
+          "given_name": "Sam",
+          "surname": "Gross"
+        },
+        {
+          "full_name": "Francisco Massa",
+          "given_name": "Francisco",
+          "surname": "Massa"
+        },
+        {
+          "full_name": "Adam Lerer",
+          "given_name": "Adam",
+          "surname": "Lerer"
+        },
+        {
+          "full_name": "James Bradbury",
+          "given_name": "James",
+          "surname": "Bradbury"
+        },
+        {
+          "full_name": "Gregory Chanan",
+          "given_name": "Gregory",
+          "surname": "Chanan"
+        },
+        {
+          "full_name": "Trevor Killeen",
+          "given_name": "Trevor",
+          "surname": "Killeen"
+        },
+        {
+          "full_name": "Zeming Lin",
+          "given_name": "Zeming",
+          "surname": "Lin"
+        },
+        {
+          "full_name": "Natalia Gimelshein",
+          "given_name": "Natalia",
+          "surname": "Gimelshein"
+        },
+        {
+          "full_name": "Luca Antiga",
+          "given_name": "Luca",
+          "surname": "Antiga"
+        },
+        {
+          "full_name": "Alban Desmaison",
+          "given_name": "Alban",
+          "surname": "Desmaison"
+        },
+        {
+          "full_name": "Andreas K\u00c3\u00b6pf",
+          "given_name": "Andreas",
+          "surname": "K\u00c3\u00b6pf"
+        },
+        {
+          "full_name": "Edward Yang",
+          "given_name": "Edward",
+          "surname": "Yang"
+        },
+        {
+          "full_name": "Zach Devito",
+          "given_name": "Zach",
+          "surname": "Devito"
+        },
+        {
+          "full_name": "Martin Raison",
+          "given_name": "Martin",
+          "surname": "Raison"
+        },
+        {
+          "full_name": "Alykhan Tejani",
+          "given_name": "Alykhan",
+          "surname": "Tejani"
+        },
+        {
+          "full_name": "Sasank Chilamkurthy",
+          "given_name": "Sasank",
+          "surname": "Chilamkurthy"
+        },
+        {
+          "full_name": "Benoit Steiner",
+          "given_name": "Benoit",
+          "surname": "Steiner"
+        },
+        {
+          "full_name": "Lu Fang",
+          "given_name": "Lu",
+          "surname": "Fang"
+        },
+        {
+          "full_name": "Junjie Bai",
+          "given_name": "Junjie",
+          "surname": "Bai"
+        },
+        {
+          "full_name": "Soumith Chintala",
+          "given_name": "Soumith",
+          "surname": "Chintala"
+        }
+      ],
+      "index": 30,
+      "id": "b30",
+      "unstructured": "Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, Alban Desmaison, Andreas K\u00c3\u00b6pf, Edward Yang, Zach DeVito, Martin Raison, Alykhan Tejani, Sasank Chilamkurthy, Benoit Steiner, Lu Fang, Junjie Bai, and Soumith Chintala. PyTorch: An im- perative style, high-performance deep learning. In NeurIPS, 2019. 5",
+      "date": "2019",
+      "title": "PyTorch: An imperative style, high-performance deep learning",
+      "journal": "NeurIPS",
+      "volume": "5"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "James Philbin",
+          "given_name": "James",
+          "surname": "Philbin"
+        },
+        {
+          "full_name": "Ondrej Chum",
+          "given_name": "Ondrej",
+          "surname": "Chum"
+        },
+        {
+          "full_name": "Michael Isard",
+          "given_name": "Michael",
+          "surname": "Isard"
+        },
+        {
+          "full_name": "Josef Sivic",
+          "given_name": "Josef",
+          "surname": "Sivic"
+        },
+        {
+          "full_name": "Andrew Zisserman",
+          "given_name": "Andrew",
+          "surname": "Zisserman"
+        }
+      ],
+      "index": 31,
+      "id": "b31",
+      "unstructured": "James Philbin, Ondrej Chum, Michael Isard, Josef Sivic, and Andrew Zisserman. Object retrieval with large vocabularies and fast spatial matching. In CVPR, 2007. 2, 5",
+      "date": "2007-06",
+      "title": "Object retrieval with large vocabularies and fast spatial matching",
+      "book_title": "2007 IEEE Conference on Computer Vision and Pattern Recognition",
+      "publisher": "IEEE",
+      "volume": "2",
+      "pages": "5",
+      "doi": "10.1109/cvpr.2007.383172"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "James Philbin",
+          "given_name": "James",
+          "surname": "Philbin"
+        },
+        {
+          "full_name": "Ondrej Chum",
+          "given_name": "Ondrej",
+          "surname": "Chum"
+        },
+        {
+          "full_name": "Michael Isard",
+          "given_name": "Michael",
+          "surname": "Isard"
+        },
+        {
+          "full_name": "Josef Sivic",
+          "given_name": "Josef",
+          "surname": "Sivic"
+        },
+        {
+          "full_name": "Andrew Zisserman",
+          "given_name": "Andrew",
+          "surname": "Zisserman"
+        }
+      ],
+      "index": 32,
+      "id": "b32",
+      "unstructured": "James Philbin, Ondrej Chum, Michael Isard, Josef Sivic, and Andrew Zisserman. Lost in quantization:Improving particu- lar object retrieval in large scale image databases. In CVPR, 2008. 5",
+      "date": "2008-06",
+      "title": "Lost in quantization: Improving particular object retrieval in large scale image databases",
+      "book_title": "2008 IEEE Conference on Computer Vision and Pattern Recognition",
+      "publisher": "IEEE",
+      "pages": "5",
+      "doi": "10.1109/cvpr.2008.4587635"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Tobias Pl\u00c3\u00b6tz",
+          "given_name": "Tobias",
+          "surname": "Pl\u00c3\u00b6tz"
+        },
+        {
+          "full_name": "Stefan Roth",
+          "given_name": "Stefan",
+          "surname": "Roth"
+        }
+      ],
+      "index": 33,
+      "id": "b33",
+      "unstructured": "Tobias Pl\u00c3\u00b6tz and Stefan Roth. Neural nearest neighbors net- works. In NeurIPS, 2018. 2, 3",
+      "date": "2018",
+      "title": "Neural nearest neighbors networks",
+      "journal": "NeurIPS",
+      "volume": "2",
+      "pages": "3"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Filip Radenovic",
+          "given_name": "Filip",
+          "surname": "Radenovic"
+        },
+        {
+          "full_name": "Ahmet Iscen",
+          "given_name": "Ahmet",
+          "surname": "Iscen"
+        },
+        {
+          "full_name": "Giorgos Tolias",
+          "given_name": "Giorgos",
+          "surname": "Tolias"
+        },
+        {
+          "full_name": "Yannis Avrithis",
+          "given_name": "Yannis",
+          "surname": "Avrithis"
+        },
+        {
+          "full_name": "Ondrej Chum",
+          "given_name": "Ondrej",
+          "surname": "Chum"
+        }
+      ],
+      "index": 34,
+      "id": "b34",
+      "unstructured": "Filip Radenovi\u00c4\u2021, Ahmet Iscen, Giorgos Tolias, Yannis Avrithis, and Ond\u00c5\u2122ej Chum. Revisiting Oxford and Paris: Large-Scale Image Retrieval Benchmarking. In CVPR, 2018. 5, 6, 7",
+      "date": "2018-06",
+      "title": "Revisiting Oxford and Paris: Large-Scale Image Retrieval Benchmarking",
+      "book_title": "2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+      "publisher": "IEEE",
+      "volume": "5",
+      "pages": "7",
+      "doi": "10.1109/cvpr.2018.00598"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Filip Radenovi\u00c4\u2021",
+          "given_name": "Filip",
+          "surname": "Radenovi\u00c4\u2021"
+        },
+        {
+          "full_name": "Giorgos Tolias",
+          "given_name": "Giorgos",
+          "surname": "Tolias"
+        },
+        {
+          "full_name": "Ond\u00c5\u2122ej Chum",
+          "given_name": "Ond\u00c5\u2122ej",
+          "surname": "Chum"
+        }
+      ],
+      "index": 35,
+      "id": "b35",
+      "unstructured": "Filip Radenovi\u00c4\u2021, Giorgos Tolias, and Ond\u00c5\u2122ej Chum. CNN image retrieval learns from BoW: Unsupervised fine-tuning with hard examples. In ECCV, 2016. 2, 7",
+      "date": "2016",
+      "title": "CNN Image Retrieval Learns from BoW: Unsupervised Fine-Tuning with Hard Examples",
+      "book_title": "Computer Vision \u00e2\u20ac\u201c ECCV 2016",
+      "publisher": "Springer International Publishing",
+      "volume": "2",
+      "pages": "3-20",
+      "first_page": "3",
+      "last_page": "20",
+      "doi": "10.1007/978-3-319-46448-0_1"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Filip Radenovic",
+          "given_name": "Filip",
+          "surname": "Radenovic",
+          "orcid": "0000-0002-7122-2765"
+        },
+        {
+          "full_name": "Giorgos Tolias",
+          "given_name": "Giorgos",
+          "surname": "Tolias"
+        },
+        {
+          "full_name": "Ondrej Chum",
+          "given_name": "Ondrej",
+          "surname": "Chum",
+          "orcid": "0000-0001-7042-1810"
+        }
+      ],
+      "index": 36,
+      "id": "b36",
+      "unstructured": "Filip Radenovi\u00c4\u2021, Giorgos Tolias, and Ond\u00c5\u2122ej Chum. Fine- Tuning CNN Image Retrieval with No Human Annotation. In TPAMI, 2019. 1, 2, 5, 6, 7",
+      "date": "2019-07-01",
+      "title": "Fine-Tuning CNN Image Retrieval with No Human Annotation",
+      "journal": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+      "journal_abbrev": "IEEE Trans. Pattern Anal. Mach. Intell.",
+      "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "issn": "0162-8828",
+      "volume": "41",
+      "issue": "7",
+      "pages": "1655-1668",
+      "first_page": "1655",
+      "last_page": "1668",
+      "doi": "10.1109/tpami.2018.2846566"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Ali Sharif Razavian",
+          "given_name": "Ali",
+          "surname": "Sharif Razavian"
+        },
+        {
+          "full_name": "Josephine Sullivan",
+          "given_name": "Josephine",
+          "surname": "Sullivan"
+        },
+        {
+          "full_name": "Stefan Carlsson",
+          "given_name": "Stefan",
+          "surname": "Carlsson"
+        },
+        {
+          "full_name": "Atsuto Maki",
+          "given_name": "Atsuto",
+          "surname": "Maki"
+        }
+      ],
+      "index": 37,
+      "id": "b37",
+      "unstructured": "Ali Sharif Razavian, Josephine Sullivan, Stefan Carlsson, and Atsuto Maki. Visual Instance Retrieval with Deep Con- volutional Networks. In CoRR, 2015. 2",
+      "date": "2015",
+      "title": "Visual Instance Retrieval with Deep Convolutional Networks",
+      "journal": "CoRR",
+      "volume": "2"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Olga Russakovsky",
+          "given_name": "Olga",
+          "surname": "Russakovsky"
+        },
+        {
+          "full_name": "Jia Deng",
+          "given_name": "Jia",
+          "surname": "Deng"
+        },
+        {
+          "full_name": "Hao Su",
+          "given_name": "Hao",
+          "surname": "Su"
+        },
+        {
+          "full_name": "Jonathan Krause",
+          "given_name": "Jonathan",
+          "surname": "Krause"
+        },
+        {
+          "full_name": "Sanjeev Satheesh",
+          "given_name": "Sanjeev",
+          "surname": "Satheesh"
+        },
+        {
+          "full_name": "Sean Ma",
+          "given_name": "Sean",
+          "surname": "Ma"
+        },
+        {
+          "full_name": "Zhiheng Huang",
+          "given_name": "Zhiheng",
+          "surname": "Huang"
+        },
+        {
+          "full_name": "Andrej Karpathy",
+          "given_name": "Andrej",
+          "surname": "Karpathy"
+        },
+        {
+          "full_name": "Aditya Khosla",
+          "given_name": "Aditya",
+          "surname": "Khosla"
+        },
+        {
+          "full_name": "Michael Bernstein",
+          "given_name": "Michael",
+          "surname": "Bernstein"
+        },
+        {
+          "full_name": "Alexander C Berg",
+          "given_name": "Alexander",
+          "middle_name": "C",
+          "surname": "Berg"
+        },
+        {
+          "full_name": "Li Fei-Fei",
+          "given_name": "Li",
+          "surname": "Fei-Fei"
+        }
+      ],
+      "index": 38,
+      "id": "b38",
+      "unstructured": "Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, San- jeev Satheesh, Sean Ma, Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, Alexander C. Berg, and Li Fei-Fei. ImageNet Large Scale Visual Recognition Chal- lenge. In International booktitle of Computer Vision, 2015.",
+      "date": "2015-04-11",
+      "title": "ImageNet Large Scale Visual Recognition Challenge",
+      "journal": "International Journal of Computer Vision",
+      "journal_abbrev": "Int J Comput Vis",
+      "publisher": "Springer Science and Business Media LLC",
+      "issn": "0920-5691",
+      "volume": "115",
+      "issue": "3",
+      "pages": "211-252",
+      "first_page": "211",
+      "last_page": "252",
+      "doi": "10.1007/s11263-015-0816-y"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Oriane Simeoni",
+          "given_name": "Oriane",
+          "surname": "Simeoni"
+        },
+        {
+          "full_name": "Yannis Avrithis",
+          "given_name": "Yannis",
+          "surname": "Avrithis"
+        },
+        {
+          "full_name": "Ondrej Chum",
+          "given_name": "Ondrej",
+          "surname": "Chum"
+        }
+      ],
+      "index": 39,
+      "id": "b39",
+      "unstructured": "Oriane Sim\u00c3\u00a9oni, Yannis Avrithis, and Ondrej Chum. Local features and visual words emerge in activations. In CVPR, 2019. 2, 6",
+      "date": "2019-06",
+      "title": "Local Features and Visual Words Emerge in Activations",
+      "book_title": "2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "volume": "2",
+      "pages": "6",
+      "doi": "10.1109/cvpr.2019.01192"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Oriane Sim\u00c3\u00a9oni",
+          "given_name": "Oriane",
+          "surname": "Sim\u00c3\u00a9oni"
+        },
+        {
+          "full_name": "Ahmet Iscen",
+          "given_name": "Ahmet",
+          "surname": "Iscen",
+          "orcid": "0000-0002-1856-4790"
+        },
+        {
+          "full_name": "Giorgos Tolias",
+          "given_name": "Giorgos",
+          "surname": "Tolias"
+        },
+        {
+          "full_name": "Yannis Avrithis",
+          "given_name": "Yannis",
+          "surname": "Avrithis"
+        },
+        {
+          "full_name": "Ond\u00c5\u2122ej Chum",
+          "given_name": "Ond\u00c5\u2122ej",
+          "surname": "Chum"
+        }
+      ],
+      "index": 40,
+      "id": "b40",
+      "unstructured": "O. Sim\u00c3\u00a9oni, A. Iscen, G. Tolias, Y. Avrithis, and O. Chum. Graph-based particular object discovery. Machine Vision and Applications, 30(2):243-254, 3 2019. 3",
+      "date": "2019-02-08",
+      "title": "Graph-based particular object discovery",
+      "journal": "Machine Vision and Applications",
+      "journal_abbrev": "Machine Vision and Applications",
+      "publisher": "Springer Science and Business Media LLC",
+      "issn": "0932-8092",
+      "volume": "30",
+      "issue": "2",
+      "pages": "243-254",
+      "first_page": "243",
+      "last_page": "254",
+      "doi": "10.1007/s00138-019-01005-z"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Jake Snell",
+          "given_name": "Jake",
+          "surname": "Snell"
+        },
+        {
+          "full_name": "Kevin Swersky",
+          "given_name": "Kevin",
+          "surname": "Swersky"
+        },
+        {
+          "full_name": "Richard S Zemel",
+          "given_name": "Richard",
+          "middle_name": "S",
+          "surname": "Zemel"
+        }
+      ],
+      "index": 41,
+      "id": "b41",
+      "unstructured": "Jake Snell, Kevin Swersky, and Richard S. Zemel. Prototyp- ical networks for few-shot learning. In NeurIPS, 2017. 1",
+      "date": "2017",
+      "title": "Prototypical networks for few-shot learning",
+      "journal": "NeurIPS",
+      "volume": "1"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Christian Szegedy",
+          "given_name": "Christian",
+          "surname": "Szegedy"
+        },
+        {
+          "full_name": "Wei Liu",
+          "surname": "Wei Liu"
+        },
+        {
+          "full_name": "Yangqing Jia",
+          "surname": "Yangqing Jia"
+        },
+        {
+          "full_name": "Pierre Sermanet",
+          "given_name": "Pierre",
+          "surname": "Sermanet"
+        },
+        {
+          "full_name": "Scott Reed",
+          "given_name": "Scott",
+          "surname": "Reed"
+        },
+        {
+          "full_name": "Dragomir Anguelov",
+          "given_name": "Dragomir",
+          "surname": "Anguelov"
+        },
+        {
+          "full_name": "Dumitru Erhan",
+          "given_name": "Dumitru",
+          "surname": "Erhan"
+        },
+        {
+          "full_name": "Vincent Vanhoucke",
+          "given_name": "Vincent",
+          "surname": "Vanhoucke"
+        },
+        {
+          "full_name": "Andrew Rabinovich",
+          "given_name": "Andrew",
+          "surname": "Rabinovich"
+        }
+      ],
+      "index": 42,
+      "id": "b42",
+      "unstructured": "Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In CVPR, 2015. 3",
+      "date": "2015-06",
+      "title": "Going deeper with convolutions",
+      "book_title": "2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "pages": "3",
+      "doi": "10.1109/cvpr.2015.7298594"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Mingxing Tan",
+          "given_name": "Mingxing",
+          "surname": "Tan"
+        },
+        {
+          "full_name": "Ruoming Pang",
+          "given_name": "Ruoming",
+          "surname": "Pang"
+        },
+        {
+          "full_name": "Quoc V Le",
+          "given_name": "Quoc",
+          "middle_name": "V",
+          "surname": "Le"
+        }
+      ],
+      "index": 43,
+      "id": "b43",
+      "unstructured": "Mingxing Tan, Ruoming Pang, and Quoc V. Le. EfficientDet: Scalable and Efficient Object Detection. In CVPR, 2020. 5",
+      "date": "2020-06",
+      "title": "EfficientDet: Scalable and Efficient Object Detection",
+      "book_title": "2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "pages": "5",
+      "doi": "10.1109/cvpr42600.2020.01079"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Marvin Teichmann",
+          "given_name": "Marvin",
+          "surname": "Teichmann"
+        },
+        {
+          "full_name": "Andre Araujo",
+          "given_name": "Andre",
+          "surname": "Araujo"
+        },
+        {
+          "full_name": "Menglong Zhu",
+          "given_name": "Menglong",
+          "surname": "Zhu"
+        },
+        {
+          "full_name": "Jack Sim",
+          "given_name": "Jack",
+          "surname": "Sim"
+        }
+      ],
+      "index": 44,
+      "id": "b44",
+      "unstructured": "Marvin Teichmann, Andre Araujo, Menglong Zhu, and Jack Sim. Detect-to-retrieve: Efficient regional aggregation for image search. In CVPR, 2019. 2",
+      "date": "2019-06",
+      "title": "Detect-To-Retrieve: Efficient Regional Aggregation for Image Search",
+      "book_title": "2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "pages": "2",
+      "doi": "10.1109/cvpr.2019.00525"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Giorgos Tolias",
+          "given_name": "Giorgos",
+          "surname": "Tolias"
+        },
+        {
+          "full_name": "Yannis Avrithis",
+          "given_name": "Yannis",
+          "surname": "Avrithis"
+        },
+        {
+          "full_name": "Herve Jegou",
+          "given_name": "Herve",
+          "surname": "Jegou"
+        }
+      ],
+      "index": 45,
+      "id": "b45",
+      "unstructured": "Giorgios Tolias, Yannis Avrithis, and Herv\u00c3\u00a9 J\u00c3\u00a9gou. To aggre- gate or not to aggregate: Selective match kernels for image search. In ICCV, 2013. 2",
+      "date": "2013-12",
+      "title": "To Aggregate or Not to aggregate: Selective Match Kernels for Image Search",
+      "book_title": "2013 IEEE International Conference on Computer Vision",
+      "publisher": "IEEE",
+      "doi": "10.1109/iccv.2013.177"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Giorgos Tolias",
+          "given_name": "Giorgos",
+          "surname": "Tolias"
+        },
+        {
+          "full_name": "Tomas Jenicek",
+          "given_name": "Tomas",
+          "surname": "Jenicek"
+        },
+        {
+          "full_name": "Ond\u00c5\u2122ej Chum",
+          "given_name": "Ond\u00c5\u2122ej",
+          "surname": "Chum"
+        }
+      ],
+      "index": 46,
+      "id": "b46",
+      "unstructured": "Giorgos Tolias, Tomas Jenicek, and Ond\u00c5\u2122ej Chum. Learn- ing and aggregating deep local descriptors for instance-level recognition. In ECCV, 2020. 2, 3",
+      "date": "2020",
+      "title": "Learning and Aggregating Deep Local Descriptors for Instance-Level Recognition",
+      "book_title": "Computer Vision \u00e2\u20ac\u201c ECCV 2020",
+      "publisher": "Springer International Publishing",
+      "volume": "2",
+      "pages": "460-477",
+      "first_page": "460",
+      "last_page": "477",
+      "doi": "10.1007/978-3-030-58452-8_27"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Giorgos Tolias",
+          "given_name": "Giorgos",
+          "surname": "Tolias"
+        },
+        {
+          "full_name": "Ronan Sicre",
+          "given_name": "Ronan",
+          "surname": "Sicre"
+        },
+        {
+          "full_name": "Herv\u00c3\u00a9 J\u00c3\u00a9gou",
+          "given_name": "Herv\u00c3\u00a9",
+          "surname": "J\u00c3\u00a9gou"
+        }
+      ],
+      "index": 47,
+      "id": "b47",
+      "unstructured": "Giorgos Tolias, Ronan Sicre, and Herv\u00c3\u00a9 J\u00c3\u00a9gou. Particular ob- ject retrieval with integral max-pooling of CNN activations. In ICLR, 2016. 2",
+      "date": "2016",
+      "title": "Particular object retrieval with integral max-pooling of CNN activations",
+      "journal": "ICLR",
+      "volume": "2"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Ashish Vaswani",
+          "given_name": "Ashish",
+          "surname": "Vaswani"
+        },
+        {
+          "full_name": "Noam Shazeer",
+          "given_name": "Noam",
+          "surname": "Shazeer"
+        },
+        {
+          "full_name": "Niki Parmar",
+          "given_name": "Niki",
+          "surname": "Parmar"
+        },
+        {
+          "full_name": "Jakob Uszkoreit",
+          "given_name": "Jakob",
+          "surname": "Uszkoreit"
+        },
+        {
+          "full_name": "Llion Jones",
+          "given_name": "Llion",
+          "surname": "Jones"
+        },
+        {
+          "full_name": "Aidan N Gomez",
+          "given_name": "Aidan",
+          "middle_name": "N",
+          "surname": "Gomez"
+        },
+        {
+          "full_name": "Lukasz Kaiser",
+          "given_name": "Lukasz",
+          "surname": "Kaiser"
+        },
+        {
+          "full_name": "Illia Polosukhin",
+          "given_name": "Illia",
+          "surname": "Polosukhin"
+        }
+      ],
+      "index": 48,
+      "id": "b48",
+      "unstructured": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszko- reit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is all you need. In NeurIPS, 2017. 4",
+      "date": "2017",
+      "title": "Attention is all you need",
+      "journal": "NeurIPS",
+      "volume": "4"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Ashish Vaswani",
+          "given_name": "Ashish",
+          "surname": "Vaswani"
+        },
+        {
+          "full_name": "Noam Shazeer",
+          "given_name": "Noam",
+          "surname": "Shazeer"
+        },
+        {
+          "full_name": "Niki Parmar",
+          "given_name": "Niki",
+          "surname": "Parmar"
+        },
+        {
+          "full_name": "Jakob Uszkoreit",
+          "given_name": "Jakob",
+          "surname": "Uszkoreit"
+        },
+        {
+          "full_name": "Llion Jones",
+          "given_name": "Llion",
+          "surname": "Jones"
+        },
+        {
+          "full_name": "Aidan N Gomez",
+          "given_name": "Aidan",
+          "middle_name": "N",
+          "surname": "Gomez"
+        },
+        {
+          "full_name": "Lukasz Kaiser",
+          "given_name": "Lukasz",
+          "surname": "Kaiser"
+        },
+        {
+          "full_name": "Illia Polosukhin",
+          "given_name": "Illia",
+          "surname": "Polosukhin"
+        }
+      ],
+      "index": 49,
+      "id": "b49",
+      "unstructured": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszko- reit, Llion Jones, Aidan N Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is all you need. In NeurIPS, 2017. 9",
+      "date": "2017",
+      "title": "Attention is all you need",
+      "journal": "NeurIPS",
+      "pages": "9"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Qilong Wang",
+          "given_name": "Qilong",
+          "surname": "Wang"
+        },
+        {
+          "full_name": "Banggu Wu",
+          "given_name": "Banggu",
+          "surname": "Wu"
+        },
+        {
+          "full_name": "Pengfei Zhu",
+          "given_name": "Pengfei",
+          "surname": "Zhu"
+        },
+        {
+          "full_name": "Peihua Li",
+          "given_name": "Peihua",
+          "surname": "Li"
+        },
+        {
+          "full_name": "Wangmeng Zuo",
+          "given_name": "Wangmeng",
+          "surname": "Zuo"
+        },
+        {
+          "full_name": "Qinghua Hu",
+          "given_name": "Qinghua",
+          "surname": "Hu"
+        }
+      ],
+      "index": 50,
+      "id": "b50",
+      "unstructured": "Qilong Wang, Banggu Wu, Pengfei Zhu, Peihua Li, Wang- meng Zuo, and Qinghua Hu. ECA-Net: Efficient Chan- nel Attention for Deep Convolutional Neural Networks. In CVPR, 2020. 2, 3, 4",
+      "date": "2020-06",
+      "title": "ECA-Net: Efficient Channel Attention for Deep Convolutional Neural Networks",
+      "book_title": "2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "volume": "2",
+      "pages": "4",
+      "doi": "10.1109/cvpr42600.2020.01155"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Xiaolong Wang",
+          "given_name": "Xiaolong",
+          "surname": "Wang"
+        },
+        {
+          "full_name": "Ross Girshick",
+          "given_name": "Ross",
+          "surname": "Girshick"
+        },
+        {
+          "full_name": "Abhinav Gupta",
+          "given_name": "Abhinav",
+          "surname": "Gupta"
+        },
+        {
+          "full_name": "Kaiming He",
+          "given_name": "Kaiming",
+          "surname": "He"
+        }
+      ],
+      "index": 51,
+      "id": "b51",
+      "unstructured": "Xiaolong Wang, Ross Girshick, Abhinav Gupta, and Kaim- ing He. Non-local Neural Networks. In CVPR, 2018. 1, 2, 3, 4",
+      "date": "2018-06",
+      "title": "Non-local Neural Networks",
+      "book_title": "2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+      "publisher": "IEEE",
+      "volume": "1",
+      "pages": "4",
+      "doi": "10.1109/cvpr.2018.00813"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Tobias Weyand",
+          "given_name": "Tobias",
+          "surname": "Weyand"
+        },
+        {
+          "full_name": "Andre Araujo",
+          "given_name": "Andre",
+          "surname": "Araujo"
+        },
+        {
+          "full_name": "Bingyi Cao",
+          "given_name": "Bingyi",
+          "surname": "Cao"
+        },
+        {
+          "full_name": "Jack Sim",
+          "given_name": "Jack",
+          "surname": "Sim"
+        }
+      ],
+      "index": 52,
+      "id": "b52",
+      "unstructured": "Tobias Weyand, Andre Araujo, Bingyi Cao, and Jack Sim. Google Landmarks Dataset v2 -A Large-Scale Benchmark for Instance-Level Recognition and Retrieval. In CVPR, 2020. 1, 2, 5, 6, 7",
+      "date": "2020-06",
+      "title": "Google Landmarks Dataset v2 \u00e2\u20ac\u201c A Large-Scale Benchmark for Instance-Level Recognition and Retrieval",
+      "book_title": "2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "volume": "1",
+      "pages": "7",
+      "doi": "10.1109/cvpr42600.2020.00265"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Sanghyun Woo",
+          "given_name": "Sanghyun",
+          "surname": "Woo"
+        },
+        {
+          "full_name": "Jongchan Park",
+          "given_name": "Jongchan",
+          "surname": "Park"
+        },
+        {
+          "full_name": "Joon-Young Lee",
+          "given_name": "Joon-Young",
+          "surname": "Lee"
+        },
+        {
+          "full_name": "In So Kweon",
+          "given_name": "In",
+          "middle_name": "So",
+          "surname": "Kweon"
+        }
+      ],
+      "index": 53,
+      "id": "b53",
+      "unstructured": "Sanghyun Woo, Jongchan Park, Joon-Young Lee, and In So Kweon. CBAM: Convolutional Block Attention Module. In ECCV, 2018. 1, 2, 4, 8",
+      "date": "2018",
+      "title": "CBAM: Convolutional Block Attention Module",
+      "book_title": "Computer Vision \u00e2\u20ac\u201c ECCV 2018",
+      "publisher": "Springer International Publishing",
+      "volume": "1",
+      "pages": "3-19",
+      "first_page": "3",
+      "last_page": "19",
+      "doi": "10.1007/978-3-030-01234-2_1"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Fan Yang",
+          "given_name": "Fan",
+          "surname": "Yang"
+        },
+        {
+          "full_name": "Ryota Hinami",
+          "given_name": "Ryota",
+          "surname": "Hinami"
+        },
+        {
+          "full_name": "Yusuke Matsui",
+          "given_name": "Yusuke",
+          "surname": "Matsui"
+        },
+        {
+          "full_name": "Steven Ly",
+          "given_name": "Steven",
+          "surname": "Ly"
+        },
+        {
+          "full_name": "Shin\u00e2\u20ac\u2122ichi Satoh",
+          "given_name": "Shin\u00e2\u20ac\u2122ichi",
+          "surname": "Satoh"
+        }
+      ],
+      "index": 54,
+      "id": "b54",
+      "unstructured": "Fan Yang, Ryota Hinami, Yusuke Matsui, Steven Ly, and Shin'ichi Satoh. Efficient image retrieval via decoupling dif- fusion into online and offline processing. In AAAI, 2019. 2, 6",
+      "date": "2019-07-17",
+      "title": "Efficient Image Retrieval via Decoupling Diffusion into Online and Offline Processing",
+      "journal": "Proceedings of the AAAI Conference on Artificial Intelligence",
+      "journal_abbrev": "AAAI",
+      "publisher": "Association for the Advancement of Artificial Intelligence (AAAI)",
+      "issn": "2159-5399",
+      "volume": "33",
+      "issue": "01",
+      "pages": "9087-9094",
+      "first_page": "9087",
+      "last_page": "9094",
+      "doi": "10.1609/aaai.v33i01.33019087"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Shuhei Yokoo",
+          "given_name": "Shuhei",
+          "surname": "Yokoo"
+        },
+        {
+          "full_name": "Kohei Ozaki",
+          "given_name": "Kohei",
+          "surname": "Ozaki"
+        },
+        {
+          "full_name": "Edgar Simo-Serra",
+          "given_name": "Edgar",
+          "surname": "Simo-Serra"
+        },
+        {
+          "full_name": "Satoshi Iizuka",
+          "given_name": "Satoshi",
+          "surname": "Iizuka"
+        }
+      ],
+      "index": 55,
+      "id": "b55",
+      "unstructured": "Shuhei Yokoo, Kohei Ozaki, Edgar Simo-Serra, and Satoshi Iizuka. Two-stage Discriminative Re-ranking for Large-scale Landmark Retrieval. In arXiv:2003.11211, 2020. 6, 8",
+      "date": "2020-06",
+      "title": "Two-stage Discriminative Re-ranking for Large-scale Landmark Retrieval",
+      "book_title": "2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)",
+      "publisher": "IEEE",
+      "pages": "8",
+      "doi": "10.1109/cvprw50498.2020.00514",
+      "arxiv_id": "2003.11211"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Fisher Yu",
+          "given_name": "Fisher",
+          "surname": "Yu"
+        },
+        {
+          "full_name": "Vladlen Koltun",
+          "given_name": "Vladlen",
+          "surname": "Koltun"
+        },
+        {
+          "full_name": "Thomas Funkhouser",
+          "given_name": "Thomas",
+          "surname": "Funkhouser"
+        }
+      ],
+      "index": 56,
+      "id": "b56",
+      "unstructured": "Fisher Yu, Vladlen Koltun, and Thomas Funkhouser. Dilated residual networks. In CVPR, 2017. 4",
+      "date": "2017-07",
+      "title": "Dilated Residual Networks",
+      "book_title": "2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "doi": "10.1109/cvpr.2017.75"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Li Yuan",
+          "given_name": "Li",
+          "surname": "Yuan"
+        },
+        {
+          "full_name": "Yunpeng Chen",
+          "given_name": "Yunpeng",
+          "surname": "Chen"
+        },
+        {
+          "full_name": "Tao Wang",
+          "given_name": "Tao",
+          "surname": "Wang"
+        },
+        {
+          "full_name": "Weihao Yu",
+          "given_name": "Weihao",
+          "surname": "Yu"
+        },
+        {
+          "full_name": "Yujun Shi",
+          "given_name": "Yujun",
+          "surname": "Shi"
+        },
+        {
+          "full_name": "Zihang Jiang",
+          "given_name": "Zihang",
+          "surname": "Jiang"
+        },
+        {
+          "full_name": "Francis E H Tay",
+          "given_name": "Francis",
+          "middle_name": "E H",
+          "surname": "Tay"
+        },
+        {
+          "full_name": "Jiashi Feng",
+          "given_name": "Jiashi",
+          "surname": "Feng"
+        },
+        {
+          "full_name": "Shuicheng Yan",
+          "given_name": "Shuicheng",
+          "surname": "Yan"
+        }
+      ],
+      "index": 57,
+      "id": "b57",
+      "unstructured": "Li Yuan, Yunpeng Chen, Tao Wang, Weihao Yu, Yujun Shi, Francis EH Tay, Jiashi Feng, and Shuicheng Yan. Tokens- to-token vit: Training vision transformers from scratch on imagenet. arXiv preprint arXiv:2101.11986, 2021.",
+      "date": "2021-10",
+      "title": "Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet",
+      "book_title": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+      "publisher": "IEEE",
+      "doi": "10.1109/iccv48922.2021.00060",
+      "arxiv_id": "2101.11986"
+    },
+    {
+      "authors": [
+        {
+          "full_name": "Hengshuang Zhao",
+          "given_name": "Hengshuang",
+          "surname": "Zhao"
+        },
+        {
+          "full_name": "Jiaya Jia",
+          "given_name": "Jiaya",
+          "surname": "Jia"
+        },
+        {
+          "full_name": "Vladlen Koltun",
+          "given_name": "Vladlen",
+          "surname": "Koltun"
+        }
+      ],
+      "index": 58,
+      "id": "b58",
+      "unstructured": "Hengshuang Zhao, Jiaya Jia, and Vladlen Koltun. Exploring self-attention for image recognition. In CVPR, 2020. 2, 3",
+      "date": "2020-06",
+      "title": "Exploring Self-Attention for Image Recognition",
+      "book_title": "2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "publisher": "IEEE",
+      "volume": "2",
+      "pages": "3",
+      "doi": "10.1109/cvpr42600.2020.01009"
+    }
+  ],
+  "abstract": "We address representation learning for large-scale instance-level image retrieval. Apart from backbone, training pipelines and loss functions, popular approaches have focused on different spatial pooling and attention mechanisms, which are at the core of learning a powerful global image representation. There are different forms of attention according to the interaction of elements of the feature tensor (local and global) and the dimensions where it is applied (spatial and channel). Unfortunately, each study addresses only one or two forms of attention and applies it to different problems like classification, detection or retrieval. We present global-local attention module (GLAM), which is attached at the end of a backbone network and incorporates all four forms of attention: local and global, spatial and channel. We obtain a new feature tensor and, by spatial pooling, we learn a powerful embedding for image retrieval. Focusing on global descriptors, we provide empirical evidence of the interaction of all forms of attention and improve the state of the art on standard benchmarks.",
+  "body": "Introduction Instance-level image retrieval is at the core of visual representation learning and is connected with many problems of visual recognition and machine learning, for instance metric learning  [30, 26] , few-shot learning  [42]  and unsupervised learning  [8] . Many large-scale open datasets  [3, 37, 16, 29, 53] , and competitions 1 have accelerated progress in instance-level image retrieval, which has been transformed by deep learning  [3] . Many studies on instance-level image retrieval focus on learning features from convolutional neural networks (CNN), while others focus on re-ranking, for instance by graph-based methods  [11] . The former can be distinguished according to feature types: local descriptors, reminiscent of SIFT  [27] , where an image is mapped to a few hundred vectors; and global descriptors, where an image is mapped to a 1 https://www.kaggle.com/c/landmark-retrieval-2020 single vector. In fact, deep learning has brought global descriptors with astounding performance, while allowing efficient search. Our study belongs to this type. Studies on global descriptors have focused on spatial pooling  [2, 37] . The need for compact, discriminative representations that are resistant to clutter has naturally given rise to spatial attention methods  [24, 28] . Different kinds of attention have been studied in many areas of computer vision research. There is also channel attention  [20, 9] ; local attention, applied independently to elements of the representation (feature map)  [54, 25] ; global attention, based on interaction between elements  [52, 9] ; and combinations thereof. Unfortunately, each study has been limited to one or two kinds of attention only; attention is not always learned; and applications vary. It is the objective of our work to perform a comprehensive study of all forms of attention above, apply them to instance-level image retrieval and provide a detailed account of their interaction and impact on performance. As shown in Figure  1 , we collect contextual information from images with both local and global attention, giving rise to two parallel network streams. Importantly, each operates on both spatial locations and feature channels. Local attention is about individual locations and channels; global is about interaction between locations and between channels. The extracted information is separately embedded in local and global attention feature maps, which are combined in a global-local attention feature map before pooling. Our contributions can be summarized as follows: 1. We propose a novel network that consists of both global and local attention for image retrieval. This is the first study that employs both mechanisms. \n Each of the global and local attention mechanisms comprises both spatial and channel attention. 3. Focusing on global descriptors, we provide empirical evidence of the interaction of all forms of attention and improve the state of the art on standard benchmarks.  A l c c \u00c3\u2014 1 \u00c3\u2014 1 \u00c3\u2014 + F l c A l s 1 \u00c3\u2014 h \u00c3\u2014 w \u00c3\u2014 + F l \u00c3\u2014 c \u00c3\u2014 h \u00c3\u2014 w F \u00c3\u2014 + c \u00c3\u2014 h \u00c3\u2014 w F gl A g c c \u00c3\u2014 c \u00c3\u2014 F g c A g s hw \u00c3\u2014 hw \u00c3\u2014 + F g \n Related work Instance-level image retrieval Studies on instance-level image retrieval can be roughly, but not exclusively, divided into three types: (1) studies on global descriptors  [3, 16, 24, 53, 2, 37] ; (2) studies on local descriptors and geometry-based re-ranking  [29, 45, 40, 53] ; (3) re-ranking by graph-based methods  [11, 21, 55] . The first two types of studies focus on the feature representation, while the last type focuses on re-ranking extracted features. Studies on global descriptors focus on spatial pooling of CNN feature maps into vectors, including MAC  [38] , SPoC [2], CroW  [24] , R-MAC  [48, 15, 16] , GeM  [37] , and NetVLAD  [1, 25] , as well as learning the representation  [3, 15, 16, 36, 37] . Studies before deep learning dominated image retrieval were mostly based on local descriptors like SIFT [27] and bag-of-words representation  [32]  or aggregated descriptors like VLAD  [22]  or ASMK  [46] . Local descriptors have been revived in deep learning, e.g. with DELF  [29] , DELG  [5]  and ASMK extensions  [45, 47] . We focus on learning a global descriptor in this work, because it is the most efficient in terms of storage and search. However, our generic attention mechanism produces a feature tensor and could be applicable to local descriptors as well, if global pooling were replaced by local feature detection. Re-ranking methods are complementary to the representation and we do not consider them in this work. Attention Attention mechanisms have been first proposed in image classification studies focusing on channel at- METHOD LOCAL GLOBAL LRN RET Spatial Channel Spatial Channel SENet  [20]  ECA-Net  [51]  GCNet  [6]  CBAM  [54]  GE  [19]  NL-Net  [52]  AA-Net  [4]  SAN [59] N 3 Net [34] A 2 -Net  [9]  GSoP  [14]  OnA  [23]  AGeM  [17]  CroW  [24]  CRN  [25]  DELF  [29]  DELG  [5]  Tolias et al.  [47]  SOLAR  [28]  Ours Table  1 : Related work on attention. LRN: learned; RET: applied to instance-level image retrieval. tention  [20, 51, 6] , spatial attention  [19]  or both, like CBAM  [54] . In image retrieval, CroW  [24]  also employs  both spatial and channel attention and can be seen as a precursor of CBAM, but, like other studies of spatial attention on retrieval  [41, 23, 17] , it is not learned. CRN  [25]  applies spatial attention for feature reweighting and is learned. Learned spatial attention mechanisms are common for local descriptors  [29, 5, 47] . c \u00c3\u2014 h \u00c3\u2014 w c \u00c3\u2014 1 \u00c3\u2014 1 c \u00c3\u2014 1 \u00c3\u2014 1 F A l c We call the above methods local attention, in the sense that elements of the feature tensor (channels / spatial locations), are weighted independently, based on contextual information obtained by pooling or learned. By constrast, by global attention we refer to mechanisms that model interaction between elements of the feature tensor, for example between channels or between locations. In image classification, non-local neural network (NL-Net)  [52]  is maybe the first global attention mechanism, followed by similar studies  [4, 59, 34] . It is global spatial attention, allowing interaction between any pair of spatial locations. Similarly, there are studies of global channel attention, allowing interaction between channels  [9, 14] . Global attention has focused mostly on image recognition and has been applied to either spatial or channel attention so far, not both. In image retrieval, SOLAR  [28]  is a direct application of the global spatial attention mechanism of  [52] . Table  1  attempts to categorize related work on attention according to whether attention is local or global, spatial or channel, whether it is learned and whether it is applied to instance-level image retrieval. We observe that all methods limit to one or two forms of attention only. Of those studies that focus on image retrieval, many are not learned  [23, 17, 24] , and of those that are, some are designed for local descriptors  [29, 47] . By contrast, we provide a comprehensive study of all forms of attention, global and local, spatial and channel, to obtain a learned representation in the form of a tensor that can be used in any way. We spatially pool it into a global descriptor and we study the relative gain of different forms of attention in image retrieval.  feature map conv 1 \u00c3\u2014 1 conv 3 \u00c3\u2014 3 conv 5 \u00c3\u2014 5 conv 7 \u00c3\u2014 7 concat conv 1 \u00c3\u2014 1 attention map c \u00c3\u2014 h \u00c3\u2014 w 4c \u00c3\u2014 h \u00c3\u2014 w 1 \u00c3\u2014 h \u00c3\u2014 w c \u00c3\u2014 h \u00c3\u2014 w dilated conv F F A l s \n Global-local attention We design a global-local attention module (GLAM), which is attached at the end of a backbone network. Figure  1  illustrates its main components. We are given a c \u00c3\u2014 h \u00c3\u2014 w feature tensor F, where c is the number of channels, and h \u00c3\u2014 w is the spatial resolution. Local attention collects context from the image and applies pooling to obtain a c \u00c3\u2014 1 \u00c3\u2014 1 local channel attention map A l c and a 1 \u00c3\u2014 h \u00c3\u2014 w local spatial attention map A l s . Global attention allows interaction between channels, resulting in a c \u00c3\u2014 c global channel attention map A g c , and between spatial locations, resulting in a hw \u00c3\u2014 hw global spatial attention map A g s . The feature maps produced by the two attention streams are combined with the original one by a learned fusion mechanism into the global-local attention feature map F gl before being spatially pooled into a global image descriptor. \n Local attention We extract an 1D channel and a 2D spatial attention map to weigh the feature map in the corresponding dimensions. Local channel attention Following ECA-Net  [51] , this attention captures local channel information. As shown in Figure  2 , we are given a c \u00c3\u2014 h \u00c3\u2014 w feature tensor F from our backbone. We first reduce it to a c \u00c3\u2014 1 \u00c3\u2014 1 tensor by global average pooling (GAP). Channel attention is then captured by a 1D convolution of kernel size k along the channel dimension, where k controls the extent of cross-channel interaction. This is followed by a sigmoid function, resulting in the c \u00c3\u2014 1 \u00c3\u2014 1 local channel attention map A l c . Local spatial attention Inspired by the inception module  [43]  and similar to  [25] , this attention map captures local spatial information at different scales. As shown in Figure  3 , given the same c \u00c3\u2014 h \u00c3\u2014 w feature tensor F from our backbone, we obtain a new tensor F with channels reduced to c , using a 1 \u00c3\u2014 1 convolution. We then extract local spatial contextual information using convolutional filters of kernel size 3 \u00c3\u2014 3, 5 \u00c3\u2014 5, and 7 \u00c3\u2014 7, which are efficiently implemented by 3 \u00c3\u2014 3 dilated convolutions  [7, 57]  with dilation parameter 1, 2, and 3 respectively. The resulting features, along with one obtained by 1 \u00c3\u2014 1 convolution on F , are concatenated into a 4c \u00c3\u2014 h \u00c3\u2014 w tensor. Finally, we obtain the 1 \u00c3\u2014 h \u00c3\u2014 w local spatial attention map A l s by a 1 \u00c3\u2014 1 convolution that reduces the channel dimension to 1. feature map GAP conv1d(k) conv1d(k) sigmoid sigmoid \u00c3\u2014 \u00c3\u2014 softmax attention feature map 1 \u00c3\u2014 c 1 \u00c3\u2014 c 1 \u00c3\u2014 c Qc c \u00c3\u2014 c hw \u00c3\u2014 c Vc A g c c \u00c3\u2014 h \u00c3\u2014 w 1 \u00c3\u2014 c 1 \u00c3\u2014 c Kc F Gc The middle column of Figure  6  shows heat maps of local spatial attention, localizing target objects in images. Local attention feature map We use the local channel attention map A l c to weigh F in the channel dimension F l c := F A l c + F. (1) We then use local spatial attention map A l s to weigh F l c in the spatial dimensions, resulting in the c \u00c3\u2014 h \u00c3\u2014 w local attention feature map F l = F l c A l s + F l c . (2) Here, A B denotes an element-wise multiplication of tensors A and B, with broadcasting when one tensor is smaller. We adopt the choice of applying channel followed by spatial attention from convolutional block attention module CBAM  [54] . However, apart from computing A l s at different scales, both attention maps are obtained from the original tensor F rather than sequentially. In addition, both (1) and (2) include residual connections, while CBAM includes a single residual connection over both steps. \n Global attention We extract two matrices capturing global pairwise channel and spatial interaction to weigh the feature map. Global channel attention We introduce a global channel attention mechanism that captures global channel interaction. This mechanism is based on the non-local neural network  [52] , but with the idea of 1D convolution from ECA-Net  [51] . As shown in Figure  4 , we are given the c \u00c3\u2014 h \u00c3\u2014 w feature tensor F from our backbone. We apply GAP and squeeze spatial dimensions, followed by a 1D convolution of kernel size k and a sigmoid function, to obtain 1\u00c3\u2014c query Q c and key K c tensors. The value tensor V c is obtained by mere reshaping of F to hw\u00c3\u2014c, without GAP. Next, we form the outer product of K c and Q c , followed by softmax over channels to obtain a c \u00c3\u2014 c global channel attention map feature map conv 1 \u00c3\u2014 1 conv 1 \u00c3\u2014 1 conv 1 \u00c3\u2014 1 \u00c3\u2014 \u00c3\u2014 softmax conv 1 \u00c3\u2014 1 attention feature map c \u00c3\u2014 hw Qs hw \u00c3\u2014 hw c \u00c3\u2014 h \u00c3\u2014 w c \u00c3\u2014 hw Vs c \u00c3\u2014 h \u00c3\u2014 w A g s c \u00c3\u2014 h \u00c3\u2014 w c \u00c3\u2014 hw Kc F Gs A g c = softmax(K c Q c ). (3) Finally, this attention map is multiplied with V c and the matrix product V c A g c is reshaped back to c \u00c3\u2014 h \u00c3\u2014 w to give the global channel attention feature map G c . In GSoP  [14]  and A 2 -Net  [9] , a c \u00c3\u2014 c global channel attention map is obtained by multiplication of hw \u00c3\u2014 c matrices; (3) is more efficient, using only an outer product of 1 \u00c3\u2014 c vectors. Global spatial attention Since ordinary convolution applies only a local neighborhood at a time, it cannot capture global contextual information. Thus, we apply non-local filtering  [52] , which is a form of self-attention  [49]  in the spatial dimensions. As shown in Figure  5 , we are given the same c \u00c3\u2014 h \u00c3\u2014 w feature tensor F from our backbone. By using three 1 \u00c3\u2014 1 convolutions, which reduce channels to c , and flattening spatial dimensions to hw, we obtain c \u00c3\u2014 hw query Q s , key K s , and value V s tensors, where each column is a feature vector corresponding to a particular spatial location. We capture pairwise similarities of these vectors by matrix multiplication of K s and Q s , followed by softmax over locations to obtain a hw \u00c3\u2014 hw global spatial attention map: A g s = softmax(K s Q s ). (4) This attention map is multiplied with V s and the matrix product V s A g s is reshaped back to c \u00c3\u2014 h \u00c3\u2014 w by expanding the spatial dimensions. Finally, using a 1 \u00c3\u2014 1 convolution, which increases channels back to c, we obtain the c \u00c3\u2014 h \u00c3\u2014 w global spatial attention feature map G s . The right column of Figure  6  shows heat maps for global spatial attention, localizing target objects in images. Global attention feature map We use the global channel attention feature map F c to weigh F element-wise F g c = F G c . (5) We then use global spatial attention feature map G s to weigh F g c element-wise, resulting in the c \u00c3\u2014 h \u00c3\u2014 w global attention feature map F g = F g c G s + F g c . ( 6 ) Similarly to F l in (  1 ) and (2), we apply channel attention first, followed by spatial attention. However, unlike (1), there is no residual connection in (  5 ). This choice is supported by early experiments. \n Global-local attention Feature fusion As shown in Figure  1 , we combine the local and global attention feature maps, F l and F g , with the original feature F. While concatenation and summation are common operations for feature combination, we use a weighted average with weights w l , w g , w respectively, obtained by softmax over three learnable scalar parameters, to obtain a c \u00c3\u2014 h \u00c3\u2014 w global-local attention feature map F gl = w l F l + w g F l + wF. (7) EfficientDet  [44]  has shown that this is the most effective, among a number of choices, for fusion of features across different scales. Pooling We apply GeM  [37] , a learnable spatial pooling mechanism, to feature map F gl (7), followed by a fullyconnected (FC) layer with dropout and batch normalization. The final embedding is obtained by 2 -normalization. \n Experiments \n Datasets Training set There are a number of open landmark datasets commonly used for training in image retrieval studies, including neural code (NC)  [3] , neural code clean (NCclean)  [16] , as well as Google Landmarks v1 (GLDv1)  [29]  and v2 (GLDv2)  [53] . Table  2  shows relevant statistics. These datasets can be categorized into noisy and clean. The clean sets were obtained from the original noisy sets for more effective training  [16, 53] . The original noisy datasets are much larger, but they have high intra-class variability.  Evaluation set and metrics We use four common evaluation datasets for landmark image retrieval: Oxford5k (Ox5k)  [32] , Paris6k (Par6k)  [33] , as well as Revisited Oxford (ROxford or ROxf) and Paris (RParis or RPar)  [35] . ROxford and RParis are used with and without one million distractors (R1M)  [28]  and evaluated using the Medium and Hard protocols  [35] . We evaluate using mean Average Precision (mAP) and mean precision at 10 (mP@10). \n Implementation details We train on 8 TITAN RTX 2080Ti GPUs. All models are pre-trained on ImageNet  [39]  and implemented in PyTorch  [31] . For fair comparisons, we set a training environment similar to the those of compared studies  [56, 53, 28, 35] . We employ ResNet101  [18]  as a backbone model. The kernel size k of ECANet in subsection 3.1 is set to 3. The parameter p of GeM in subsection 3.3 is set to 3 and the dimension d of final embeddings to 512. We adopt ArcFace  [10] , a cosine-softmax based loss, with a margin of 0.3. We use stochastic gradient descent with initial learning rate 10 -3 , momentum 0.9 and weight decay 10 -5 . We adopt the batch sampling of Yokoo et al.  [56]  where mini-batch samples with similar aspect ratios are resized to a particular size. Here, we use a batch size of 64. For image augmentation, we apply scaling, random cropping, and varied illumination. At inference, we apply a multi-resolution representation  [16]  to query and database images. Our method is denoted as GLAM (global-local attention module). Using the backbone model alone is referred to as baseline. It is compatible with recent models based on ResNet101-GeM trained with ArcFace  [53, 28] . Adding our local attention (subsection 3.1) to the baseline model is denoted +local, while adding our global attention (subsection 3.2) is denoted +global. Since we focus on representation learning, we do not consider post-processing methods like geometry-based re-ranking  [29, 40, 53]  or graph-based re-ranking  [11, 21, 55]       [53, 28] . All models use ResNet101-GeM. Red: best results. Blue: GLAM higher than SOLAR  [28]  on GLDv1-noisy. GLDv2-noisy has 2.6 times more images than GLDv2clean, the latter is superior by a large margin. This shows that, in training, a cleaner dataset can be more important than a larger one. By contrast, NC-clean has the worst performance despite being clean, aparently because it is   [16, 35]  NC-clean 2048 86.1 94.5 60.9 78.1 39.3 62.1 78.9 96.9 54.8 93.9 32.4 50.0 12.5 24.9 59.4 86.1 28.0 70.0 GeM-R101-Siamese  [37, 35]  SfM   [53]  is the only model other than ours trained on GLDv2-clean, while  [28]  is trained on GLDv1-noisy and compared in Table  3 . too small. To achieve best possible performance, we use GLDv2-clean as a training set in the remaining experiments. \n Comparisons on same training set It is common to compare methods regardless of training sets as more become available, e.g.,  [35, 28] . Since GLDv2-clean is relatively new, Weyand et al.  [53] , which introduced the dataset, is the only study that has trained the same backbone with the same settings (ResNet101-GeM with ArcFace) on GLDv2-clean. Our baseline is lower than  [53] , because our dimensinality is 512, while other models based on ResNet101 use 2048. Yet, Table  3  shows that our best model trained on GLDv2-clean outperforms  [53]  by a large margin. But the most important comparison is with SOLAR  [28] , also based on selfattention, which has trained ResNet101-GeM on GLDv1noisy. On this training set, our best model clearly outperforms  [28]  despite lower dimensionality. With this model, we outperform previous best methods on most benchmarks except mP@10 on RParis (medium) and RParis+R1M (medium), where we are outperformed by  [37, 35] . These results demonstrate that our approach is effective for landmark image retrieval. Figure  7  shows some  \n Comparison with state of the art \n Ablation study Our ablation study uses the Google Landmark v2 clean dataset (GLDv2-clean)  [53]  for training, which is shown to be the most effective in Table  3  Table  9 : mAP comparison of using multiresolution representation (Multi) or not (Single) on query or database. \n Effect of attention modules We ablate the effect of our local and global attention networks as well as their combination. Table  5  shows the results, which are more finegrained than those of Table  4 . In particular, it shows the effect of the channel and spatial variants of both local and global attention. We observe that, when used alone, the channel and spatial variants of local attention are harmful in most cases. Even the combination, baseline+local, is not always effective. By contrast, when used alone, the channel and spatial variants of global attention are mostly beneficial, especially the latter. Their combination, baseline+global, is impressive, bringing gain of up to 7.5%. Importantly, the combination baseline+global+local improves further by up to another 2.8%. This result shows the necessity of local attention in the final model. \n CBAM vs. our local spatial attention We experiment with the local spatial attention of CBAM  [54] . CBAM applies average and max-pooling to input features and concatenates the two for spatial attention. We apply this variant to our local spatial attention module for comparison. For the CBAM style module, we keep the overall design of our module as shown in Figure  3 , but apply average and max-pooling to each of the four convolutional layer outputs before concatenation. Table  6  shows that the CBAM style module is considerably worse than ours on all benchmarks except Paris6k, where it is only slightly better. Concatenation vs. sum for feature fusion We use a softmax-based weighted average of local and global attention feature maps with the original feature map  (7) . Here, we compare this weighted average with weighted concatenation, where concatenation replaces the sum operation in  (7) . As shown in Table  7 , the weighted average outperforms the weighted concatenation. Fixed-size vs. group-size sampling Numerous studies have proposed methods for constructing batches according to image size for efficient training. For instance, Gordo et al.  [16] , DELF  [29] , and Yokoo et al.  [56]  employed different image sizes per batch for training instead of a single fixed size. We adopt the method of Yokoo et al., which constructs a batch with images of similar aspect ratio, so that the images can be resized to a size with an aspect ratio that is similar to their own. We call this method group-size sampling. Table  8  compares fixed-size (224 \u00c3\u2014 224) with groupsize sampling. We observe that maintaining aspect ratios by using dynamic input sizes is much more effective. \n Multi-resolution We use the multi-resolution representation  [16]  for the final feature of an image at inference time. This method: (1) resizes an image into multiple scales; (2) extracts features from the resized images; and (3) averages the features to obtain the final feature of the image. The method is applied to both query and database images to enhance ranking results, especially for small target objects. Table  9  compares the four cases of applying this method or not to query or database images. \n Conclusion We have introduced a novel approach that extracts global and local contextual information using attention mechanisms for instance-level image retrieval. It is manifested as a network architecture consisting of global and local attention components, each operating on both spatial and channel dimensions. This constitutes a comprehensive study and empirical evaluation of all four forms of attention that have previously been studied only in isolation. Our findings indicate that the gain (or loss) brought by one form of attention alone strongly depends on the presence of the others, with the maximum gain appearing when all forms are present. The output is a modified feature tensor that can be used in any way, for instance with local feature detection instead of spatial pooling for image retrieval. With the advent of vision transformers  [12, 58]  and their recent application to image retrieval  [13] , attention is expected to play a more and more significant role in vision. According to our classification, transformers perform global spatial attention alone. It is of great interest to investigate the role of the other forms of attention, where our approach may yield a basic building block of such architectures. One may even envision an extension to language models, where transformers originate from  [50] . Figure 1 : 1 Figure 1: Our global-local attention module (GLAM) involves both channel and spatial attention, as well as both local attention (channels/locations weighted independently, based on contextual information obtained by pooling) and global attention (based on pairwise interaction between channels/locations). As a result, four attention maps are used: local channel (A l c ), local spatial (A l s ), global channel (A g c ) and global spatial (A g s ). The input feature map F is weighted into local (F l ) and global (F g ) attention feature maps, which are fused with F to yield the global-local attention feature map F gl . The diagram is abstract: The four attention modules are shown in more detail in Figures 2, 3, 4, 5. \n Figure 2 : 2 Figure 2: Local channel attention. \n Figure 3 : 3 Figure 3: Local spatial attention. Convolutional layers in blue implemented by dilated convolutions with kernel size 3 \u00c3\u2014 3 and dilation factors 1, 3, 5. \n Figure 4 : 4 Figure 4: Global channel attention. \n Figure 5 : 5 Figure 5: Global spatial attention. \n Figure 6 : 6 Figure 6: Local and global spatial attention. Left: input images. Middle: local spatial attention heat maps. Right: global spatial attention heat maps. Red (blue) means higher (lower) attention weight. \n Figure 7 : 7 Figure 7: Examples of our ranking results. In each row, the first image on the left (pink dotted outline) is a query image with a target object (red crop box), and the following are the top ranking images for the query. Orange solid outline: positive images for the query; red solid outline: negative. \n . \n 4. 3 . 3 Benchmarking Noisy vs. clean training sets We begin by training our best model (baseline+local+global) on all training sets of \n Table 2 , 2 except NC-noisy because some images are currently unavailable. As shown in Table3, even though TRAIN SET #IMAGES #CLASSES NC-noisy 213,678 672 NC-clean 27,965 581 SfM-120k 117,369 713 GLDv1-noisy 1,225,029 14, 951 GLDv2-noisy 4,132,914 203,094 GLDv2-clean 1,580,470 81,313 \n Table 2 : 2 Statistics of different training sets. METHOD TRAIN SET DIM OXF5K PAR6K RMEDIUM RHARD ROxf RPar ROxf RPar GeM-Siamese [37, 35] SfM-120k 2048 87.8 92.7 64.7 77.2 38.5 56.3 SOLAR [28] GLDv1-noisy 2048 - - 69.9 81.6 47.9 64.5 GLDv2 [53] GLDv2-clean 2048 - - 74.2 84.9 51.6 70.3 GLAM (Ours) NC-clean 512 77.8 85.8 51.6 68.1 20.9 44.7 GLDv1-noisy 512 92.8 95.0 73.7 83.5 49.8 69.4 GLDv2-noisy 512 93.3 95.3 75.7 86.0 53.1 73.8 GLDv2-clean 512 94.2 95.6 78.6 88.5 60.2 76.8 \n Table 3 : 3 mAP comparison of our best model (base-line+local+global) trained on different training sets against \n Table 4 : 4 mAP comparison of our GLAM against SOTA methods based on global descriptors without re-ranking. V16: VGG16; R101: ResNet101. [O]: Off-the-shelf (pre-trained on ImageNet). -120k 2048 87.8 92.7 64.7 84.7 45.2 71.7 77.2 98.1 52.3 95.3 38.5 53.0 19.9 34.9 56.3 89.1 24.7 73.3 AGeM-R101-Siamese [17] SfM-120k 2048 - - 67.0 - - -78.1 - - -40.7 - - -57.3 - - - SOLAR-GeM-R101-Triplet/SOS [28] GLDv1-noisy 2048 - - 69.9 86.7 53.5 76.7 81.6 97.1 59.2 94.9 47.9 63.0 29.9 48.9 64.5 93.0 33.4 81.6 DELG-GeM-R101-ArcFace [5] GLDv1-noisy 2048 - - 73.2 -54.8 -82.4 -61.8 -51.2 -30.3 -64.7 -35.5 - GeM-R101-ArcFace [53] GLDv2-clean 2048 - - 74.2 - - -84.9 - - -51.6 - - -70.3 - - - GLAM-GeM-R101-ArcFace baseline GLDv2-clean 512 91.9 94.5 72.8 86.7 58.1 78.2 84.2 95.9 63.9 93.3 49.9 62.1 31.6 49.7 69.7 88.4 37.7 73.7 +local GLDv2-clean 512 91.2 95.4 73.7 86.2 60.5 77.4 86.5 95.6 68.0 93.9 52.6 65.3 36.1 55.6 73.7 89.3 44.7 79.1 +global GLDv2-clean 512 92.3 95.3 77.2 87.0 63.8 79.3 86.7 95.4 67.8 93.7 57.4 69.6 38.7 57.9 75.0 89.4 45.0 77.0 +global+local GLDv2-clean 512 94.2 95.6 78.6 88.2 68.0 82.4 88.5 97.0 73.5 94.9 60.2 72.9 43.5 62.1 76.8 93.4 53.1 84.0 * : dimension d = 256 [2]. mP: mP@10. Red: best results. Black bold: best previous methods. Blue: GLAM higher than previous methods. Weyand et al. \n Table 4 4 shows the performance of four variants of our model, i.e. baseline with or without local/global attention, and compares them against state-of-the-art (SOTA) methods based on global de- scriptors without re-ranking on the complete set of bench- marks, including distractors. Both local and global atten- tion bring significant gain over the baseline. The effect of global is stronger, while the gain of the two is addi- tive in the combination. The best results are achieved by the global-local attention network (baseline+global+local). \n . METHOD OXF5K PAR6K RMEDIUM RHARD ROxf RPar ROxf RPar Concatenate 89.5 95.1 73.6 86.5 54.0 73.7 Sum (Ours) 94.2 95.6 78.6 88.5 60.2 76.8 Table 7: mAP comparison between weighted concatenation and weighted average for feature fusion. METHOD OXF5K PAR6K RMEDIUM RHARD ROxf RPar ROxf RPar Fixed-size 76.1 82.6 55.7 68.4 29.2 47.5 Group-size (Ours) 94.2 95.6 78.6 88.5 60.2 76.8 Table 8: mAP comparison between fixed-size (224 \u00c3\u2014 224) and group-size sampling methods. QUERY DATABASE OXF5K PAR6K RMEDIUM RHARD ROxf RPar ROxf RPar Single Single 93.3 95.2 76.9 87.1 58.6 74.7 Multi Single 93.9 95.4 78.0 87.7 59.0 75.5 Single Multi 93.6 95.6 77.0 87.8 57.1 76.0 Multi Multi 94.2 95.6 78.6 88.5 60.2 76.8"
+}

@@ -25,17 +25,15 @@ import glob
 import chromadb
 from langchain.retrievers.multi_query import MultiQueryRetriever
 import shutil
-
+from arxiv_bot.config import RetrieverConfig, RetrieverWithSearchConfig, LLMConfig
 load_dotenv()
 
-def load_llm(settings: dict) -> ChatOpenAI:
-    
-    temp = float(settings['temp'])
+def load_llm(LLMConfig) -> ChatOpenAI:
     
     return ChatOpenAI(
         model = 'gpt-3.5-turbo-1106',
-        temperature = temp,
-        streaming = True
+        streaming = True,
+        **LLMConfig.get()
     )
     
 def summarize(query: str, documents: List[Document]) -> str:
@@ -100,25 +98,22 @@ def load_tools(settings: dict) -> List[BaseTool]:
     
     os.makedirs(PERSIST_DIR, exist_ok=True)
     
-    search_k = int(settings['search_k'])
-    fetch_k = int(settings['fetch_k'])
-    k = int(settings['k'])
 
     vectordb = chroma.Chroma(
         collection_name=COLLECTION_NAME,
         persist_directory=PERSIST_DIR,
         embedding_function=base_embeddings)
+    
+    retriever_config = RetrieverConfig(settings)
+    retriever_with_search_config = RetrieverWithSearchConfig(settings)
 
     retriever = Retriever(vectordb=vectordb, 
-                          search_k=search_k,
-                          fetch_k=fetch_k,
-                          k=k
+                        **retriever_config.get()
                           )
+    
     retriever_with_search = RetrieverWithSearch(
         vectordb=vectordb,
-        search_k=search_k,
-        fetch_k=fetch_k,
-        k=k,
+        **retriever_with_search_config.get()
     )
     
     return [retriever, retriever_with_search]
@@ -132,7 +127,7 @@ def load_bot(settings: dict) -> AgentExecutor:
     :rtype: Agent
     """
     tools: List[BaseTool] = load_tools(settings)
-    llm = load_llm(settings)
+    llm = load_llm(LLMConfig(settings))
     
     
     PREFIX = """
@@ -178,7 +173,7 @@ def load_bot(settings: dict) -> AgentExecutor:
 
         Answer general knowledge questions or handle conversations without a tool.
         If a specific knowledge is need regarding a certain topic, the assistant will ask the user to use the 'Retriever'. TRY THIS TOOL FIRST AND SEE IF THE RETRIEVER CAN ANSWER THE QUESTION.
-        If no relevant documetns are retrieved, then it will look for more information online with the 'RetrieverWithSearch' tool. TRY THIS SECOND.
+        If no relevant documetns are retrieved, then it will look for more information online with the 'RetrieverWithSearch' tool. TRY THIS SECOND AND ONLY IF YOU HAVE TO.
         Then, summarize the information retrieved and answer the question in great detail.
         
         {format_instructions}
@@ -256,8 +251,10 @@ async def start():
             TextInput(id="search_k", label="# of web search results", initial="5"),
             TextInput(id="fetch_k", label="# of initial papers to fetch", initial="10"),
             TextInput(id="k", label="# of papers for context", initial="3"),
-            Slider(id="temp", label="Temperature", min=0.0, max=1.0, step=0.1, initial=0.0),
-            Select(id = "parser", label = "Parser", values = ["PyMuPDF", "GROBID"], initial_index=1),
+            TextInput(id="chunk_size", label="Chunk size", initial="1024"),
+            TextInput(id="chunk_overlap", label="Chunk overlap", initial="100"),
+            Slider(id="temperature", label="Temperature", min=0.0, max=1.0, step=0.1, initial=0.0),
+            Select(id = "pdf_parser", label = "Parser", values = ["PyMuPDF", "GROBID"], initial_index=1),
             
         ]
     ).send()
@@ -269,7 +266,6 @@ async def start():
                                         k=5,
                                         )
     cl.user_session.set('memory', memory)
-    print(memory, cl.user_session.get('memory'))
     
     bot = load_bot(settings)
     cl.user_session.set('bot', bot)
