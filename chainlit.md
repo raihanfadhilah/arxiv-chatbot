@@ -1,14 +1,15 @@
-# Welcome to Chainlit! 🚀🤖
+# Welcome to arXiv Bot! 🤖
 
-Hi there, Developer! 👋 We're excited to have you on board. Chainlit is a powerful tool designed to help you prototype, debug and share applications built on top of LLMs.
+This personal project is a demo of the arXiv Research Assistant. It is meant to help me keep up with the latest research in the fast-growing space of AI and LLMs. It is capable of retrieving relevant papers from arXiv and parsing the full-text to extract relevant information based on your query. You can check out the project in my [Github repo](https://github.com/raihanfadhilah/arxiv-chatbot)! 
 
-## Useful Links 🔗
+## Usage
+There are two ways you can use the chatbot:
 
-- **Documentation:** Get started with our comprehensive [Chainlit Documentation](https://docs.chainlit.io) 📚
-- **Discord Community:** Join our friendly [Chainlit Discord](https://discord.gg/k73SQ3FyUh) to ask questions, share your projects, and connect with other developers! 💬
+1. Upload papers of interest and immediately ask specific questions about some information contained in the paper.
 
-We can't wait to see what you create with Chainlit! Happy coding! 💻😊
 
-## Welcome screen
+2. Use the built-in search functionality to retrieve relevant papers from the arXiv database based on a user query. Note that to optimize the query, please phrase the question such that arXiv IDs or titles of papers of interest are clearly noted in the query. 
 
-To modify the welcome screen, edit the `chainlit.md` file at the root of your project. If you do not want a welcome screen, just leave this file empty.
+    Example query: In the paper "Attention is All You Need", how do positional embeddings work?
+
+    After the relevant papers are retrieved, more specifc questions can be asked.

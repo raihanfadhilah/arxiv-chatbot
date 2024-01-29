@@ -1,0 +1,148 @@
+\vspace{-2mm}
+\section{Adaptive scheduler}
+\label{sec.scheduler}
+Next, we present the adaptive scheduler of \system which addresses the challenges of determining an appropriate number of groups $N$ and accordingly the batch size $B$, as described in Introduction. Using a dynamic scheduling method we propose, the scheduler automatically determines and adjusts $N$ and $B$ based on the distributional properties of the feature embeddings produced over the iterative training process, while guaranteed to produce high quality attention approximation that meets the requirement of users.  
+
+% under the guidance of the user-specified error bound $\epsilon$ in Sec.~\ref{sec.group.error}, thus no additional hyper-parameter is required from users.
+
+% A key challenge in group attention is determining $N$, the number of groups. Intuitively, a large $N$ will lead to tight groups, hence a small approximation error as shown in Lemma~\ref{lm.grperrorbound}. However, it will increase both the time and space complexity of group attention. 
+% Therefore, an appropriate $N$ which balances the approximation error and complexity is critical to the performance of group attention.
+
+% However, manually setting an appropriate $N$ is almost impossible for the following reasons. Similar to Transformer, \system stacks multiple layers which runs multi-head attention. 
+% Ideally, different attention heads at different attention layers should use different values of $N$. Furthermore, during the model training phrase,  group attention should use different values of $N$ to adapt to the varying feature embeddings. 
+
+% Moreover, as we want to dynamically adjusts $N$ during training, the batch size should also vary. Because if $N$ decreases, the memory usage of a single timeseries sample will decrease. 
+% This allows a larger batch size which is beneficial: 
+% (1) it makes full use of GPU memory; (2) high-parallelism across the samples in a big batch brings better performance. 
+
+% To address the challenges, we design a dynamic scheduling method to automatically determine and adjust $N$ and batch size under the guidance of the user-specified error bound $\epsilon$ in Sec.~\ref{sec.group.error}, thus no additional hyper-parameter is required from users.
+
+In Sec.~\ref{sec.scheduler.group} we show how \system automatically determines $N$. 
+Then we introduce in Sec.~\ref{sec.scheduler.batch} the learning-based method which given an $N$, immediately predicts a good batch size.
+
+\subsection{Dynamically Determining the Number of Groups N}
+\label{sec.scheduler.group}
+Without loss of generality, we use one group attention module as an example to show how \system automatically gets an appropriate $N$. The adaptive scheduler of \system starts with a large $N$ and decreases it dynamically. This is because in the training process of \system, the feature embeddings produced epoch by epoch tend to get stabler and stabler and gradually converge, thus no need to increase $N$.
+
+\system reduces the number of groups by merging similar groups. Intuitively, given two groups, we could measure their similarity based on the distance of their centers. If the distance between their centers is smaller than a distance threshold, then the two groups could be merged. However, setting an appropriate distance threshold seems hard -- as difficult as setting an appropriate $N$.
+
+To solve this problem, \system leverages the error bound of group attention introduced in Sec.~\ref{sec.group.error}. It only requires users to set an error bound $\epsilon$, and then uses Lemma~\ref{lm.grperrorbound} to translate $\epsilon$ to a distance threshold $d$.
+\system then uses Lemma~\ref{lm.mergealbe} to determine if merging some given clusters still meets the error bound threshold $\epsilon$. 
+
+\vspace{-2mm}
+\begin{lemma}
+\label{lm.mergealbe}
+Denote $c_k$ to be the cluster center of $cluster_k$. Assume the existing grouping satisfies $\mathit{\forall k,\mathop{max}\limits_{x \in cluster_k} |c_k-x| \leq d}$
+% \begin{equation}
+% \label{equ.dbounded}
+% \forall k,\mathop{max}\limits_{x \in cluster_k} |c_k-x| \leq d
+% \end{equation}
+, thus satisfying an error bound $\epsilon$ by Lemma~\ref{lm.grperrorbound}.
+If there exist $m$ clusters, namely, $cluster_{k_1},cluster_{k_2},...,cluster_{k_m}$, satisfying that:
+\begin{equation}
+\label{equ.mergecond}
+\mathop{max}\limits_{x \in cluster_{k_i}} |c_{k_i}-c_{k_j}|+|x-c_{k_i}| \leq d, i,j \in [1,m]
+\end{equation}
+merging them into one cluster still meets the error bound $\epsilon$.
+\end{lemma}
+Please refer to Appendix~\ref{appendix.proof.merge} for the proof.
+
+\begin{comment}
+\begin{proof}
+Denote the cluster size of $cluster_k$ to be $n_k$.After merging, the new center will be: $\mathit{c'= \frac{\sum_{i=1}^m n_{k_i}c_{k_i}}{\sum_{i=1}^m n_{k_i}}}$.
+For $\forall i \in [1,m],\forall x \in cluster_{k_i}$, it holds that:
+\begin{equation}
+\label{eq.tri}
+\begin{aligned}
+        |x-c'| &\leq |x-c_{k_i}|+|c_{k_i}-c'|\  (Triangle\  inequality)\\
+        &=|x-c_{k_i}|+| \frac{\sum_{j=1}^m n_{k_j}}{\sum_{j=1}^m n_{k_j}}c_{k_i}-
+        \frac{\sum_{j=1}^m n_{k_j}c_{k_j}}{\sum_{j=1}^m n_{k_j}}|\\
+        &=|x-c_{k_i}|+| 
+         \frac{\sum_{j=1}^m n_{k_j}(c_{k_i}-c_{k_j})}{\sum_{j=1}^m n_{k_j}}|\\
+        &=|x-c_{k_i}|+\frac{|\sum_{j=1}^m n_{k_j}(c_{k_i}-c_{k_j})|}{\sum_{j=1}^m n_{k_j}}\\
+        &\leq |x-c_{k_i}|+\frac{\sum_{j=1}^m n_{k_j}|c_{k_i}-c_{k_j}|}{\sum_{j=1}^m n_{k_j}}\\
+        &= \frac{\sum_{j=1}^m n_{k_j}(|c_{k_i}-c_{k_j}|+|x-c_{k_i}|)}{\sum_{j=1}^m n_{k_j}}\\
+        &\leq \frac{\sum_{j=1}^m n_{k_j}d}{\sum_{j=1}^m n_{k_j}} =d
+\end{aligned}
+\end{equation}
+\end{proof}
+\end{comment}
+
+\noindent\textbf{Finding the Mergable Clusters.} We formulate the problem of finding mergeable clusters using graph theory: 
+
+(1) each cluster is a node in the graph; 
+
+(2) if $cluster_i$ and $cluster_j$ satisfy:
+
+$\mathop{max}\limits_{x \in cluster_{i}} |c_{i}-c_{j}|+|x-c_{i}| \leq d$, and
+$\mathop{max}\limits_{x \in cluster_{j}} |c_{j}-c_{i}|+|x-c_{j}| \leq d$
+
+there is an undirected edge between $node_i$ and $node_j$;
+
+In this scenario, finding the maximum number of \textit{mergeable} clusters is equivalent to finding the minimal clique cover in the corresponding graph, which is an NP-hard problem~\cite{karp1972reducibility}. 
+Such heavy computation overhead is not acceptable for \system. We thus offer a simplified solution:
+
+(1) Halve the clusters into two sets $S_1,S_2$;
+
+(2) If $cluster_i \in S_1$ and $cluster_j \in S_2$ satisfy:
+\vspace{-2mm}
+\begin{equation}
+\small
+\label{eq.simplemerge}
+\begin{aligned}
+\mathop{max}\limits_{x \in cluster_{i}} |c_{i}-c_{j}|+|x-c_{i}| \leq d,  \mathop{max}\limits_{x \in cluster_{j}} |c_{j}-c_{i}|+|x-c_{j}| \leq \frac{d}{2}
+\end{aligned}
+\end{equation}
+
+$cluster_j$ is marked.
+
+(3) Decrease the number of clusters by counting the masks in $S_2$.
+
+%\srm{I don't know what "mark-counting" means}
+\smallskip
+\noindent
+In this solution, clusters in $S_1$ can be regarded as transfer nodes.
+If \eqref{eq.simplemerge} holds for $(cluster_i \in S_1,cluster_{j_1}\in S_2)$ and $(cluster_i \in S_1,cluster_{j_2}\in S_2)$, respectively, we have,
+\vspace{-1mm}
+\begin{equation}
+\small
+\begin{aligned}
+&\mathop{max}\limits_{x \in cluster_{j_1}} |c_{j_1}-c_{j_2}|+|x-c_{j_1}| \\
+\leq &\mathop{max}\limits_{x \in cluster_{j_1}} |c_{j_1}-c_{i}|+|c_{i}-c_{j_2}|+|x-c_{j_1}|\\
+\leq &\mathop{max}\limits_{x \in cluster_{j_1}} |c_{j_1}-c_{i}|+|c_{i}-c_{j_2}|+|x-c_{j_1}|+|x-c_{j_2}| \leq d
+\end{aligned}
+\end{equation}
+
+Thus \eqref{equ.mergecond} holds when merging several clusters in $S_2$ with one cluster in $S_1$. As a result, we can greedily merge clusters in $S_2$, as illustrated in step(3). 
+
+Assume the number of clusters decreases by $D$ after merging, we apply a momentum update~\cite{qian1999momentum} on the number of clusters $N$, as is commonly used in machine learning to smooth the changing of $N$ and avoid sample selection bias. To be specific:
+$N_{new}=\alpha (N-D)+(1-\alpha)N$, where $\alpha$ is a hyper-parameter for momentum.
+
+\subsection{Dynamically Determining the Batch Size}
+\label{sec.scheduler.batch}
+Because of the dynamic grouping operation, the computational graph in deep learning training~\cite{abadi2016tensorflow} varies from sample to sample. As a result, it is impossible to precisely compute a batch's GPU memory usage without indeed feeding it into the model. To overcome this problem, \system learns a batch size prediction function offline; then at the \system training time, given a number of groups $N$, \system uses this function to predict a proper batch size.
+
+When the model architecture and hardware are fixed, the batch size depends on the length of the timeseries $L$ and the average group number among all attention module $\overline{N}$. So \system samples several $(L_i,\overline{N}_i)$ pairs and estimate a proper batch size for each pair. 
+
+More specifically, given a user-defined timeseries maximal length $L_{max}$, we randomly sample integral points $(L_i,N_i)$ from plane $\{1 \leq L \leq L_{max}, 1\leq N \leq L\}$. Then we use a binary search based algorithm to find the maximal batch size $B_i$ that consumes less than $90\%$ available GPU memory, aiming to avoid wasting GPU memory and the risks of out of memory (OOM).
+
+Treating these pairs as ground truth labels, we use function fitting~\cite{guest2012numerical} to learn the batch size predicting function $\mathit{B = f(L,N)}$, where B is a function of two variables $L$ and $N$. 
+
+%Specifically, we sample several pairs of $(L_i,N_i)$ and use a binary to find a proper batch size $B_i$ when the time series length is $L_i$ and the group number of each group attention module is $N_i$. After that, we treat $B_i$ as a function of two variables $L_i,N_i$, i.e. $B_i=f(L_i,N_i)$, and use a fitting method to get the function $f$. 
+
+%To avoid OOM, we ensure that the estimated batch size is not greater than the proper batch size, i.e. $B_i \ge f(L_i,N_i)$.
+ 
+
+\noindent\textbf{Learning the Prediction Function.}
+We apply \textit{curve fit} from SciPy~\cite{2020SciPy-NMeth} as the function fitting tool to fit the two-variable function $B_i=f(L_i,N_i)$ on plane $\{1 \leq L \leq L_{max}, 1\leq N \leq L\}$.  
+
+We observe that applying one function to the whole plane incurs a huge estimation error. 
+So we develop a dynamic-programming (DP) method to divide the plane into several sub-planes and apply a distinct function to each sub-plane respectively. It is {\bf optimal} in minimizing the total estimation error on all sub-planes
+
+With the learned prediction function $f$, we can estimate a proper batch size for any $(L,N)$ during training, even if it is not seen in the sampled $(L_i,N_i)$ pairs. 
+
+\noindent\textbf{The Algorithms and Optimality Proof.} Please refer to Appendix~\ref{appendix.batch} for the pseudo code of the binary search-based algorithm and the description of the DP method for plane-division and the proof for its optimality.
+
+% \noindent\textbf{Dynamic Learning Rate.} As the batch size changes, the variance of gradients in a batch also changes, indicating that the learning rate which is a critical hyper-parameter should also dynamically change. 
+% We adapt a learning rate tuning method from \cite{krizhevsky2014one} to make the model converge better. To be specific, the learning rate is given by $lr_{new}=lr_{old}*\sqrt{\frac{B_{new}}{B_{old}}}$.
+

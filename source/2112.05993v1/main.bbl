@@ -1,0 +1,156 @@
+\begin{thebibliography}{10}
+
+\bibitem{zhang2016single}
+Yingying Zhang, Desen Zhou, Siqin Chen, Shenghua Gao, and Yi~Ma,
+\newblock ``Single-image crowd counting via multi-column convolutional neural
+  network,''
+\newblock in {\em CVPR}, 2016.
+
+\bibitem{ma2019bayesian}
+Zhiheng Ma, Xing Wei, Xiaopeng Hong, and Yihong Gong,
+\newblock ``Bayesian loss for crowd count estimation with point supervision,''
+\newblock in {\em ICCV}, 2019.
+
+\bibitem{biswas2017automatic}
+Debojit Biswas, Hongbo Su, Chengyi Wang, Jason Blankenship, and Aleksandar
+  Stevanovic,
+\newblock ``An automatic car counting system using overfeat framework,''
+\newblock {\em Sensors (Basel)}, 2017.
+
+\bibitem{ranjan2021learning}
+Viresh Ranjan, Udbhav Sharma, Thu Nguyen, and Minh Hoai,
+\newblock ``Learning to count everything,''
+\newblock in {\em CVPR}, 2021.
+
+\bibitem{yang2021class}
+Shuo-Diao Yang, Hung-Ting Su, Winston~H Hsu, and Wen-Chin Chen,
+\newblock ``Class-agnostic few-shot object counting,''
+\newblock in {\em WACV}, 2021.
+
+\bibitem{lin2014microsoft}
+Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva
+  Ramanan, Piotr Doll{\'a}r, and C~Lawrence Zitnick,
+\newblock ``Microsoft coco: Common objects in context,''
+\newblock in {\em ECCV}. Springer, 2014.
+
+\bibitem{chattopadhyay2017counting}
+Prithvijit Chattopadhyay, Ramakrishna Vedantam, Ramprasaath~R Selvaraju, Dhruv
+  Batra, and Devi Parikh,
+\newblock ``Counting everyday objects in everyday scenes,''
+\newblock in {\em CVPR}, 2017, pp. 1135--1144.
+
+\bibitem{cao2018scale}
+Xinkun Cao, Zhipeng Wang, Yanyun Zhao, and Fei Su,
+\newblock ``Scale aggregation network for accurate and efficient crowd
+  counting,''
+\newblock in {\em ECCV}, 2018.
+
+\bibitem{liu2019context}
+Weizhe Liu, Mathieu Salzmann, and Pascal Fua,
+\newblock ``Context-aware crowd counting,''
+\newblock in {\em CVPR}, 2019.
+
+\bibitem{wang2020distribution}
+Boyu Wang, Huidong Liu, Dimitris Samaras, and Minh~Hoai Nguyen,
+\newblock ``Distribution matching for crowd counting,''
+\newblock {\em Advances in Neural Information Processing Systems}, vol. 33,
+  2020.
+
+\bibitem{lin2021direct}
+Hui Lin, Xiaopeng Hong, Zhiheng Ma, Xing Wei, Yunfeng Qiu, Yaowei Wang, and
+  Yihong Gong,
+\newblock ``Direct measure matching for crowd counting,''
+\newblock in {\em IJCAI}, 2021.
+
+\bibitem{moranduzzo2013automatic}
+Thomas Moranduzzo and Farid Melgani,
+\newblock ``Automatic car counting method for unmanned aerial vehicle images,''
+\newblock {\em TGRS}, 2013.
+
+\bibitem{machefer2020mask}
+M{\'e}lissande Machefer, Fran{\c{c}}ois Lemarchand, Virginie Bonnefond,
+  Alasdair Hitchins, and Panagiotis Sidiropoulos,
+\newblock ``Mask r-cnn refitting strategy for plant counting and sizing in uav
+  imagery,''
+\newblock {\em Remote Sensing}, 2020.
+
+\bibitem{falk2019u}
+Thorsten Falk, Dominic Mai, Robert Bensch, {\"O}zg{\"u}n {\c{C}}i{\c{c}}ek,
+  Ahmed Abdulkadir, Yassine Marrakchi, Anton B{\"o}hm, Jan Deubner, Zoe
+  J{\"a}ckel, Katharina Seiwald, et~al.,
+\newblock ``U-net: deep learning for cell counting, detection, and
+  morphometry,''
+\newblock {\em Nature methods}, 2019.
+
+\bibitem{xie2018microscopy}
+Weidi Xie, J~Alison Noble, and Andrew Zisserman,
+\newblock ``Microscopy cell counting and detection with fully convolutional
+  regression networks,''
+\newblock {\em Computer methods in biomechanics and biomedical engineering:
+  Imaging \& Visualization}, 2018.
+
+\bibitem{lu2018class}
+Erika Lu, Weidi Xie, and Andrew Zisserman,
+\newblock ``Class-agnostic counting,''
+\newblock in {\em ACCV}, 2018.
+
+\bibitem{michaelis2018one}
+Claudio Michaelis, Ivan Ustyuzhaninov, Matthias Bethge, and Alexander~S Ecker,
+\newblock ``One-shot instance segmentation,''
+\newblock {\em arXiv preprint}, 2018.
+
+\bibitem{hsieh2019one}
+Ting-I Hsieh, Yi-Chen Lo, Hwann-Tzong Chen, and Tyng-Luh Liu,
+\newblock ``One-shot object detection with co-attention and co-excitation,''
+\newblock in {\em NIPS}, 2019.
+
+\bibitem{li2020one}
+Xiang Li, Lin Zhang, Yau~Pun Chen, Yu-Wing Tai, and Chi-Keung Tang,
+\newblock ``One-shot object detection without fine-tuning,''
+\newblock {\em arXiv preprint}, 2020.
+
+\bibitem{lin2017focal}
+Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Doll{\'a}r,
+\newblock ``Focal loss for dense object detection,''
+\newblock in {\em ICCV}, 2017.
+
+\bibitem{ren2015faster}
+Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun,
+\newblock ``Faster r-cnn: Towards real-time object detection with region
+  proposal networks,''
+\newblock {\em NIPS}, 2015.
+
+\bibitem{he2017mask}
+Kaiming He, Georgia Gkioxari, Piotr Doll{\'a}r, and Ross Girshick,
+\newblock ``Mask r-cnn,''
+\newblock in {\em ICCV}, 2017.
+
+\bibitem{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, {\L}ukasz Kaiser, and Illia Polosukhin,
+\newblock ``Attention is all you need,''
+\newblock in {\em NIPS}, 2017.
+
+\bibitem{kingmaadam}
+Diederik~P Kingma and Jimmy~Lei Ba,
+\newblock ``Adam: Amethod for stochastic optimization,''
+\newblock .
+
+\bibitem{kang2019few}
+Bingyi Kang, Zhuang Liu, Xin Wang, Fisher Yu, Jiashi Feng, and Trevor Darrell,
+\newblock ``Few-shot object detection via feature reweighting,''
+\newblock in {\em ICCV}, 2019.
+
+\bibitem{fan2020few}
+Qi~Fan, Wei Zhuo, Chi-Keung Tang, and Yu-Wing Tai,
+\newblock ``Few-shot object detection with attention-rpn and multi-relation
+  detector,''
+\newblock in {\em CVPR}, 2020.
+
+\bibitem{finn2017model}
+Chelsea Finn, Pieter Abbeel, and Sergey Levine,
+\newblock ``Model-agnostic meta-learning for fast adaptation of deep
+  networks,''
+\newblock in {\em ICML}, 2017.
+
+\end{thebibliography}

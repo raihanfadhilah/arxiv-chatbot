@@ -25,15 +25,18 @@ import glob
 import chromadb
 from langchain.retrievers.multi_query import MultiQueryRetriever
 import shutil
-from arxiv_bot.config import RetrieverConfig, RetrieverWithSearchConfig, LLMConfig
-load_dotenv()
+# from arxiv_bot.config import RetrieverConfig, RetrieverWithSearchConfig, LLMConfig
+try:
+    load_dotenv()
+except:
+    pass
 
-def load_llm(LLMConfig) -> ChatOpenAI:
+def load_llm(settings: dict) -> ChatOpenAI:
     
     return ChatOpenAI(
         model = 'gpt-3.5-turbo-1106',
         streaming = True,
-        **LLMConfig.get()
+        temperature = settings['temperature'],
     )
     
 def summarize(query: str, documents: List[Document]) -> str:
@@ -66,8 +69,7 @@ def summarize(query: str, documents: List[Document]) -> str:
     
     return summary
     
-def load_tools(settings: dict) -> List[BaseTool]:
-    base_embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
+def load_tools(vectordb: VectorStore, settings: dict) -> List[BaseTool]:
     
     # HYDE_PROMPT_TEMPLATE = """
     # Please answer the user's questions regarding specific topics in the latest research papers in Arxiv.
@@ -92,42 +94,37 @@ def load_tools(settings: dict) -> List[BaseTool]:
     #     llm_chain = hyde_chain,
     #     base_embeddings = base_embeddings,
     # )
-
-    COLLECTION_NAME = "arxiv"
-    PERSIST_DIR = "arxiv_vdb"
-    
-    os.makedirs(PERSIST_DIR, exist_ok=True)
     
 
-    vectordb = chroma.Chroma(
-        collection_name=COLLECTION_NAME,
-        persist_directory=PERSIST_DIR,
-        embedding_function=base_embeddings)
-    
-    retriever_config = RetrieverConfig(settings)
-    retriever_with_search_config = RetrieverWithSearchConfig(settings)
-
-    retriever = Retriever(vectordb=vectordb, 
-                        **retriever_config.get()
-                          )
+    retriever = Retriever(
+                    vectordb=vectordb,
+                    fetch_k = settings['fetch_k'],
+                    k = settings['k'],
+                    )
     
     retriever_with_search = RetrieverWithSearch(
-        vectordb=vectordb,
-        **retriever_with_search_config.get()
+                                    vectordb=vectordb,
+                                    pdf_parser=settings['pdf_parser'],
+                                    search_k=settings['search_k'],
+                                    fetch_k=settings['fetch_k'],
+                                    k=settings['k'],
+                                    chunk_size=settings['chunk_size'],
+                                    chunk_overlap=settings['chunk_overlap'],
     )
     
     return [retriever, retriever_with_search]
     
     
-def load_bot(settings: dict) -> AgentExecutor:
+def load_bot(vectordb: VectorStore, settings: dict) -> AgentExecutor:
     """
     Loads the bot with the tools and the language model
     
     :return: the bot
     :rtype: Agent
     """
-    tools: List[BaseTool] = load_tools(settings)
-    llm = load_llm(LLMConfig(settings))
+    
+    tools: List[BaseTool] = load_tools(vectordb, settings)
+    llm = load_llm(settings)
     
     
     PREFIX = """
@@ -237,7 +234,8 @@ def load_bot(settings: dict) -> AgentExecutor:
 
 @cl.on_settings_update
 async def on_settings_update(settings: dict):
-    bot = load_bot(settings)
+    vectordb: VectorStore = cl.user_session.get('vectordb') #type: ignore
+    bot = load_bot(vectordb, settings)
     cl.user_session.set('bot', bot)
 
 @cl.on_chat_start
@@ -246,6 +244,14 @@ async def start():
     # await msg.send()
     # msg.content = "Hi there! I am a bot that is very knowledgable in the latest research papers in Arxiv. Ask me anything!"
     # await msg.update()
+    
+    try:
+        shutil.rmtree("./pdfs")
+        shutil.rmtree("./output")
+        chromadb.PersistentClient(path="arxiv_vdb").delete_collection("arxiv")
+    except:
+        pass
+    
     settings = await cl.ChatSettings(
         [
             TextInput(id="search_k", label="# of web search results", initial="5"),
@@ -254,7 +260,7 @@ async def start():
             TextInput(id="chunk_size", label="Chunk size", initial="1024"),
             TextInput(id="chunk_overlap", label="Chunk overlap", initial="100"),
             Slider(id="temperature", label="Temperature", min=0.0, max=1.0, step=0.1, initial=0.0),
-            Select(id = "pdf_parser", label = "Parser", values = ["PyMuPDF", "GROBID"], initial_index=1),
+            Select(id = "pdf_parser", label = "Parser", values = ["PyMuPDF", "GROBID"], initial_index=0),
             
         ]
     ).send()
@@ -267,7 +273,20 @@ async def start():
                                         )
     cl.user_session.set('memory', memory)
     
-    bot = load_bot(settings)
+    COLLECTION_NAME = "arxiv"
+    PERSIST_DIR = "arxiv_vdb"
+    
+    os.makedirs(PERSIST_DIR, exist_ok=True)
+    
+    base_embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
+
+    vectordb: VectorStore = chroma.Chroma(
+        collection_name=COLLECTION_NAME,
+        persist_directory=PERSIST_DIR,
+        embedding_function=base_embeddings)
+    cl.user_session.set('vectordb', vectordb)
+    
+    bot = load_bot(vectordb, settings)
     cl.user_session.set('bot', bot)
 
 
@@ -347,10 +366,4 @@ async def main(query):
 
 @cl.on_chat_end
 def on_chat_end():
-    # try:
-    #     shutil.rmtree("./pdfs")
-    #     shutil.rmtree("./output")
-    #     chromadb.PersistentClient(path="arxiv_vdb").delete_collection("arxiv")
-    # except:
-    #     pass
     pass

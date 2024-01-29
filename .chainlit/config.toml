@@ -35,7 +35,7 @@ multi_modal = true
 
 [UI]
 # Name of the app and chatbot.
-name = "ArXiVBot"
+name = "arXiv Bot"
 
 # Show the readme while the thread is empty.
 show_readme_as_default = true
@@ -65,9 +65,9 @@ hide_cot = false
     #paper = "#FFFFFF"
 
     [UI.theme.light.primary]
-        #main = "#F80061"
-        #dark = "#980039"
-        #light = "#FFE7EB"
+        main = "#ab152d"
+        dark = "#980039"
+        light = "#FFE7EB"
 
 # Override default MUI dark theme. (Check theme.ts)
 [UI.theme.dark]
@@ -75,9 +75,9 @@ hide_cot = false
     #paper = "#FFFFFF"
 
     [UI.theme.dark.primary]
-        #main = "#F80061"
-        #dark = "#980039"
-        #light = "#FFE7EB"
+        main = "#ab152d"
+        dark = "#980039"
+        light = "#FFE7EB"
 
 
 [meta]

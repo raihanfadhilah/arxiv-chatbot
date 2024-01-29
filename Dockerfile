@@ -1,0 +1,14 @@
+FROM python:3.10.12
+
+WORKDIR /app
+
+# Copy the entire project
+COPY . .
+
+# Install the grobid_client_python package and other requirements
+RUN pip install -e ./grobid_client_python \
+    && pip install -r requirements.txt
+
+EXPOSE 8000
+
+CMD ["chainlit", "run", "app.py"]

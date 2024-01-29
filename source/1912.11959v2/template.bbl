@@ -1,0 +1,150 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Alom \bgroup \em et al.\egroup
+  }{2018}]{historyofdeeplearning}
+Md~Zahangir Alom, Tarek~M. Taha, Christopher Yakopcic, Stefan Westbery,
+  Paheding Sidike, Mst~Sharmina Nasrin, Brian C~Van Esesn, Abdul A~S. Awwal,
+  and Vijayan~K. Asari.
+\newblock The history began from alexnet: A comprehensive survey on deep
+  learning approaches.
+\newblock {\em arXiv preprint arXiv:1803.01164}, 2018.
+
+\bibitem[\protect\citeauthoryear{Bai \bgroup \em et al.\egroup }{2019}]{bai}
+Shaojie Bai, J.~Zico Kolter, and Vladlen Koltun.
+\newblock An empirical evaluation of generic convolutional and recurrent
+  networks for sequence modeling.
+\newblock {\em arXiv preprint arXiv:1803.01271}, 2019.
+
+\bibitem[\protect\citeauthoryear{Dai \bgroup \em et al.\egroup
+  }{2019}]{transformerxl}
+Zihang Dai, Zhilin Yang, Yiming Yang, Jaime Carbonell, Quoc~V. Le, and Ruslan
+  Salakhutdinov.
+\newblock Transformer-{XL}: Attentive language models beyond a fixed-length
+  context.
+\newblock {\em arXiv preprint arXiv:1901.02860}, 2019.
+
+\bibitem[\protect\citeauthoryear{Dauphin \bgroup \em et al.\egroup
+  }{2016}]{glu2017}
+Yann~N. Dauphin, Angela Fan, Michael Auli, and David Grangier.
+\newblock Language modeling with gated convolutional networks.
+\newblock {\em arXiv preprint arXiv:1612.08083}, 2016.
+
+\bibitem[\protect\citeauthoryear{Delvin \bgroup \em et al.\egroup
+  }{2018}]{bert}
+Jacob Delvin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock {\em arXiv preprint arXiv:1810.04805}, 2018.
+
+\bibitem[\protect\citeauthoryear{Freivalds and Liepins}{2017}]{freivalds}
+Karlis Freivalds and Renars Liepins.
+\newblock Improving the neural gpu architecture for algorithm learning.
+\newblock {\em arXiv preprint arXiv:1702.08727}, 2017.
+
+\bibitem[\protect\citeauthoryear{Gehring \bgroup \em et al.\egroup
+  }{2017}]{gehring2017}
+Jonas Gehring, Michael Auli, David Grangier, Denis Yarats, and Yann Dauphin.
+\newblock Convolutional sequence to sequence learning.
+\newblock {\em arXiv preprint arXiv:1705.03122}, 2017.
+
+\bibitem[\protect\citeauthoryear{Hao \bgroup \em et al.\egroup }{2019}]{hao}
+Jie Hao, Xing Wang, Baosong Yang, Longyue Wang, Jinfeng Zhang, and Zhaopeng Tu.
+\newblock Modeling recurrence for transformer.
+\newblock {\em arXiv preprint arXiv:1904.03092}, 2019.
+
+\bibitem[\protect\citeauthoryear{Kaiser and Bengio}{2016}]{kaiser2016}
+Lukasz Kaiser and Samy Bengio.
+\newblock Can active memory replace attention.
+\newblock {\em arXiv preprint arXiv:1610.08613}, 2016.
+
+\bibitem[\protect\citeauthoryear{Kaiser and Sutskever}{2015}]{kaiser2015}
+Lukasz Kaiser and Ilya Sutskever.
+\newblock Neural gpus learn algorithms.
+\newblock {\em arXiv preprint arXiv:1511.08228}, 2015.
+
+\bibitem[\protect\citeauthoryear{Kingma and Ba}{2014}]{kingma2014}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock {\em arXiv preprint arXiv:1412.6980}, 2014.
+
+\bibitem[\protect\citeauthoryear{Merity \bgroup \em et al.\egroup
+  }{2016}]{merity2016}
+Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher.
+\newblock Pointer sentinel mixture models.
+\newblock {\em arXiv preprint arXiv:1609.07843}, 2016.
+
+\bibitem[\protect\citeauthoryear{Resende \bgroup \em et al.\egroup
+  }{2016}]{one_shot_draw}
+Danilo~J. Resende, Shakir Mohamed, Ivo Danihelka, Karol Gregor, and Daan
+  Wiestra.
+\newblock One shot generalization in deep generative models.
+\newblock {\em arXiv preprint arXiv:1603.05106}, 2016.
+
+\bibitem[\protect\citeauthoryear{Sennrich \bgroup \em et al.\egroup
+  }{2016}]{sennrich2016}
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+\newblock Neural machine translation of rare words with subword units.
+\newblock {\em arXiv preprint arXiv:1508.07909}, 2016.
+
+\bibitem[\protect\citeauthoryear{Shoeybi \bgroup \em et al.\egroup
+  }{2019}]{shoeybi2019}
+Mohammad Shoeybi, Mostofa Patwary, Raul Puri, Patrick LeGresley, Jared Casper,
+  and Bryan Catanzaro.
+\newblock Megatron-lm: Training multi-billion parameter language models using
+  model parallelism.
+\newblock {\em arXiv preprint arXiv:1909.08053}, 2019.
+
+\bibitem[\protect\citeauthoryear{Srivastava \bgroup \em et al.\egroup
+  }{2015}]{srivastava2015}
+Rupseh~Kumar Srivastava, Klaus Greff, and J{\"u}rgen Schmidhuber.
+\newblock Highway networks.
+\newblock {\em arXiv preprint arXiv:1505.00387}, 2015.
+
+\bibitem[\protect\citeauthoryear{Sukhbaatar \bgroup \em et al.\egroup
+  }{2019}]{sukbaatar2019}
+Sainbayar Sukhbaatar, Edouard Grave, Guillaume Lample, Herve Jegou, and Armand
+  Joulin.
+\newblock Augmenting self-attention with persistent memory.
+\newblock {\em arXiv preprint arXiv:1907.01470}, 2019.
+
+\bibitem[\protect\citeauthoryear{Vaswani \bgroup \em et al.\egroup
+  }{2017}]{vaswani2017}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N. Gomez, Łukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock {\em arXiv preprint arXiv:1706.03762}, 2017.
+
+\bibitem[\protect\citeauthoryear{Wang \bgroup \em et al.\egroup
+  }{2019}]{wang2019}
+Zhiwei Wang, Yao Ma, Zitao Liu, and Jiliang Tang.
+\newblock R-transformer: Recurrent neural network enhanced transformer.
+\newblock {\em arXiv preprint arXiv:1907.05572}, 2019.
+
+\bibitem[\protect\citeauthoryear{Wu \bgroup \em et al.\egroup }{2019}]{wu2019}
+Felix Wu, Angela Fan, Alexei Baevski, Yann~N. Dauphin, and Michael Auli.
+\newblock Pay less attention with lightweight and dynamic attention.
+\newblock {\em arXiv preprint arXiv:1901.10430}, 2019.
+
+\bibitem[\protect\citeauthoryear{Yang \bgroup \em et al.\egroup
+  }{2019a}]{yang2019}
+Baosong Yang, Longyue Wang, Derek~F. Wong, Lidia~S. Chao, and Zhaopeng Tu.
+\newblock Convolutional self-attention networks.
+\newblock {\em arXix preprint arXiv:1904.03107}, 2019.
+
+\bibitem[\protect\citeauthoryear{Yang \bgroup \em et al.\egroup
+  }{2019b}]{xlnet}
+Zhilin Yang, Zihang Dai, Yiming Yang, Jaime Carbonell, Ruslan Salakhutdinov,
+  and Quoc~V. Le.
+\newblock Xlnet: Generalized autoregressive pretraining for language
+  understanding.
+\newblock {\em arXiv preprint arXiv:1906.08237}, 2019.
+
+\bibitem[\protect\citeauthoryear{Zhenzhong \bgroup \em et al.\egroup
+  }{2019}]{albert}
+Lan Zhenzhong, Mingda Chen, Sebastian Goodman, Kevin Gimpel, Piyush Sharma, and
+  Radu Soricut.
+\newblock Albert: A lite bert for self-supervised learning of language
+  representations.
+\newblock {\em arXiv preprint arXiv:1909.11942}, 2019.
+
+\end{thebibliography}

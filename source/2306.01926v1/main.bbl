@@ -1,0 +1,840 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{62}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[Abadi et~al\mbox{.}(2016)]%
+        {abadi2016tensorflow}
+\bibfield{author}{\bibinfo{person}{Mart{\'\i}n Abadi}, \bibinfo{person}{Ashish
+  Agarwal}, \bibinfo{person}{Paul Barham}, \bibinfo{person}{Eugene Brevdo},
+  \bibinfo{person}{Zhifeng Chen}, \bibinfo{person}{Craig Citro},
+  \bibinfo{person}{Greg~S Corrado}, \bibinfo{person}{Andy Davis},
+  \bibinfo{person}{Jeffrey Dean}, \bibinfo{person}{Matthieu Devin},
+  {et~al\mbox{.}}} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Tensorflow: Large-scale machine learning on
+  heterogeneous distributed systems}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1603.04467}}
+  (\bibinfo{year}{2016}).
+\newblock
+
+
+\bibitem[Ainslie et~al\mbox{.}(2020)]%
+        {ainslie2020etc}
+\bibfield{author}{\bibinfo{person}{Joshua Ainslie}, \bibinfo{person}{Santiago
+  Ontanon}, \bibinfo{person}{Chris Alberti}, \bibinfo{person}{Vaclav Cvicek},
+  \bibinfo{person}{Zachary Fisher}, \bibinfo{person}{Philip Pham},
+  \bibinfo{person}{Anirudh Ravula}, \bibinfo{person}{Sumit Sanghai},
+  \bibinfo{person}{Qifan Wang}, {and} \bibinfo{person}{Li Yang}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{ETC: Encoding long and structured inputs in
+  transformers}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2004.08483}}
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[Beltagy et~al\mbox{.}(2020)]%
+        {beltagy2020longformer}
+\bibfield{author}{\bibinfo{person}{Iz Beltagy}, \bibinfo{person}{Matthew~E
+  Peters}, {and} \bibinfo{person}{Arman Cohan}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Longformer: The long-document transformer}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2004.05150}}
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[Brown et~al\mbox{.}(2020)]%
+        {brown2020language}
+\bibfield{author}{\bibinfo{person}{Tom Brown}, \bibinfo{person}{Benjamin Mann},
+  \bibinfo{person}{Nick Ryder}, \bibinfo{person}{Melanie Subbiah},
+  \bibinfo{person}{Jared~D Kaplan}, \bibinfo{person}{Prafulla Dhariwal},
+  \bibinfo{person}{Arvind Neelakantan}, \bibinfo{person}{Pranav Shyam},
+  \bibinfo{person}{Girish Sastry}, \bibinfo{person}{Amanda Askell},
+  {et~al\mbox{.}}} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Language models are few-shot learners}.
+\newblock \bibinfo{journal}{\emph{Advances in neural information processing
+  systems}}  \bibinfo{volume}{33} (\bibinfo{year}{2020}),
+  \bibinfo{pages}{1877--1901}.
+\newblock
+
+
+\bibitem[Bui et~al\mbox{.}(2017)]%
+        {bui2017time}
+\bibfield{author}{\bibinfo{person}{C Bui}, \bibinfo{person}{N Pham},
+  \bibinfo{person}{A Vo}, \bibinfo{person}{A Tran}, \bibinfo{person}{A Nguyen},
+  {and} \bibinfo{person}{T Le}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Time series forecasting for healthcare diagnosis
+  and prognostics with the focus on cardiovascular diseases}. In
+  \bibinfo{booktitle}{\emph{International conference on the development of
+  biomedical engineering in Vietnam}}. Springer, \bibinfo{pages}{809--818}.
+\newblock
+
+
+\bibitem[Cao et~al\mbox{.}(2019)]%
+        {DBLP:journals/pvldb/CaoTAJYLGSBSCWM19}
+\bibfield{author}{\bibinfo{person}{Lei Cao}, \bibinfo{person}{Wenbo Tao},
+  \bibinfo{person}{Sungtae An}, \bibinfo{person}{Jing Jin},
+  \bibinfo{person}{Yizhou Yan}, \bibinfo{person}{Xiaoyu Liu},
+  \bibinfo{person}{Wendong Ge}, \bibinfo{person}{Adam Sah},
+  \bibinfo{person}{Leilani Battle}, \bibinfo{person}{Jimeng Sun},
+  \bibinfo{person}{Remco Chang}, \bibinfo{person}{M.~Brandon Westover},
+  \bibinfo{person}{Samuel Madden}, {and} \bibinfo{person}{Michael
+  Stonebraker}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Smile: {A} System to Support Machine Learning on
+  {EEG} Data at Scale}.
+\newblock \bibinfo{journal}{\emph{Proc. {VLDB} Endow.}} \bibinfo{volume}{12},
+  \bibinfo{number}{12} (\bibinfo{year}{2019}), \bibinfo{pages}{2230--2241}.
+\newblock
+
+
+\bibitem[Cao et~al\mbox{.}(2018)]%
+        {cao2018brits}
+\bibfield{author}{\bibinfo{person}{Wei Cao}, \bibinfo{person}{Dong Wang},
+  \bibinfo{person}{Jian Li}, \bibinfo{person}{Hao Zhou}, \bibinfo{person}{Lei
+  Li}, {and} \bibinfo{person}{Yitan Li}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Brits: Bidirectional recurrent imputation for time
+  series}.
+\newblock \bibinfo{journal}{\emph{Advances in neural information processing
+  systems}}  \bibinfo{volume}{31} (\bibinfo{year}{2018}).
+\newblock
+
+
+\bibitem[Chatfield(2000)]%
+        {chatfield2000time}
+\bibfield{author}{\bibinfo{person}{Chris Chatfield}.}
+  \bibinfo{year}{2000}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Time-series forecasting}}.
+\newblock \bibinfo{publisher}{Chapman and Hall/CRC}.
+\newblock
+
+
+\bibitem[Child et~al\mbox{.}(2019)]%
+        {child2019generating}
+\bibfield{author}{\bibinfo{person}{Rewon Child}, \bibinfo{person}{Scott Gray},
+  \bibinfo{person}{Alec Radford}, {and} \bibinfo{person}{Ilya Sutskever}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Generating long sequences with sparse
+  transformers}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1904.10509}}
+  (\bibinfo{year}{2019}).
+\newblock
+
+
+\bibitem[Choromanski et~al\mbox{.}(2020)]%
+        {choromanski2020rethinking}
+\bibfield{author}{\bibinfo{person}{Krzysztof Choromanski},
+  \bibinfo{person}{Valerii Likhosherstov}, \bibinfo{person}{David Dohan},
+  \bibinfo{person}{Xingyou Song}, \bibinfo{person}{Andreea Gane},
+  \bibinfo{person}{Tamas Sarlos}, \bibinfo{person}{Peter Hawkins},
+  \bibinfo{person}{Jared Davis}, \bibinfo{person}{Afroz Mohiuddin},
+  \bibinfo{person}{Lukasz Kaiser}, {et~al\mbox{.}}}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Rethinking attention with performers}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2009.14794}}
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[Cook et~al\mbox{.}(2019)]%
+        {cook2019anomaly}
+\bibfield{author}{\bibinfo{person}{Andrew~A Cook}, \bibinfo{person}{G{\"o}ksel
+  M{\i}s{\i}rl{\i}}, {and} \bibinfo{person}{Zhong Fan}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Anomaly detection for IoT time-series data: A
+  survey}.
+\newblock \bibinfo{journal}{\emph{IEEE Internet of Things Journal}}
+  \bibinfo{volume}{7}, \bibinfo{number}{7} (\bibinfo{year}{2019}),
+  \bibinfo{pages}{6481--6494}.
+\newblock
+
+
+\bibitem[Cortes and Vapnik(1995)]%
+        {cortes1995support}
+\bibfield{author}{\bibinfo{person}{Corinna Cortes} {and}
+  \bibinfo{person}{Vladimir Vapnik}.} \bibinfo{year}{1995}\natexlab{}.
+\newblock \showarticletitle{Support-vector networks}.
+\newblock \bibinfo{journal}{\emph{Machine learning}} \bibinfo{volume}{20},
+  \bibinfo{number}{3} (\bibinfo{year}{1995}), \bibinfo{pages}{273--297}.
+\newblock
+
+
+\bibitem[Cox(1958)]%
+        {cox1958regression}
+\bibfield{author}{\bibinfo{person}{David~R Cox}.}
+  \bibinfo{year}{1958}\natexlab{}.
+\newblock \showarticletitle{The regression analysis of binary sequences}.
+\newblock \bibinfo{journal}{\emph{Journal of the Royal Statistical Society:
+  Series B (Methodological)}} \bibinfo{volume}{20}, \bibinfo{number}{2}
+  (\bibinfo{year}{1958}), \bibinfo{pages}{215--232}.
+\newblock
+
+
+\bibitem[Crabtree et~al\mbox{.}(1990)]%
+        {crabtree1990individual}
+\bibfield{author}{\bibinfo{person}{Benjamin~F Crabtree},
+  \bibinfo{person}{Subhash~C Ray}, \bibinfo{person}{Priscilla~M Schmidt},
+  \bibinfo{person}{Patrick~T O'Connor}, {and} \bibinfo{person}{David~D
+  Schmidt}.} \bibinfo{year}{1990}\natexlab{}.
+\newblock \showarticletitle{The individual over time: time series applications
+  in health care research}.
+\newblock \bibinfo{journal}{\emph{Journal of clinical epidemiology}}
+  \bibinfo{volume}{43}, \bibinfo{number}{3} (\bibinfo{year}{1990}),
+  \bibinfo{pages}{241--260}.
+\newblock
+
+
+\bibitem[Dempster et~al\mbox{.}(2020)]%
+        {DBLP:journals/datamine/DempsterPW20}
+\bibfield{author}{\bibinfo{person}{Angus Dempster},
+  \bibinfo{person}{Fran{\c{c}}ois Petitjean}, {and}
+  \bibinfo{person}{Geoffrey~I. Webb}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{{ROCKET:} exceptionally fast and accurate time
+  series classification using random convolutional kernels}.
+\newblock \bibinfo{journal}{\emph{Data Min. Knowl. Discov.}}
+  \bibinfo{volume}{34}, \bibinfo{number}{5} (\bibinfo{year}{2020}),
+  \bibinfo{pages}{1454--1495}.
+\newblock
+
+
+\bibitem[Devlin et~al\mbox{.}(2019)]%
+        {DBLP:conf/naacl/DevlinCLT19}
+\bibfield{author}{\bibinfo{person}{Jacob Devlin}, \bibinfo{person}{Ming{-}Wei
+  Chang}, \bibinfo{person}{Kenton Lee}, {and} \bibinfo{person}{Kristina
+  Toutanova}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{{BERT:} Pre-training of Deep Bidirectional
+  Transformers for Language Understanding}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 2019 Conference of the North
+  American Chapter of the Association for Computational Linguistics: Human
+  Language Technologies, {NAACL-HLT} 2019, Minneapolis, MN, USA, June 2-7,
+  2019, Volume 1 (Long and Short Papers)}}. \bibinfo{pages}{4171--4186}.
+\newblock
+
+
+\bibitem[Fix and Hodges(1989)]%
+        {fix1989discriminatory}
+\bibfield{author}{\bibinfo{person}{Evelyn Fix} {and}
+  \bibinfo{person}{Joseph~Lawson Hodges}.} \bibinfo{year}{1989}\natexlab{}.
+\newblock \showarticletitle{Discriminatory analysis. Nonparametric
+  discrimination: Consistency properties}.
+\newblock \bibinfo{journal}{\emph{International Statistical Review/Revue
+  Internationale de Statistique}} \bibinfo{volume}{57}, \bibinfo{number}{3}
+  (\bibinfo{year}{1989}), \bibinfo{pages}{238--247}.
+\newblock
+
+
+\bibitem[Guest and Guest(2012)]%
+        {guest2012numerical}
+\bibfield{author}{\bibinfo{person}{Philip~George Guest} {and}
+  \bibinfo{person}{Philip~George Guest}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Numerical methods of curve fitting}}.
+\newblock \bibinfo{publisher}{Cambridge University Press}.
+\newblock
+
+
+\bibitem[He et~al\mbox{.}(2016)]%
+        {he2016deep}
+\bibfield{author}{\bibinfo{person}{Kaiming He}, \bibinfo{person}{Xiangyu
+  Zhang}, \bibinfo{person}{Shaoqing Ren}, {and} \bibinfo{person}{Jian Sun}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Deep residual learning for image recognition}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the IEEE conference on computer
+  vision and pattern recognition}}. \bibinfo{pages}{770--778}.
+\newblock
+
+
+\bibitem[Ismail~Fawaz et~al\mbox{.}(2019)]%
+        {ismail2019deep}
+\bibfield{author}{\bibinfo{person}{Hassan Ismail~Fawaz},
+  \bibinfo{person}{Germain Forestier}, \bibinfo{person}{Jonathan Weber},
+  \bibinfo{person}{Lhassane Idoumghar}, {and} \bibinfo{person}{Pierre-Alain
+  Muller}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Deep learning for time series classification: a
+  review}.
+\newblock \bibinfo{journal}{\emph{Data mining and knowledge discovery}}
+  \bibinfo{volume}{33}, \bibinfo{number}{4} (\bibinfo{year}{2019}),
+  \bibinfo{pages}{917--963}.
+\newblock
+
+
+\bibitem[Ismail~Fawaz et~al\mbox{.}(2020)]%
+        {ismail2020inceptiontime}
+\bibfield{author}{\bibinfo{person}{Hassan Ismail~Fawaz},
+  \bibinfo{person}{Benjamin Lucas}, \bibinfo{person}{Germain Forestier},
+  \bibinfo{person}{Charlotte Pelletier}, \bibinfo{person}{Daniel~F Schmidt},
+  \bibinfo{person}{Jonathan Weber}, \bibinfo{person}{Geoffrey~I Webb},
+  \bibinfo{person}{Lhassane Idoumghar}, \bibinfo{person}{Pierre-Alain Muller},
+  {and} \bibinfo{person}{Fran{\c{c}}ois Petitjean}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Inceptiontime: Finding alexnet for time series
+  classification}.
+\newblock \bibinfo{journal}{\emph{Data Mining and Knowledge Discovery}}
+  \bibinfo{volume}{34}, \bibinfo{number}{6} (\bibinfo{year}{2020}),
+  \bibinfo{pages}{1936--1962}.
+\newblock
+
+
+\bibitem[Jegou et~al\mbox{.}(2010)]%
+        {jegou2010product}
+\bibfield{author}{\bibinfo{person}{Herve Jegou}, \bibinfo{person}{Matthijs
+  Douze}, {and} \bibinfo{person}{Cordelia Schmid}.}
+  \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{Product quantization for nearest neighbor search}.
+\newblock \bibinfo{journal}{\emph{IEEE transactions on pattern analysis and
+  machine intelligence}} \bibinfo{volume}{33}, \bibinfo{number}{1}
+  (\bibinfo{year}{2010}), \bibinfo{pages}{117--128}.
+\newblock
+
+
+\bibitem[Johnson et~al\mbox{.}(2019)]%
+        {johnson2019billion}
+\bibfield{author}{\bibinfo{person}{Jeff Johnson}, \bibinfo{person}{Matthijs
+  Douze}, {and} \bibinfo{person}{Herv{\'e} J{\'e}gou}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Billion-scale similarity search with gpus}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Big Data}}
+  \bibinfo{volume}{7}, \bibinfo{number}{3} (\bibinfo{year}{2019}),
+  \bibinfo{pages}{535--547}.
+\newblock
+
+
+\bibitem[Karp(1972)]%
+        {karp1972reducibility}
+\bibfield{author}{\bibinfo{person}{Richard~M Karp}.}
+  \bibinfo{year}{1972}\natexlab{}.
+\newblock \showarticletitle{Reducibility among combinatorial problems}.
+\newblock In \bibinfo{booktitle}{\emph{Complexity of computer computations}}.
+  \bibinfo{publisher}{Springer}, \bibinfo{pages}{85--103}.
+\newblock
+
+
+\bibitem[Keogh et~al\mbox{.}(2001)]%
+        {keogh2001dimensionality}
+\bibfield{author}{\bibinfo{person}{Eamonn Keogh}, \bibinfo{person}{Kaushik
+  Chakrabarti}, \bibinfo{person}{Michael Pazzani}, {and}
+  \bibinfo{person}{Sharad Mehrotra}.} \bibinfo{year}{2001}\natexlab{}.
+\newblock \showarticletitle{Dimensionality reduction for fast similarity search
+  in large time series databases}.
+\newblock \bibinfo{journal}{\emph{Knowledge and information Systems}}
+  \bibinfo{volume}{3}, \bibinfo{number}{3} (\bibinfo{year}{2001}),
+  \bibinfo{pages}{263--286}.
+\newblock
+
+
+\bibitem[Kitaev et~al\mbox{.}(2020)]%
+        {kitaev2020reformer}
+\bibfield{author}{\bibinfo{person}{Nikita Kitaev}, \bibinfo{person}{{\L}ukasz
+  Kaiser}, {and} \bibinfo{person}{Anselm Levskaya}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Reformer: The efficient transformer}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2001.04451}}
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[Kraft and Kraft(1977)]%
+        {kraft1977determinants}
+\bibfield{author}{\bibinfo{person}{John Kraft} {and} \bibinfo{person}{Arthur
+  Kraft}.} \bibinfo{year}{1977}\natexlab{}.
+\newblock \showarticletitle{Determinants of common stock prices: A time series
+  analysis}.
+\newblock \bibinfo{journal}{\emph{The journal of finance}}
+  \bibinfo{volume}{32}, \bibinfo{number}{2} (\bibinfo{year}{1977}),
+  \bibinfo{pages}{417--425}.
+\newblock
+
+
+\bibitem[Krizhevsky et~al\mbox{.}(2012)]%
+        {NIPS2012_c399862d}
+\bibfield{author}{\bibinfo{person}{Alex Krizhevsky}, \bibinfo{person}{Ilya
+  Sutskever}, {and} \bibinfo{person}{Geoffrey~E Hinton}.}
+  \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{ImageNet Classification with Deep Convolutional
+  Neural Networks}. In \bibinfo{booktitle}{\emph{Advances in Neural Information
+  Processing Systems}}, \bibfield{editor}{\bibinfo{person}{F.~Pereira},
+  \bibinfo{person}{C.J. Burges}, \bibinfo{person}{L.~Bottou}, {and}
+  \bibinfo{person}{K.Q. Weinberger}} (Eds.), Vol.~\bibinfo{volume}{25}.
+  \bibinfo{publisher}{Curran Associates, Inc.}
+\newblock
+\urldef\tempurl%
+\url{https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Lara and Labrador(2012)]%
+        {lara2012survey}
+\bibfield{author}{\bibinfo{person}{Oscar~D Lara} {and}
+  \bibinfo{person}{Miguel~A Labrador}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{A survey on human activity recognition using
+  wearable sensors}.
+\newblock \bibinfo{journal}{\emph{IEEE communications surveys \& tutorials}}
+  \bibinfo{volume}{15}, \bibinfo{number}{3} (\bibinfo{year}{2012}),
+  \bibinfo{pages}{1192--1209}.
+\newblock
+
+
+\bibitem[Li et~al\mbox{.}(2019)]%
+        {li2019enhancing}
+\bibfield{author}{\bibinfo{person}{Shiyang Li}, \bibinfo{person}{Xiaoyong Jin},
+  \bibinfo{person}{Yao Xuan}, \bibinfo{person}{Xiyou Zhou},
+  \bibinfo{person}{Wenhu Chen}, \bibinfo{person}{Yu-Xiang Wang}, {and}
+  \bibinfo{person}{Xifeng Yan}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Enhancing the locality and breaking the memory
+  bottleneck of transformer on time series forecasting}.
+\newblock \bibinfo{journal}{\emph{Advances in Neural Information Processing
+  Systems}}  \bibinfo{volume}{32} (\bibinfo{year}{2019}).
+\newblock
+
+
+\bibitem[Liao(2005)]%
+        {liao2005clustering}
+\bibfield{author}{\bibinfo{person}{T~Warren Liao}.}
+  \bibinfo{year}{2005}\natexlab{}.
+\newblock \showarticletitle{Clustering of time series data—a survey}.
+\newblock \bibinfo{journal}{\emph{Pattern recognition}} \bibinfo{volume}{38},
+  \bibinfo{number}{11} (\bibinfo{year}{2005}), \bibinfo{pages}{1857--1874}.
+\newblock
+
+
+\bibitem[Lin and Shim(1995)]%
+        {lin1995fast}
+\bibfield{author}{\bibinfo{person}{Rake\& Agrawal King-lp Lin} {and}
+  \bibinfo{person}{Harpreet S Sawhney~Kyuseok Shim}.}
+  \bibinfo{year}{1995}\natexlab{}.
+\newblock \showarticletitle{Fast similarity search in the presence of noise,
+  scaling, and translation in time-series databases}. In
+  \bibinfo{booktitle}{\emph{Proceeding of the 21th International Conference on
+  Very Large Data Bases}}. \bibinfo{pages}{490--501}.
+\newblock
+
+
+\bibitem[Lines et~al\mbox{.}(2018)]%
+        {10.1145/3182382}
+\bibfield{author}{\bibinfo{person}{Jason Lines}, \bibinfo{person}{Sarah
+  Taylor}, {and} \bibinfo{person}{Anthony Bagnall}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Time Series Classification with HIVE-COTE: The
+  Hierarchical Vote Collective of Transformation-Based Ensembles}.
+\newblock \bibinfo{journal}{\emph{ACM Trans. Knowl. Discov. Data}}
+  \bibinfo{volume}{12}, \bibinfo{number}{5}, Article \bibinfo{articleno}{52}
+  (\bibinfo{date}{jul} \bibinfo{year}{2018}), \bibinfo{numpages}{35}~pages.
+\newblock
+
+
+\bibitem[Liu et~al\mbox{.}(2018)]%
+        {liu2018open}
+\bibfield{author}{\bibinfo{person}{Feifei Liu}, \bibinfo{person}{Chengyu Liu},
+  \bibinfo{person}{Lina Zhao}, \bibinfo{person}{Xiangyu Zhang},
+  \bibinfo{person}{Xiaoling Wu}, \bibinfo{person}{Xiaoyan Xu},
+  \bibinfo{person}{Yulin Liu}, \bibinfo{person}{Caiyun Ma},
+  \bibinfo{person}{Shoushui Wei}, \bibinfo{person}{Zhiqiang He},
+  {et~al\mbox{.}}} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{An open access database for evaluating the
+  algorithms of electrocardiogram rhythm and morphology abnormality detection}.
+\newblock \bibinfo{journal}{\emph{Journal of Medical Imaging and Health
+  Informatics}} \bibinfo{volume}{8}, \bibinfo{number}{7}
+  (\bibinfo{year}{2018}), \bibinfo{pages}{1368--1373}.
+\newblock
+
+
+\bibitem[Lloyd(1982)]%
+        {lloyd1982least}
+\bibfield{author}{\bibinfo{person}{Stuart Lloyd}.}
+  \bibinfo{year}{1982}\natexlab{}.
+\newblock \showarticletitle{Least squares quantization in PCM}.
+\newblock \bibinfo{journal}{\emph{IEEE transactions on information theory}}
+  \bibinfo{volume}{28}, \bibinfo{number}{2} (\bibinfo{year}{1982}),
+  \bibinfo{pages}{129--137}.
+\newblock
+
+
+\bibitem[Loshchilov and Hutter(2017)]%
+        {loshchilov2017decoupled}
+\bibfield{author}{\bibinfo{person}{Ilya Loshchilov} {and}
+  \bibinfo{person}{Frank Hutter}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Decoupled weight decay regularization}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1711.05101}}
+  (\bibinfo{year}{2017}).
+\newblock
+
+
+\bibitem[Ma et~al\mbox{.}(2019)]%
+        {ma2019cdsa}
+\bibfield{author}{\bibinfo{person}{Jiawei Ma}, \bibinfo{person}{Zheng Shou},
+  \bibinfo{person}{Alireza Zareian}, \bibinfo{person}{Hassan Mansour},
+  \bibinfo{person}{Anthony Vetro}, {and} \bibinfo{person}{Shih-Fu Chang}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{CDSA: cross-dimensional self-attention for
+  multivariate, geo-tagged time series imputation}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1905.09904}}
+  (\bibinfo{year}{2019}).
+\newblock
+
+
+\bibitem[Malkov and Yashunin(2018)]%
+        {malkov2018efficient}
+\bibfield{author}{\bibinfo{person}{Yu~A Malkov} {and} \bibinfo{person}{Dmitry~A
+  Yashunin}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Efficient and robust approximate nearest neighbor
+  search using hierarchical navigable small world graphs}.
+\newblock \bibinfo{journal}{\emph{IEEE transactions on pattern analysis and
+  machine intelligence}} \bibinfo{volume}{42}, \bibinfo{number}{4}
+  (\bibinfo{year}{2018}), \bibinfo{pages}{824--836}.
+\newblock
+
+
+\bibitem[Negi and Bansal(2005)]%
+        {negi2005time}
+\bibfield{author}{\bibinfo{person}{Tripti Negi} {and} \bibinfo{person}{Veena
+  Bansal}.} \bibinfo{year}{2005}\natexlab{}.
+\newblock \showarticletitle{Time series: Similarity search and its
+  applications}. In \bibinfo{booktitle}{\emph{Proceedings of the International
+  Conference on Systemics, Cybernetics and Informatics: ICSCI-04, Hyderabad,
+  India}}. \bibinfo{pages}{528--533}.
+\newblock
+
+
+\bibitem[Paparrizos and Franklin(2019)]%
+        {paparrizos2019grail}
+\bibfield{author}{\bibinfo{person}{John Paparrizos} {and}
+  \bibinfo{person}{Michael~J Franklin}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Grail: efficient time-series representation
+  learning}.
+\newblock \bibinfo{journal}{\emph{Proceedings of the VLDB Endowment}}
+  \bibinfo{volume}{12}, \bibinfo{number}{11} (\bibinfo{year}{2019}),
+  \bibinfo{pages}{1762--1777}.
+\newblock
+
+
+\bibitem[Pascanu et~al\mbox{.}(2013)]%
+        {pascanu2013difficulty}
+\bibfield{author}{\bibinfo{person}{Razvan Pascanu}, \bibinfo{person}{Tomas
+  Mikolov}, {and} \bibinfo{person}{Yoshua Bengio}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{On the difficulty of training recurrent neural
+  networks}. In \bibinfo{booktitle}{\emph{International conference on machine
+  learning}}. PMLR, \bibinfo{pages}{1310--1318}.
+\newblock
+
+
+\bibitem[Qian(1999)]%
+        {qian1999momentum}
+\bibfield{author}{\bibinfo{person}{Ning Qian}.}
+  \bibinfo{year}{1999}\natexlab{}.
+\newblock \showarticletitle{On the momentum term in gradient descent learning
+  algorithms}.
+\newblock \bibinfo{journal}{\emph{Neural networks}} \bibinfo{volume}{12},
+  \bibinfo{number}{1} (\bibinfo{year}{1999}), \bibinfo{pages}{145--151}.
+\newblock
+
+
+\bibitem[Ren et~al\mbox{.}(2022)]%
+        {ren2022autotransformer}
+\bibfield{author}{\bibinfo{person}{Yankun Ren}, \bibinfo{person}{Longfei Li},
+  \bibinfo{person}{Xinxing Yang}, {and} \bibinfo{person}{Jun Zhou}.}
+  \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{AutoTransformer: Automatic Transformer Architecture
+  Design for Time Series Classification}. In
+  \bibinfo{booktitle}{\emph{Pacific-Asia Conference on Knowledge Discovery and
+  Data Mining}}. Springer, \bibinfo{pages}{143--155}.
+\newblock
+
+
+\bibitem[Salinas et~al\mbox{.}(2020)]%
+        {salinas2020deepar}
+\bibfield{author}{\bibinfo{person}{David Salinas}, \bibinfo{person}{Valentin
+  Flunkert}, \bibinfo{person}{Jan Gasthaus}, {and} \bibinfo{person}{Tim
+  Januschowski}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{DeepAR: Probabilistic forecasting with
+  autoregressive recurrent networks}.
+\newblock \bibinfo{journal}{\emph{International Journal of Forecasting}}
+  \bibinfo{volume}{36}, \bibinfo{number}{3} (\bibinfo{year}{2020}),
+  \bibinfo{pages}{1181--1191}.
+\newblock
+
+
+\bibitem[Shifaz et~al\mbox{.}(2020)]%
+        {Shifaz2020TSCHIEFAS}
+\bibfield{author}{\bibinfo{person}{Ahmed Shifaz}, \bibinfo{person}{Charlotte
+  Pelletier}, \bibinfo{person}{François Petitjean}, {and}
+  \bibinfo{person}{Geoffrey~I. Webb}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{TS-CHIEF: a scalable and accurate forest algorithm
+  for time series classification}.
+\newblock \bibinfo{journal}{\emph{Data Mining and Knowledge Discovery}}
+  \bibinfo{volume}{34} (\bibinfo{year}{2020}), \bibinfo{pages}{742--775}.
+\newblock
+
+
+\bibitem[Stisen et~al\mbox{.}(2015)]%
+        {stisen2015smart}
+\bibfield{author}{\bibinfo{person}{Allan Stisen}, \bibinfo{person}{Henrik
+  Blunck}, \bibinfo{person}{Sourav Bhattacharya}, \bibinfo{person}{Thor~Siiger
+  Prentow}, \bibinfo{person}{Mikkel~Baun Kj{\ae}rgaard}, \bibinfo{person}{Anind
+  Dey}, \bibinfo{person}{Tobias Sonne}, {and} \bibinfo{person}{Mads~M{\o}ller
+  Jensen}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Smart devices are different: Assessing and
+  mitigatingmobile sensing heterogeneities for activity recognition}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 13th ACM conference on embedded
+  networked sensor systems}}. \bibinfo{pages}{127--140}.
+\newblock
+
+
+\bibitem[Su et~al\mbox{.}(2019)]%
+        {su2019robust}
+\bibfield{author}{\bibinfo{person}{Ya Su}, \bibinfo{person}{Youjian Zhao},
+  \bibinfo{person}{Chenhao Niu}, \bibinfo{person}{Rong Liu},
+  \bibinfo{person}{Wei Sun}, {and} \bibinfo{person}{Dan Pei}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Robust anomaly detection for multivariate time
+  series through stochastic recurrent neural network}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 25th ACM SIGKDD international
+  conference on knowledge discovery \& data mining}}.
+  \bibinfo{pages}{2828--2837}.
+\newblock
+
+
+\bibitem[Sztyler and Stuckenschmidt(2016)]%
+        {sztyler2016body}
+\bibfield{author}{\bibinfo{person}{Timo Sztyler} {and} \bibinfo{person}{Heiner
+  Stuckenschmidt}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{On-body localization of wearable devices: An
+  investigation of position-aware activity recognition}. In
+  \bibinfo{booktitle}{\emph{2016 IEEE International Conference on Pervasive
+  Computing and Communications (PerCom)}}. IEEE, \bibinfo{pages}{1--9}.
+\newblock
+
+
+\bibitem[Tay et~al\mbox{.}(2020)]%
+        {tay2020efficient}
+\bibfield{author}{\bibinfo{person}{Yi Tay}, \bibinfo{person}{Mostafa Dehghani},
+  \bibinfo{person}{Dara Bahri}, {and} \bibinfo{person}{Donald Metzler}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Efficient transformers: A survey}.
+\newblock \bibinfo{journal}{\emph{ACM Computing Surveys (CSUR)}}
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[Teng(2010)]%
+        {teng2010anomaly}
+\bibfield{author}{\bibinfo{person}{Mingyan Teng}.}
+  \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{Anomaly detection on time series}. In
+  \bibinfo{booktitle}{\emph{2010 IEEE International Conference on Progress in
+  Informatics and Computing}}, Vol.~\bibinfo{volume}{1}. IEEE,
+  \bibinfo{pages}{603--608}.
+\newblock
+
+
+\bibitem[Thompson(1990)]%
+        {thompson1990mse}
+\bibfield{author}{\bibinfo{person}{Patrick~A Thompson}.}
+  \bibinfo{year}{1990}\natexlab{}.
+\newblock \showarticletitle{An MSE statistic for comparing forecast accuracy
+  across series}.
+\newblock \bibinfo{journal}{\emph{International Journal of Forecasting}}
+  \bibinfo{volume}{6}, \bibinfo{number}{2} (\bibinfo{year}{1990}),
+  \bibinfo{pages}{219--227}.
+\newblock
+
+
+\bibitem[Vaswani et~al\mbox{.}(2017)]%
+        {DBLP:conf/nips/VaswaniSPUJGKP17}
+\bibfield{author}{\bibinfo{person}{Ashish Vaswani}, \bibinfo{person}{Noam
+  Shazeer}, \bibinfo{person}{Niki Parmar}, \bibinfo{person}{Jakob Uszkoreit},
+  \bibinfo{person}{Llion Jones}, \bibinfo{person}{Aidan~N. Gomez},
+  \bibinfo{person}{Lukasz Kaiser}, {and} \bibinfo{person}{Illia Polosukhin}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Attention is All you Need}. In
+  \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems
+  30: Annual Conference on Neural Information Processing Systems 2017, December
+  4-9, 2017, Long Beach, CA, {USA}}}. \bibinfo{pages}{5998--6008}.
+\newblock
+
+
+\bibitem[Virtanen et~al\mbox{.}(2020)]%
+        {2020SciPy-NMeth}
+\bibfield{author}{\bibinfo{person}{Pauli Virtanen}, \bibinfo{person}{Ralf
+  Gommers}, \bibinfo{person}{Travis~E. Oliphant}, \bibinfo{person}{Matt
+  Haberland}, \bibinfo{person}{Tyler Reddy}, \bibinfo{person}{David
+  Cournapeau}, \bibinfo{person}{Evgeni Burovski}, \bibinfo{person}{Pearu
+  Peterson}, \bibinfo{person}{Warren Weckesser}, \bibinfo{person}{Jonathan
+  Bright}, \bibinfo{person}{St{\'e}fan~J. {van der Walt}},
+  \bibinfo{person}{Matthew Brett}, \bibinfo{person}{Joshua Wilson},
+  \bibinfo{person}{K.~Jarrod Millman}, \bibinfo{person}{Nikolay Mayorov},
+  \bibinfo{person}{Andrew R.~J. Nelson}, \bibinfo{person}{Eric Jones},
+  \bibinfo{person}{Robert Kern}, \bibinfo{person}{Eric Larson},
+  \bibinfo{person}{C~J Carey}, \bibinfo{person}{{\.I}lhan Polat},
+  \bibinfo{person}{Yu Feng}, \bibinfo{person}{Eric~W. Moore},
+  \bibinfo{person}{Jake {VanderPlas}}, \bibinfo{person}{Denis Laxalde},
+  \bibinfo{person}{Josef Perktold}, \bibinfo{person}{Robert Cimrman},
+  \bibinfo{person}{Ian Henriksen}, \bibinfo{person}{E.~A. Quintero},
+  \bibinfo{person}{Charles~R. Harris}, \bibinfo{person}{Anne~M. Archibald},
+  \bibinfo{person}{Ant{\^o}nio~H. Ribeiro}, \bibinfo{person}{Fabian Pedregosa},
+  \bibinfo{person}{Paul {van Mulbregt}}, {and} \bibinfo{person}{{SciPy 1.0
+  Contributors}}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{{{SciPy} 1.0: Fundamental Algorithms for Scientific
+  Computing in Python}}.
+\newblock \bibinfo{journal}{\emph{Nature Methods}}  \bibinfo{volume}{17}
+  (\bibinfo{year}{2020}), \bibinfo{pages}{261--272}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1038/s41592-019-0686-2}
+\showDOI{\tempurl}
+
+
+\bibitem[Wang et~al\mbox{.}(2020)]%
+        {wang2020linformer}
+\bibfield{author}{\bibinfo{person}{Sinong Wang}, \bibinfo{person}{Belinda~Z
+  Li}, \bibinfo{person}{Madian Khabsa}, \bibinfo{person}{Han Fang}, {and}
+  \bibinfo{person}{Hao Ma}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Linformer: Self-attention with linear complexity}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2006.04768}}
+  (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[Weiss et~al\mbox{.}(2019)]%
+        {weiss2019smartphone}
+\bibfield{author}{\bibinfo{person}{Gary~M Weiss}, \bibinfo{person}{Kenichi
+  Yoneda}, {and} \bibinfo{person}{Thaier Hayajneh}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Smartphone and smartwatch-based biometrics using
+  activities of daily living}.
+\newblock \bibinfo{journal}{\emph{IEEE Access}}  \bibinfo{volume}{7}
+  (\bibinfo{year}{2019}), \bibinfo{pages}{133190--133202}.
+\newblock
+
+
+\bibitem[Wen et~al\mbox{.}(2021)]%
+        {10.1145/3448016.3452779}
+\bibfield{author}{\bibinfo{person}{Qingsong Wen}, \bibinfo{person}{Kai He},
+  \bibinfo{person}{Liang Sun}, \bibinfo{person}{Yingying Zhang},
+  \bibinfo{person}{Min Ke}, {and} \bibinfo{person}{Huan Xu}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{RobustPeriod: Robust Time-Frequency Mining for
+  Multiple Periodicity Detection}. In \bibinfo{booktitle}{\emph{Proceedings of
+  the 2021 International Conference on Management of Data}} (Virtual Event,
+  China) \emph{(\bibinfo{series}{SIGMOD '21})}. \bibinfo{publisher}{Association
+  for Computing Machinery}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{2328–2337}.
+\newblock
+\showISBNx{9781450383431}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3448016.3452779}
+\showDOI{\tempurl}
+
+
+\bibitem[Wu et~al\mbox{.}(2021)]%
+        {wu2021autoformer}
+\bibfield{author}{\bibinfo{person}{Haixu Wu}, \bibinfo{person}{Jiehui Xu},
+  \bibinfo{person}{Jianmin Wang}, {and} \bibinfo{person}{Mingsheng Long}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Autoformer: Decomposition transformers with
+  auto-correlation for long-term series forecasting}.
+\newblock \bibinfo{journal}{\emph{Advances in Neural Information Processing
+  Systems}}  \bibinfo{volume}{34} (\bibinfo{year}{2021}),
+  \bibinfo{pages}{22419--22430}.
+\newblock
+
+
+\bibitem[Xu et~al\mbox{.}(2021)]%
+        {xu2021anomaly}
+\bibfield{author}{\bibinfo{person}{Jiehui Xu}, \bibinfo{person}{Haixu Wu},
+  \bibinfo{person}{Jianmin Wang}, {and} \bibinfo{person}{Mingsheng Long}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Anomaly Transformer: Time Series Anomaly Detection
+  with Association Discrepancy}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2110.02642}}
+  (\bibinfo{year}{2021}).
+\newblock
+
+
+\bibitem[Yue et~al\mbox{.}(2007)]%
+        {yue2007review}
+\bibfield{author}{\bibinfo{person}{Dianmin Yue}, \bibinfo{person}{Xiaodan Wu},
+  \bibinfo{person}{Yunfeng Wang}, \bibinfo{person}{Yue Li}, {and}
+  \bibinfo{person}{Chao-Hsien Chu}.} \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{A review of data mining-based financial fraud
+  detection research}. In \bibinfo{booktitle}{\emph{2007 International
+  Conference on Wireless Communications, Networking and Mobile Computing}}.
+  Ieee, \bibinfo{pages}{5519--5522}.
+\newblock
+
+
+\bibitem[Zaheer et~al\mbox{.}(2020)]%
+        {zaheer2020big}
+\bibfield{author}{\bibinfo{person}{Manzil Zaheer}, \bibinfo{person}{Guru
+  Guruganesh}, \bibinfo{person}{Kumar~Avinava Dubey}, \bibinfo{person}{Joshua
+  Ainslie}, \bibinfo{person}{Chris Alberti}, \bibinfo{person}{Santiago
+  Ontanon}, \bibinfo{person}{Philip Pham}, \bibinfo{person}{Anirudh Ravula},
+  \bibinfo{person}{Qifan Wang}, \bibinfo{person}{Li Yang}, {et~al\mbox{.}}}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Big bird: Transformers for longer sequences}.
+\newblock \bibinfo{journal}{\emph{Advances in Neural Information Processing
+  Systems}}  \bibinfo{volume}{33} (\bibinfo{year}{2020}),
+  \bibinfo{pages}{17283--17297}.
+\newblock
+
+
+\bibitem[Zerveas et~al\mbox{.}(2021)]%
+        {DBLP:conf/kdd/ZerveasJPBE21}
+\bibfield{author}{\bibinfo{person}{George Zerveas}, \bibinfo{person}{Srideepika
+  Jayaraman}, \bibinfo{person}{Dhaval Patel}, \bibinfo{person}{Anuradha
+  Bhamidipaty}, {and} \bibinfo{person}{Carsten Eickhoff}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{A Transformer-based Framework for Multivariate Time
+  Series Representation Learning}. In \bibinfo{booktitle}{\emph{{KDD} '21: The
+  27th {ACM} {SIGKDD} Conference on Knowledge Discovery and Data Mining,
+  Virtual Event, Singapore, August 14-18, 2021}}. \bibinfo{pages}{2114--2124}.
+\newblock
+
+
+\bibitem[Zhou et~al\mbox{.}(2021)]%
+        {zhou2021informer}
+\bibfield{author}{\bibinfo{person}{Haoyi Zhou}, \bibinfo{person}{Shanghang
+  Zhang}, \bibinfo{person}{Jieqi Peng}, \bibinfo{person}{Shuai Zhang},
+  \bibinfo{person}{Jianxin Li}, \bibinfo{person}{Hui Xiong}, {and}
+  \bibinfo{person}{Wancai Zhang}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Informer: Beyond efficient transformer for long
+  sequence time-series forecasting}. In \bibinfo{booktitle}{\emph{Proceedings
+  of AAAI}}.
+\newblock
+
+
+\end{thebibliography}

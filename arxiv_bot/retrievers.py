@@ -311,7 +311,7 @@ class RetrieverWithSearch(BaseTool):
 
     """
     vectordb: VectorStore
-    pdf_parser: Literal['pymupdf', 'grobid'] = "grobid"
+    pdf_parser: Literal['PyMuPDF', 'GROBID'] = "PyMuPDF"
     search_k: int = 10
     fetch_k: int = 10
     k: int = 3

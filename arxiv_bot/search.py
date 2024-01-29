@@ -12,13 +12,17 @@ import arxiv #type: ignore
 import chainlit as cl
 import chromadb
 import os
+import fitz
 import re
 import time
 from typing import List
 import logging
 
 logging.getLogger("IndexNewArxivPapers").setLevel(logging.INFO)
-load_dotenv()
+try:
+    load_dotenv()
+except:
+    pass
 
 
 def read_tei(tei_file):
@@ -95,6 +99,28 @@ class TEIFile(object):
             self._text = plain_text
         return self._text
 
+
+class PyMuPDFParser:
+    def __init__(self, pdf_path):
+        self.pdf_path = pdf_path
+        self.doc = fitz.open(self.pdf_path)
+        self.id = self.pdf_path.split("/")[-1].split(".")[0]
+        self._INTRO_DELIMITERS = '|'.join(map(re.escape, ['Introduction\n', 'INTRODUCTION\n']))
+        self._REF_DELIMITERS = '|'.join(map(re.escape, ['References\n', 'REFERENCES\n']))
+        self._APPENDIX_DELIMITERS = '|'.join(map(re.escape, ['Appendix\n', 'APPENDIX\n']))
+        
+    def process(self):
+        content = ""
+        for page in self.doc:
+            content += page.get_text() #type: ignore
+        
+        content = re.split(self._INTRO_DELIMITERS, content)[-1]
+        content = re.split(self._REF_DELIMITERS, content)[0]
+        appendix = re.split(self._APPENDIX_DELIMITERS, content)[-1]
+        content += "\n\n" + appendix
+        
+        return content
+        
 class IndexNewArxivPapers:
     """
     This tool indexes new papers from arxiv using the following steps:
@@ -109,7 +135,7 @@ class IndexNewArxivPapers:
     def __init__(self, 
                 vectordb: VectorStore,
                 n_search_results: int = 2,
-                pdf_parser: Literal["grobid", "pymupdf"] = "grobid",
+                pdf_parser: Literal["PyMuPDF", "GROBID"] = "PyMuPDF",
                 chunk_size: int = 1024,
                 chunk_overlap: int = 100,
                 ):
@@ -127,18 +153,20 @@ class IndexNewArxivPapers:
     
     def _get_paper_ids(self, query: str) -> List[str]:
         ARXIV_ID_REGEX =  r"\d{4}\.\d{4,5}"
-        
-        ids = list(
-            {re.findall(ARXIV_ID_REGEX, result['link'])[0] 
-             for result in self.google_api.results(query, self.n_search_results)}
-            )
+        try:
+            ids = list(
+                {re.findall(ARXIV_ID_REGEX, result['link'])[0] 
+                for result in self.google_api.results(query, self.n_search_results)}
+                )
+        except IndexError:
+            raise IndexError("No papers found, try a different query.")
         
         return ids
     
     def _run(self, query):
         with cl.Step():
             self.ids = self._get_paper_ids(query)
-            
+            print(self.ids)
             os.makedirs(f"./output/{query}", exist_ok=True)
             os.makedirs(f"./pdfs/{query}", exist_ok=True)
             
@@ -157,7 +185,8 @@ class IndexNewArxivPapers:
                 time.sleep(1)
             
             docs = []
-            if self.pdf_parser == "grobid":
+            print(self.pdf_parser)
+            if self.pdf_parser == "GROBID":
                 self.grobid_client = GrobidClient(config_path="./grobid_client_python/config.json")
                 self.grobid_client.process("processFulltextDocument", f"./pdfs/{query}/", output=f"./output/{query}", force=True)            
                 
@@ -179,28 +208,30 @@ class IndexNewArxivPapers:
                                     )
                                     for i, chunk in enumerate(chunks)
                                 ]
-                    )
+                            )
                     
-            if self.pdf_parser == "pymupdf":
+            if self.pdf_parser == "PyMuPDF":
                 for paper in papers:
-                    loader = PyMuPDFLoader(f"pdfs/{query}/{paper.entry_id.split('/')[-1]}.pdf")
-                    chunks = loader.load_and_split(self.splitter)                    
+                    # loader = PyMuPDFLoader(f"pdfs/{query}/{paper.entry_id.split('/')[-1]}.pdf")
+                    # chunks = loader.load_and_split(self.splitter)                    
+                    text = PyMuPDFParser(f"./pdfs/{query}/{paper.entry_id.split('/')[-1]}.pdf").process()
+                    chunks = self.splitter.split_text(text)
                     docs.extend([
                             Document(
-                                    page_content=chunk.page_content, 
+                                    page_content=chunk, 
                                     metadata={
                                         'paper_id': paper.entry_id.split("/")[-1],
                                         'authors': ", ".join([author.name for author in paper.authors]),
+                                        'date': paper.published.strftime("%Y-%m-%d"),
+                                        'abstract': paper.summary,
                                         'title': paper.title,
                                         'chunk_id': f"{paper.entry_id.split('/')[-1]}-{i}"
                                         }
                                     ) 
                                     for i, chunk in enumerate(chunks)
                                 ]
-                        )
-            self.vectordb.add_documents(
-                docs
-            )
+                            )
+            self.vectordb.add_documents(docs)
 
 
     async def _arun(self, query: str):
