@@ -16,19 +16,19 @@ variable "tags" {
 
 variable "container_registry_config" {
   description = "Specifies the container registry configuration"
-  type        = object({
-    name                     = string
-    admin_enabled            = bool
-    sku                      = string
-    identity                 = object({
-      type         = string
+  type = object({
+    name          = string
+    admin_enabled = bool
+    sku           = string
+    identity = object({
+      type = string
     })
   })
 }
 
 variable "acr_identity_config" {
   description = "Specifies the ACR identity configuration"
-  type        = object({
+  type = object({
     name = string
   })
 }
@@ -39,13 +39,13 @@ variable "log_analytics_workspace_id" {
 }
 
 variable "storage_account_id" {
-    description = "Specifies the storage account id"
-    type        = string
+  description = "Specifies the storage account id"
+  type        = string
 }
 
 variable "acr_diag_settings_config" {
   description = "Specifies the ACR diagnostic settings configuration"
-  type        = object({
-    name      = string
+  type = object({
+    name = string
   })
 }

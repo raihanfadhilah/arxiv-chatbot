@@ -4,7 +4,7 @@ from chainlit.input_widget import Slider, Select, TextInput
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_openai import OpenAI
-from langchain.memory import ConversationBufferWindowMemory, ConversationBufferMemory
+from langchain.memory import ConversationBufferWindowMemory
 from langchain.prompts import PromptTemplate
 from langchain.agents import initialize_agent
 from langchain.vectorstores import chroma, VectorStore
@@ -17,7 +17,6 @@ from typing import List
 import os
 import chromadb
 from arxiv_bot.prompts import PREFIX, SUFFIX, FORMAT_INSTRUCTIONS
-from langchain.retrievers.multi_query import MultiQueryRetriever
 import shutil
 
 try:
@@ -189,7 +188,7 @@ async def start():
     
     base_embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
 
-    vectordb: VectorStore = chroma.Chroma(
+    vectordb = chroma.Chroma(
         collection_name=COLLECTION_NAME,
         persist_directory=PERSIST_DIR,
         embedding_function=base_embeddings)

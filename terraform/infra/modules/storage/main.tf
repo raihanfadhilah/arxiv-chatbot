@@ -11,6 +11,7 @@ resource "azurerm_storage_container" "arxivchatbot-storage-container" {
   name                  = var.storage_container_config.name
   storage_account_name  = azurerm_storage_account.arxivchatbot-storage-account.name
   container_access_type = var.storage_container_config.container_access_type
+  depends_on            = [azurerm_storage_account.arxivchatbot-storage-account]
 }
 
 # Create a storage management policy to define log retention
@@ -32,4 +33,5 @@ resource "azurerm_storage_management_policy" "arxivchatbot-storage-management-po
       }
     }
   }
+  depends_on = [azurerm_storage_account.arxivchatbot-storage-account]
 }

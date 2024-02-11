@@ -6,7 +6,7 @@ resource "azurerm_container_app_environment" "arxivchatbot-container-app-environ
   infrastructure_subnet_id       = var.infrastructure_subnet_id
   internal_load_balancer_enabled = var.container_app_environment_config.internal_load_balancer_enabled
   tags                           = var.tags
-  
+
   lifecycle {
     ignore_changes = [
       tags

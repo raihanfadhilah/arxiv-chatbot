@@ -1,10 +1,10 @@
 resource "azurerm_container_registry" "arxivchatbot-container-registry" {
-  name                     = var.container_registry_config.name
-  resource_group_name      = var.resource_group_name
-  location                 = var.location
-  sku                      = var.container_registry_config.sku
-  admin_enabled            = var.container_registry_config.admin_enabled
-  tags                     = var.tags
+  name                = var.container_registry_config.name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  sku                 = var.container_registry_config.sku
+  admin_enabled       = var.container_registry_config.admin_enabled
+  tags                = var.tags
 
   identity {
     type = var.container_registry_config.identity.type
@@ -14,9 +14,9 @@ resource "azurerm_container_registry" "arxivchatbot-container-registry" {
   }
 
   lifecycle {
-      ignore_changes = [
-          tags
-      ]
+    ignore_changes = [
+      tags
+    ]
   }
 }
 
@@ -38,7 +38,7 @@ resource "azurerm_monitor_diagnostic_setting" "arxivchatbot-acr-diag-settings" {
   name                       = var.acr_diag_settings_config.name
   target_resource_id         = azurerm_container_registry.arxivchatbot-container-registry.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
-  storage_account_id        = var.storage_account_id
+  storage_account_id         = var.storage_account_id
 
   enabled_log {
     category = "ContainerRegistryRepositoryEvents"
@@ -51,4 +51,6 @@ resource "azurerm_monitor_diagnostic_setting" "arxivchatbot-acr-diag-settings" {
   metric {
     category = "AllMetrics"
   }
+
+  depends_on = [azurerm_container_registry.arxivchatbot-container-registry]
 }

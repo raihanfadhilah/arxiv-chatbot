@@ -20,15 +20,15 @@ output "resource_group_name" {
 
 output "login_server" {
   description = "Specifies the login server of the container registry."
-  value = azurerm_container_registry.arxivchatbot-container-registry.login_server
+  value       = azurerm_container_registry.arxivchatbot-container-registry.login_server
 }
 
 output "login_server_url" {
   description = "Specifies the login server url of the container registry."
-  value = "https://${azurerm_container_registry.arxivchatbot-container-registry.login_server}"
+  value       = "https://${azurerm_container_registry.arxivchatbot-container-registry.login_server}"
 }
 
 output "admin_username" {
   description = "Specifies the admin username of the container registry."
-  value = azurerm_container_registry.arxivchatbot-container-registry.admin_username
+  value       = azurerm_container_registry.arxivchatbot-container-registry.admin_username
 }

@@ -20,7 +20,7 @@ variable "infrastructure_subnet_id" {
 
 variable "container_app_environment_config" {
   description = "(Required) Specifies the name of the container app environment"
-  type        = object({
+  type = object({
     name                           = string
     internal_load_balancer_enabled = bool
   })

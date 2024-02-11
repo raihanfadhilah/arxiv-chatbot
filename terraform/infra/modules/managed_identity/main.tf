@@ -12,8 +12,8 @@ resource "azurerm_user_assigned_identity" "arxivchatbot-workload-user-assigned-i
 }
 
 resource "azurerm_role_assignment" "arxivchatbot-acr-pull-assignment" {
-  scope                = var.acr_id
-  role_definition_name = var.acr_pull_assignment_config.role_definition_name
-  principal_id         = var.acr_identity_principal_id
+  scope                            = var.acr_id
+  role_definition_name             = var.acr_pull_assignment_config.role_definition_name
+  principal_id                     = var.acr_identity_principal_id
   skip_service_principal_aad_check = var.acr_pull_assignment_config.skip_service_principal_aad_check
 }
