@@ -1,3 +1,11 @@
+############################ APPLICATION ############################
 .env
 /venv
 /arxiv_vdb
+/pdfs
+/output
+/notebooks
+
+############################# TERRAFORM ############################
+/terraform
+
