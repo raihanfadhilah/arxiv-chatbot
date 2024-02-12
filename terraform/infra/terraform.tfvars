@@ -56,7 +56,7 @@ acr_pull_assignment_config = {
 container_registry_config = {
   name          = "arxivchatbotregistry"
   sku           = "Standard"
-  admin_enabled = false
+  admin_enabled = true
   identity = {
     type = "UserAssigned"
   }
@@ -69,5 +69,5 @@ acr_diag_settings_config = {
 }
 container_app_environment_config = {
   name                           = "arxivchatbot-app-environment"
-  internal_load_balancer_enabled = true
+  internal_load_balancer_enabled = false
 }
