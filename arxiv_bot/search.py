@@ -12,10 +12,10 @@ import arxiv #type: ignore
 import chainlit as cl
 import chromadb
 import os
-import fitz
+import fitz #type: ignore
 import re
 import time
-from typing import List
+from typing import List, Union
 import logging
 
 logging.getLogger("IndexNewArxivPapers").setLevel(logging.INFO)
@@ -26,8 +26,8 @@ except:
 
 
 def read_tei(tei_file):
-    with open(tei_file, 'r', encoding='utf-8') as tei:
-        soup = BeautifulSoup(tei, 'lxml')
+    with open(tei_file, 'r', encoding='utf-8') as tei: # Open the TEI file with 'ISO-8859-1' encoding
+        soup = BeautifulSoup(tei, 'lxml-xml')
         return soup
     raise RuntimeError('Cannot generate a soup from the input')
 
@@ -60,6 +60,10 @@ class TEIFile(object):
         return self._title
 
     @property
+    def published(self):
+        return self.soup.date.get("when")
+    
+    @property
     def abstract(self):
         if not self._abstract:
             abstract = self.soup.abstract.getText(separator=' ', strip=True) #type: ignore
@@ -72,12 +76,9 @@ class TEIFile(object):
 
         result = []
         for author in authors_in_header:
-            persname = author.persname
-            if not persname:
-                continue
-            firstname = elem_to_text(persname.find("forename", type="first")).strip()
-            middlename = elem_to_text(persname.find("forename", type="middle")).strip()
-            surname = elem_to_text(persname.surname).strip()
+            firstname = elem_to_text(author.find("forename", type="first")).strip()
+            middlename = elem_to_text(author.find("forename", type="middle")).strip()
+            surname = elem_to_text(author.surname).strip()
             if middlename == '':
                 full_name = f"{firstname} {surname}".strip()
             else:
@@ -120,6 +121,110 @@ class PyMuPDFParser:
         content += "\n\n" + appendix
         
         return content
+    
+class ProcessPDF:
+    def __init__(self,
+                #  vectordb: VectorStore,
+                 parser: Literal["PyMuPDF", "GROBID"] = "PyMuPDF",
+                 chunk_size: int = 1024,
+                 chunk_overlap: int = 100,
+                 ):
+
+        # self.vectordb = vectordb
+        self.parser = parser
+        self.chunk_size = chunk_size
+        self.grobid_client = GrobidClient(config_path="./grobid_client_python/config.json")
+        self.chunk_overlap = chunk_overlap
+        self.text_splitter = SpacyTextSplitter(
+            chunk_size = chunk_size,
+            chunk_overlap = chunk_overlap,
+            separator="\n\n"
+            )
+        
+    def _get_id_from_str(self, string: str) -> str:
+        ARXIV_ID_REGEX =  r"\d{4}\.\d{4,5}"
+        result = re.findall(ARXIV_ID_REGEX, string)[0]
+        if len(result) == 0:
+            return string
+        else:
+            return result
+        
+    def _extract_metadata(self, paper: str) -> dict:
+        filename = paper.split("/")[-1]
+        entry_id = self._get_id_from_str(filename)
+        
+        old_path = f"./output/{entry_id}.grobid.tei.xml"
+        new_path = f"./output/{entry_id}.header.grobid.tei.xml"
+        os.rename(old_path, new_path)
+        
+        tei_object = TEIFile(new_path)
+        title = tei_object.title
+        authors = ", ".join([author for author in tei_object.authors])
+        abstract = tei_object.abstract
+        date = tei_object.published
+        return {
+            'paper_id': entry_id,
+            'title': title, 
+            'authors': authors,
+            'date': date,
+            'abstract': abstract
+        }
+        
+    def _process_pymupdf(self, pdf_path: List[str]) -> List[Document]:
+        docs = []
+        self.grobid_client.process_batch(
+            "processHeaderDocument",
+            pdf_path,
+            input_path = os.path.dirname(pdf_path[0]),
+            output=f"./output/",
+            generateIDs=False,
+            n=10,
+            consolidate_header=True,
+            consolidate_citations=False,
+            include_raw_citations=False,
+            include_raw_affiliations=False,
+            tei_coordinates=False,
+            segment_sentences=False,
+            force=False,
+            verbose=False,
+            )
+        
+        for paper in pdf_path:                               
+            text = PyMuPDFParser(paper).process()
+            chunks = self.text_splitter.split_text(text)
+            metadata = self._extract_metadata(paper)
+            for i, chunk in enumerate(chunks):
+                metadata['chunk_id'] = f"{metadata['paper_id']}-{i}"
+                docs.append(
+                    Document(
+                            page_content=chunk, 
+                            metadata=metadata
+                            )
+                        )
+        return docs
+
+        
+        
+    def process(self, pdf_path: Union[List[str], str]):
+        list_of_files = []
+        if isinstance(pdf_path, str):
+            if os.path.isdir(pdf_path):
+                list_of_files.extend([f"{pdf_path}/{file}" for file in os.listdir(pdf_path)])
+            elif os.path.isfile(pdf_path) and pdf_path.endswith(".pdf"):
+                list_of_files.append(pdf_path)
+            else:
+                raise ValueError("pdf_path must be a directory of pdf files or a (list of) pdf file(s).")
+            
+        if isinstance(pdf_path, list):
+            if all([file.endswith(".pdf") for file in pdf_path]):
+                list_of_files = pdf_path
+            else:
+                raise ValueError("pdf_path must be a directory of pdf files or a (list of) pdf file(s).")
+            
+        if self.parser == "PyMuPDF":
+            return self._process_pymupdf(list_of_files)
+            
+        
         
 class IndexNewArxivPapers:
     """
