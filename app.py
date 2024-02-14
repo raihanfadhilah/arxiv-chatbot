@@ -1,206 +1,67 @@
+from arxiv_bot.functions import (
+    clear_pdf,
+    init_file_upload,
+    load_bot,
+    load_memory,
+    load_vectordb,
+    init_chat_settings
+)
+from arxiv_bot.search import ProcessPDF
 from dotenv import load_dotenv
 import chainlit as cl
-from chainlit.input_widget import Slider, Select, TextInput
-from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain_openai.chat_models import ChatOpenAI
-from langchain_openai import OpenAI
-from langchain.memory import ConversationBufferWindowMemory
-from langchain.prompts import PromptTemplate
-from langchain.agents import initialize_agent
-from langchain.vectorstores import chroma, VectorStore
-from langchain_core.documents import Document
-from langchain.agents.agent import AgentExecutor
-from langchain.chains import LLMChain
-from langchain_core.tools import BaseTool
-from arxiv_bot.retrievers import Retriever, RetrieverWithSearch
-from typing import List
-import os
-import chromadb
-from arxiv_bot.prompts import PREFIX, SUFFIX, FORMAT_INSTRUCTIONS
-import shutil
+import warnings
+warnings.filterwarnings("ignore")
 
 try:
     load_dotenv()
 except:
     pass
 
-def load_llm(settings: dict) -> ChatOpenAI:
-    
-    return ChatOpenAI(
-        model = 'gpt-3.5-turbo-1106',
-        streaming = True,
-        temperature = settings['temperature'],
-    )
-    
-def summarize(query: str, documents: List[Document]) -> str:
-    """Summarizes a list of documents by extracting key points per parent document retrieved.
-
-    Args:
-        documents (List[Document]): The list of documents to summarize.
-
-    Returns:
-        str: The summary of the documents.
-    """
-    chunks = "\n\n".join([chunk.page_content + f"\nReference : {chunk.metadata['title']}, {chunk.metadata['paper_id']}" for chunk in documents])
-    SUMMARIZE_INSTRUCTIONS = """Given the following documents: {chunks}, summarize the key points per parent document. 
-    Summary:
-    """
-    
-    summary_chain = LLMChain(
-        llm = OpenAI(
-            model="gpt-3.5-turbo",
-            n=4,
-            best_of=4
-            ),
-        prompt = PromptTemplate(
-            template=SUMMARIZE_INSTRUCTIONS,
-            input_variables=["chunks"],
-            )
-    )
-    
-    summary = summary_chain.run({"chunks": chunks})
-    
-    return summary
-    
-def load_tools(vectordb: VectorStore, settings: dict) -> List[BaseTool]:
-    
-    # HYDE_PROMPT_TEMPLATE = """
-    # Please answer the user's questions regarding specific topics in the latest research papers in Arxiv.
-    # Questions: {question}
-    # Answer:
-    # """
-    # hyde_prompt = PromptTemplate(
-    #     template=HYDE_PROMPT_TEMPLATE,
-    #     input_variables=["question"],
-    #     )
-    
-    # hyde_chain = LLMChain(
-    #     llm = OpenAI(
-    #         model="gpt-3.5-turbo-instruct",
-    #         n=4,
-    #         best_of=4
-    #         ),
-    #     prompt = hyde_prompt
-    # )
-    
-    # embeddings = HypotheticalDocumentEmbedder(
-    #     llm_chain = hyde_chain,
-    #     base_embeddings = base_embeddings,
-    # )
-    
-
-    retriever = Retriever(
-                    vectordb=vectordb,
-                    fetch_k = settings['fetch_k'],
-                    k = settings['k'],
-                    )
-    
-    retriever_with_search = RetrieverWithSearch(
-                                    vectordb=vectordb,
-                                    pdf_parser=settings['pdf_parser'],
-                                    search_k=settings['search_k'],
-                                    fetch_k=settings['fetch_k'],
-                                    k=settings['k'],
-                                    chunk_size=settings['chunk_size'],
-                                    chunk_overlap=settings['chunk_overlap'],
-    )
-    
-    return [retriever, retriever_with_search]
-    
-    
-def load_bot(vectordb: VectorStore, settings: dict) -> AgentExecutor:
-    """
-    Loads the bot with the tools and the language model
-    
-    :return: the bot
-    :rtype: Agent
-    """
-    
-    tools: List[BaseTool] = load_tools(vectordb, settings)
-    llm = load_llm(settings)
-
-    memory = cl.user_session.get('memory')
-
-    agent: AgentExecutor = initialize_agent(
-        tools,
-        llm,
-        verbose=True,
-        agent = "chat-conversational-react-description",
-        agent_kwargs = {
-            'system_message': PREFIX,
-            'human_message': SUFFIX,
-            'format_instructions': FORMAT_INSTRUCTIONS,
-            },
-        
-        memory = memory,
-        handle_parsing_errors=True,
-        return_intermediate_steps=True
-        )
-        
-    
-    return agent
-
 @cl.on_settings_update
 async def on_settings_update(settings: dict):
-    vectordb: VectorStore = cl.user_session.get('vectordb') #type: ignore
-    bot = load_bot(vectordb, settings)
-    cl.user_session.set('bot', bot)
+    vectordb = cl.user_session.get('vectordb')
+    cl.user_session.set('settings', settings)
+    cl.user_session.set('pdf_processor', ProcessPDF(
+        vectordb, 
+        settings['pdf_parser'],
+        int(settings['chunk_size']),
+        int(settings['chunk_overlap'])))
+    
+    load_bot()
+    
 
 @cl.on_chat_start
 async def start():
-    # msg = cl.Message(content="Initializing bot...")
-    # await msg.send()
-    # msg.content = "Hi there! I am a bot that is very knowledgable in the latest research papers in Arxiv. Ask me anything!"
-    # await msg.update()
+
+    clear_pdf()
     
-    try:
-        shutil.rmtree("./pdfs")
-        shutil.rmtree("./output")
-        chromadb.PersistentClient(path="arxiv_vdb").delete_collection("arxiv")
-    except:
-        pass
-    
-    settings = await cl.ChatSettings(
-        [
-            TextInput(id="search_k", label="# of web search results", initial="5"),
-            TextInput(id="fetch_k", label="# of initial papers to fetch", initial="10"),
-            TextInput(id="k", label="# of papers for context", initial="3"),
-            TextInput(id="chunk_size", label="Chunk size", initial="1024"),
-            TextInput(id="chunk_overlap", label="Chunk overlap", initial="100"),
-            Slider(id="temperature", label="Temperature", min=0.0, max=1.0, step=0.1, initial=0.0),
-            Select(id = "pdf_parser", label = "Parser", values = ["PyMuPDF", "GROBID"], initial_index=0),
-            
-        ]
-    ).send()
-    
-    memory = ConversationBufferWindowMemory(memory_key='chat_history', 
-                                        input_key='input',
-                                        output_key='output',
-                                        return_messages=True,
-                                        k=5,
-                                        )
-    cl.user_session.set('memory', memory)
+    await init_chat_settings()
     
     COLLECTION_NAME = "arxiv"
     PERSIST_DIR = "arxiv_vdb"
     
-    os.makedirs(PERSIST_DIR, exist_ok=True)
-    
-    base_embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
-
-    vectordb = chroma.Chroma(
+    load_memory()
+    load_vectordb(
         collection_name=COLLECTION_NAME,
-        persist_directory=PERSIST_DIR,
-        embedding_function=base_embeddings)
-    cl.user_session.set('vectordb', vectordb)
+        persist_dir=PERSIST_DIR,
+    )
+    load_bot()
     
-    bot = load_bot(vectordb, settings)
-    cl.user_session.set('bot', bot)
+    files = None
+    ask_file_message = cl.AskFileMessage(
+        content = "If you have a specific paper in mind, please upload the PDF here. Otherwise, you can ask me anything!",
+        accept = [".pdf"],
+        max_size_mb = 10,
+        max_files = 10
+    )
+    files = await ask_file_message.send()
+    
+    if files:
+        await init_file_upload(ask_file_message, files)
 
-
+        
 @cl.on_message
 async def main(query):
-    # FINAL_ANSWER_PREFIX = '{\n    "action": "Final Answer",\n    "action_input": "'
     bot = cl.user_session.get('bot')
         
     response = await bot.acall(query.content) #type: ignore
@@ -230,6 +91,7 @@ async def main(query):
                     
     answer.elements = sources
     await answer.send()
+    
 # @cl.on_message
 # async def main(query):
 #     FINAL_ANSWER_PREFIX = '{\n    "action": "Final Answer",\n    "action_input": "'

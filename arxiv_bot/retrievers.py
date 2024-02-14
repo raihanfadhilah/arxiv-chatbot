@@ -9,7 +9,7 @@ from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain.prompts import PromptTemplate
 from typing import List, Type, Optional
 from arxiv_bot.search import IndexNewArxivPapers
-from pydantic import BaseModel, Field
+from langchain.pydantic_v1 import BaseModel, Field
 import chainlit as cl
 from typing import Literal, List
 import logging
@@ -18,7 +18,7 @@ logging.basicConfig()
 logging.getLogger("langchain.retrievers.multi_query").setLevel(logging.INFO)
 
 class RetrievalInput(BaseModel):
-    query: str = Field(..., title="Query", description="The query to use to find relevant documents.")
+    query: str = Field(title="Query", description="The query to use to find relevant documents.")
 
 # class Retriever(BaseTool):
 #     vectordb: VectorStore
@@ -224,7 +224,7 @@ class Retriever(BaseTool):
     k: int = 3
     name: str = "Retriever"
     description: str  = "Retriever that find documents from the vectorstore."
-    args_schema: Optional[Type[BaseModel]] = RetrievalInput
+    args_schema: Type[BaseModel] = RetrievalInput
     
     def _run(self, query: str) -> List[Document]:
         """
