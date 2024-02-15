@@ -90,3 +90,13 @@ module "container_apps_environment" {
   depends_on                       = [azurerm_resource_group.arxivchatbot-rg]
 }
 
+module "key_vault" {
+  source              = "./modules/key_vault"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  key_vault_name      = var.key_vault_name
+  tags                = var.tags
+  openai_api_key      = var.openai_api_key
+  google_api_key      = var.google_api_key
+  google_cse_id       = var.google_cse_id
+}

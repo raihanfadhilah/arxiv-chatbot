@@ -15,9 +15,7 @@ provider "azurerm" {
 data "azurerm_client_config" "current" {
 }
 
-module "chatbot" {
-    source = "./modules/chatbot"
-}
+
 
 module "grobid" {
     source = "./modules/grobid"
@@ -27,5 +25,16 @@ module "grobid" {
     acr_identity_name = var.acr_identity_name
     workload_identity_name = var.workload_identity_name
     container_app_config = var.grobid_config
+    tags = var.tags
+}
+module "chatbot" {
+    source = "./modules/chatbot"
+    resource_group_name = var.resource_group_name
+    container_app_environment_name = var.container_app_environment_name
+    container_registry_name = var.container_registry_name
+    acr_identity_name = var.acr_identity_name
+    workload_identity_name = var.workload_identity_name
+    container_app_config = var.chatbot_config
+    key_vault_name = var.key_vault_name
     tags = var.tags
 }

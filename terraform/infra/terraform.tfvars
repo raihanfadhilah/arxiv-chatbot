@@ -71,3 +71,5 @@ container_app_environment_config = {
   name                           = "arxivchatbot-app-environment"
   internal_load_balancer_enabled = false
 }
+key_vault_name = "arxivchatbot-key-vault"
+key_vault_sku  = "Standard"
