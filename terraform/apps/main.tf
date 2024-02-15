@@ -6,6 +6,13 @@ terraform {
       version = "~> 3.65"
     }
   }
+
+  backend "azurerm"{
+    resource_group_name = "arxivchatbot-rg"
+    storage_account_name = "arxivchatbot"
+    container_name = "tfstate"
+    key = "arxivchatbot/app.tfstate"
+  }
 }
 
 provider "azurerm" {
