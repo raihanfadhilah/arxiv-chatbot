@@ -9,3 +9,12 @@
 ############################# TERRAFORM ############################
 /terraform
 
+############################# MISC ############################
+/.gitignore
+/README.md
+docker-compose.yml
+Dockerfile
+.mypy_cache
+.chainlit
+.vscode
+__pycache__

@@ -13,7 +13,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 try:
-    load_dotenv()
+    load_dotenv(override=True)
 except:
     pass
 
@@ -32,14 +32,11 @@ async def on_settings_update(settings: dict):
 
 @cl.on_chat_start
 async def start():
-
-    clear_pdf()
-    
-    await init_chat_settings()
-    
     COLLECTION_NAME = "arxiv"
     PERSIST_DIR = "arxiv_vdb"
     
+    clear_pdf()
+    await init_chat_settings()
     load_memory()
     load_vectordb(
         collection_name=COLLECTION_NAME,
@@ -64,7 +61,7 @@ async def start():
 async def main(query):
     bot = cl.user_session.get('bot')
         
-    response = await bot.acall(query.content) #type: ignore
+    response = await bot.acall({"input": query.content}) #type: ignore
     answer = cl.Message(content=response['output'])
     intermediate_steps = response['intermediate_steps']
     

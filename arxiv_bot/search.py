@@ -1,22 +1,19 @@
 from bs4 import BeautifulSoup #type: ignore
-from dataclasses import dataclass
-from dotenv import load_dotenv
+from dotenv import load_dotenv 
 from grobid_client.grobid_client import GrobidClient #type: ignore
 from langchain.schema.document import Document
 from langchain.text_splitter import SpacyTextSplitter
-from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_community.utilities import GoogleSearchAPIWrapper
 from langchain_core.vectorstores import VectorStore
 from typing import  Literal
-import arxiv #type: ignore
-import chainlit as cl
+from typing import List, Union
+import arxiv  #type: ignore
 import chromadb
-import os
 import fitz #type: ignore
+import logging
+import os
 import re
 import time
-from typing import List, Union
-import logging
 
 logger_index_new_arxiv_papers = logging.getLogger("IndexNewArxivPapers")
 logger_index_new_arxiv_papers.setLevel(logging.INFO)
@@ -120,7 +117,7 @@ class TEIFile(object):
         :rtype: str
         """
         if not self._title:
-            self._title = self.soup.title.getText() #type: ignore
+            self._title = self.soup.title.getText() 
         return self._title
 
     @property
@@ -146,7 +143,7 @@ class TEIFile(object):
         :rtype: str
         """
         if not self._abstract:
-            abstract = self.soup.abstract.getText(separator=' ', strip=True) #type: ignore
+            abstract = self.soup.abstract.getText(separator=' ', strip=True) 
             self._abstract = abstract
         return self._abstract
 
@@ -158,7 +155,7 @@ class TEIFile(object):
         :return: A list of author names.
         :rtype: List[str]
         """
-        authors_in_header = self.soup.analytic.find_all('author') #type: ignore
+        authors_in_header = self.soup.analytic.find_all('author') 
 
         result = []
         for author in authors_in_header:
@@ -182,7 +179,7 @@ class TEIFile(object):
         """
         if not self._text:
             divs_text = []
-            for div in self.soup.body.find_all("div"): #type: ignore
+            for div in self.soup.body.find_all("div"): 
                 # div is neither an appendix nor references, just plain text.
                 if not div.get("type"):
                     text = div.getText(separator=': ', strip=True).replace("\n", "")
@@ -277,7 +274,11 @@ class ProcessPDF:
         """
         Constructor for the ProcessPDF object.
         """
-        self.grobid_client = GrobidClient(config_path="./grobid_client_python/config.json")
+        self.grobid_client = GrobidClient(
+            grobid_server=os.environ.get("GROBID_FQDN"),
+            sleep_time=0,
+            batch_size=10
+        )
         self.vectordb = vectordb
         self.parser = parser
         self.text_splitter = SpacyTextSplitter(
@@ -520,7 +521,7 @@ class IndexNewArxivPapers:
 
     google_api = GoogleSearchAPIWrapper()
     arxiv_client = arxiv.Client(delay_seconds=0)
-    chromadb_client = chromadb.PersistentClient("arxiv_vdb").get_collection("arxiv")
+    chromadb_client = chromadb.PersistentClient("arxiv_vdb").get_or_create_collection("arxiv")
 
     def __init__(
         self,

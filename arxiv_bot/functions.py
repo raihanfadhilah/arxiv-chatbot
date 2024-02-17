@@ -82,7 +82,7 @@ async def init_chat_settings():
                     "gpt-3.5-turbo-0613",
                     "gpt-3.5-turbo-16k-0613"
                 ], 
-                initial_value = "gpt-3.5-turbo-1106",
+                initial_value = os.environ.get("INIT_LLM"),
                 tooltip="The language model to use for the conversation. For more information, see https://platform.openai.com/docs/models/overview."
             ),
             Slider(id="temperature", label="Temperature", min=0.0, max=1.0, step=0.1, initial=0.0),
@@ -94,7 +94,7 @@ async def init_chat_settings():
                     "text-embedding-3-small",
                     "text-embedding-ada-002"
                 ],
-                initial_value = "text-embedding-ada-002",
+                initial_value = os.environ.get("INIT_EMBEDDING"),
                 tooltip="The embedding model to use for the vector database. For more information, see https://platform.openai.com/docs/models/overview."
             ),
             Slider(
@@ -123,14 +123,14 @@ async def init_chat_settings():
     ).send()
     cl.user_session.set('settings', settings)
 
-def load_memory() -> ConversationBufferWindowMemory:
+def load_memory():
     memory = ConversationBufferWindowMemory(memory_key='chat_history', 
                                     input_key='input',
                                     output_key='output',
                                     return_messages=True,
-                                    k=cl.user_session.get('settings')['k'],
+                                    k=cl.user_session.get('settings')['chat_history'],
                                     )
-    return memory
+    cl.user_session.set('memory', memory)
 
 def load_vectordb(
     persist_dir: str,
@@ -164,7 +164,6 @@ def load_bot():
     tools = load_tools()
     llm = load_llm()
     memory = cl.user_session.get('memory')
-
     agent = initialize_agent(
         tools,
         llm,

@@ -1,4 +1,29 @@
 #!/bin/bash
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --openai-api-key)
+            openai_api_key=$2
+            shift 2
+            ;;
+        --google-api-key)
+            google_api_key=$2
+            shift 2
+            ;;
+        --google-cse-id)
+            google_cse_id=$2
+            shift 2
+            ;;
+        *)
+            echo "Invalid argument: $1"
+            exit 1
+            ;;
+    esac
+done
+
+if [[ -z $openai_api_key || -z $google_api_key || -z $google_cse_id ]]; then
+    echo "Usage: $0 --openai_api_key <OpenAI API Key> --google_api_key <Google API Key> --google_cse_id <Google CSE ID>"
+    exit 1
+fi
 
 # Assign arguments to variables
 resourceGroupName="arxivchatbot-rg"
@@ -42,8 +67,8 @@ terraform init
 terraform fmt -recursive
 terraform validate
 terraform plan -out tfplan \
--var "openai_api_key=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" \
--var "google_api_key=AIzaSyC4_47M3njDIco0nL-r0f8IqBhOtNeFy0k" \
--var "google_cse_id=805b71f9cef6d4b64"
+-var "openai_api_key=$openai_api_key" \
+-var "google_api_key=$google_api_key" \
+-var "google_cse_id=$google_cse_id"
 terraform apply -auto-approve tfplan
 echo "Deployment complete."
