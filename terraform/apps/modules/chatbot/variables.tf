@@ -31,6 +31,7 @@ variable "key_vault_name" {
 variable "grobid_fqdn" {
   description = "The fully qualified domain name of the GROBID container app"
   type        = string
+  sensitive   = true
 }
 
 variable "container_app_config" {

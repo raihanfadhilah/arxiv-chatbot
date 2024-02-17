@@ -66,8 +66,8 @@ hide_cot = false
 
     [UI.theme.light.primary]
         main = "#ab152d"
-        dark = "#980039"
-        light = "#FFE7EB"
+        dark = "#ab152d"
+        light = "#ab152d"
 
 # Override default MUI dark theme. (Check theme.ts)
 [UI.theme.dark]
@@ -76,8 +76,8 @@ hide_cot = false
 
     [UI.theme.dark.primary]
         main = "#ab152d"
-        dark = "#980039"
-        light = "#FFE7EB"
+        dark = "#ab152d"
+        light = "#ab152d"
 
 
 [meta]

@@ -53,8 +53,8 @@ resource "azurerm_container_app" "chatbot" {
       memory = var.container_app_config.template.container.memory
 
       env {
-        name  = "GROBID_FQDN"
-        value = var.grobid_fqdn
+        name        = "GROBID_FQDN"
+        secret_name = "grobid-fqdn"
       }
 
       env {
@@ -141,6 +141,11 @@ resource "azurerm_container_app" "chatbot" {
   }
 
   secret {
+    name  = "grobid-fqdn"
+    value = var.grobid_fqdn
+  }
+
+  secret {
     name  = data.azurerm_key_vault_secret.openai-api-key.name
     value = data.azurerm_key_vault_secret.openai-api-key.value
   }
@@ -154,4 +159,5 @@ resource "azurerm_container_app" "chatbot" {
     name  = data.azurerm_key_vault_secret.google-cse-id.name
     value = data.azurerm_key_vault_secret.google-cse-id.value
   }
+
 }

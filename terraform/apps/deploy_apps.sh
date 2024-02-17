@@ -42,6 +42,6 @@ fi
 terraform init
 terraform fmt -recursive
 terraform validate
-terraform plan -out tfplan 
+terraform plan -replace="module.chatbot.azurerm_container_app.chatbot" -out tfplan 
 terraform apply -auto-approve tfplan
 echo "Deployment complete."

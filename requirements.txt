@@ -122,6 +122,7 @@ pydantic==2.6.1
 pydantic_core==2.16.2
 pydot==2.0.0
 PyJWT==2.8.0
+PyMuPDF==1.23.22
 PyMuPDFb==1.23.22
 pyparsing==3.1.1
 PyPika==0.48.9

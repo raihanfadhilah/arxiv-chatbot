@@ -117,7 +117,7 @@ chatbot_config = {
   }
 
   ingress = {
-    allow_insecure_connections = false
+    allow_insecure_connections = true
     external_enabled           = true
     target_port                = 8000
     transport                  = "http"

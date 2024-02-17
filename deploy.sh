@@ -26,7 +26,7 @@ fi
 
 pip freeze > requirements.txt
 
-# ## dir: .
+## dir: .
 echo -e "######################### Login to Azure Container Registry #########################"
 docker login arxivchatbotregistry.azurecr.io
 
@@ -43,7 +43,7 @@ cd terraform/infra
 # dir: terraform/infra
 echo -e "\n\n######################### Deploying Infrastructure #########################"
 chmod +x deploy_infra.sh
-./deploy_infra.sh --openai-api-key ${openai_api_key} --google-api-key ${google_api_key} --google-cse-id ${google_cse_id}
+./deploy_infra.sh --openai-api-key $openai_api_key --google-api-key $google_api_key --google-cse-id $google_cse_id
 cd ../apps
 
 # dir: terraform/apps
