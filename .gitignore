@@ -53,7 +53,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-############################# MISC ############################
+############################# MISC #############################
 .mypy_cache
 .chainlit
 .vscode
