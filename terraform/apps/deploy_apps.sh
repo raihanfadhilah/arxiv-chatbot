@@ -44,4 +44,18 @@ terraform fmt -recursive
 terraform validate
 terraform plan -replace="module.chatbot.azurerm_container_app.chatbot" -out tfplan 
 terraform apply -auto-approve tfplan
-echo "Deployment complete."
+FQDN="https://$(terraform show -json | jq -r '.values.root_module.child_modules[] |
+ select(.address == "module.chatbot") |
+  .resources[] |
+   select(.address == "module.chatbot.azurerm_container_app.chatbot").values.latest_revision_fqdn' | 
+   sed 's/--[a-zA-Z0-9]*//')"
+
+LIGHT_GREEN='\033[92m'
+RED='\033[41m'
+
+# Check if the deployment was successful
+if [ $? -eq 0 ]; then
+    echo -e "\n\n${LIGHT_GREEN}Deployment Complete. FQDN: ${FQDN}"
+else
+    echo -e "\n\n${RED}Deployment Failed."
+fi
