@@ -10,7 +10,6 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y git && \
     pip install -r requirements.txt --no-cache-dir 
-    # && pip install -e ./grobid_client_python 
 
 EXPOSE 8000
 

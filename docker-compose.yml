@@ -8,8 +8,6 @@ services:
     depends_on:
       - grobid-service
 
-
-
   grobid-service:
     image: lfoppiano/grobid:0.8.0
     ports:

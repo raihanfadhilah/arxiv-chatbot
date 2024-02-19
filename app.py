@@ -44,17 +44,36 @@ async def start():
     )
     load_bot()
     
-    files = None
-    ask_file_message = cl.AskFileMessage(
-        content = "If you have a specific paper in mind, please upload the PDF here. Otherwise, you can ask me anything!",
-        accept = [".pdf"],
-        max_size_mb = 10,
-        max_files = 10
+    ## Ask user if they want to upload a file.
+    init_msg = cl.AskActionMessage(
+        content = "Welcome to arXiv AI Research Assistant! Would you like to upload some papers?",
+        actions = [
+            cl.Action(name = 'Yes', value = 'Yes', label='✅ Yes'),
+            cl.Action(name = 'No', value = 'No', label = '❌ No')
+        ]
     )
-    files = await ask_file_message.send()
     
-    if files:
-        await init_file_upload(ask_file_message, files)
+    upload_bool = await init_msg.send()
+    
+    
+    if upload_bool and upload_bool.get("value") == 'Yes':
+        
+        files = None
+        ask_file_message = cl.AskFileMessage(
+            content = "Please upload the papers here.",
+            accept = [".pdf"],
+            max_size_mb = 10,
+            max_files = 10
+        )
+        files = await ask_file_message.send()
+        
+        if files:
+            await init_file_upload(ask_file_message, files)
+    
+    else:
+        init_msg.content = "No worries! Ask me anything regarding a specific topic found on arXiv papers and I'll try my best to answer!"
+        init_msg.actions = []
+        await init_msg.update()
 
         
 @cl.on_message
@@ -65,6 +84,7 @@ async def main(query):
     answer = cl.Message(content=response['output'])
     intermediate_steps = response['intermediate_steps']
     
+    # Get sources
     sources = []
     if len(intermediate_steps) > 0:
         for step in intermediate_steps:
