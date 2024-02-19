@@ -57,5 +57,5 @@ RED='\033[41m'
 if [ $? -eq 0 ]; then
     echo -e "\n\n${LIGHT_GREEN}Deployment Complete. FQDN: ${FQDN}"
 else
-    echo -e "\n\n${RED}Deployment Failed."
+    echo -e "\n\n${RED}Deployment Failed. Please reconfigure"
 fi
