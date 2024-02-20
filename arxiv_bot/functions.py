@@ -28,45 +28,48 @@ def clear_pdf():
         chromadb.PersistentClient(path="arxiv_vdb").delete_collection("arxiv")
     except:
         pass
-    
+
+
 def load_llm() -> ChatOpenAI:
-    
-    settings = cl.user_session.get('settings')
+
+    settings = cl.user_session.get("settings")
     return ChatOpenAI(
-        model = settings['llm_model'],
-        streaming = True,
-        temperature = float(settings['temperature']),
+        model=settings["llm_model"],
+        streaming=True,
+        temperature=float(settings["temperature"]),
     )
-    
+
+
 def load_tools() -> List[BaseTool]:
-    
-    settings = cl.user_session.get('settings')
-    vectordb = cl.user_session.get('vectordb')
-    
+
+    settings = cl.user_session.get("settings")
+    vectordb = cl.user_session.get("vectordb")
+
     retriever = Retriever(
-                    vectordb=vectordb,
-                    fetch_k = int(settings['fetch_k']),
-                    k = int(settings['k']),
-                    )
-    
-    retriever_with_search = RetrieverWithSearch(
-                                    vectordb=vectordb,
-                                    pdf_parser=settings['pdf_parser'],
-                                    search_k=int(settings['search_k']),
-                                    fetch_k=int(settings['fetch_k']),
-                                    k=int(settings['k']),
-                                    chunk_size=int(settings['chunk_size']),
-                                    chunk_overlap=int(settings['chunk_overlap']),
+        vectordb=vectordb,
+        fetch_k=int(settings["fetch_k"]),
+        k=int(settings["k"]),
     )
-    
+
+    retriever_with_search = RetrieverWithSearch(
+        vectordb=vectordb,
+        pdf_parser=settings["pdf_parser"],
+        search_k=int(settings["search_k"]),
+        fetch_k=int(settings["fetch_k"]),
+        k=int(settings["k"]),
+        chunk_size=int(settings["chunk_size"]),
+        chunk_overlap=int(settings["chunk_overlap"]),
+    )
+
     return [retriever, retriever_with_search]
+
 
 async def init_chat_settings():
     settings = await cl.ChatSettings(
         [
             Select(
-                id='llm_model',
-                label='Language Model',
+                id="llm_model",
+                label="Language Model",
                 values=[
                     "gpt-4-0125-preview",
                     "gpt-4-turbo-preview",
@@ -81,22 +84,29 @@ async def init_chat_settings():
                     "gpt-3.5-turbo-instruct",
                     "gpt-3.5-turbo-16k",
                     "gpt-3.5-turbo-0613",
-                    "gpt-3.5-turbo-16k-0613"
-                ], 
-                initial_value = os.environ.get("INIT_LLM"),
-                tooltip="The language model to use for the conversation. For more information, see https://platform.openai.com/docs/models/overview."
+                    "gpt-3.5-turbo-16k-0613",
+                ],
+                initial_value=os.environ.get("INIT_LLM"),
+                tooltip="The language model to use for the conversation. For more information, see https://platform.openai.com/docs/models/overview.",
             ),
-            Slider(id="temperature", label="Temperature", min=0.0, max=1.0, step=0.1, initial=0.0),
+            Slider(
+                id="temperature",
+                label="Temperature",
+                min=0.0,
+                max=1.0,
+                step=0.1,
+                initial=0.0,
+            ),
             Select(
-                id='embedding_model',
-                label='Embedding Model',
+                id="embedding_model",
+                label="Embedding Model",
                 values=[
                     "text-embedding-3-large",
                     "text-embedding-3-small",
-                    "text-embedding-ada-002"
+                    "text-embedding-ada-002",
                 ],
-                initial_value = os.environ.get("INIT_EMBEDDING"),
-                tooltip="The embedding model to use for the vector database. For more information, see https://platform.openai.com/docs/models/overview."
+                initial_value=os.environ.get("INIT_EMBEDDING"),
+                tooltip="The embedding model to use for the vector database. For more information, see https://platform.openai.com/docs/models/overview.",
             ),
             Slider(
                 id="chat_history",
@@ -105,147 +115,168 @@ async def init_chat_settings():
                 max=10,
                 step=1,
                 initial=5,
-                tooltip="The number of previous messages to consider for context."
+                tooltip="The number of previous messages to consider for context.",
             ),
             TextInput(id="search_k", label="# of web search results", initial="5"),
             Select(
-                id = "pdf_parser",
-                label = "Parser",
-                values = ["PyMuPDF", "GROBID"],
+                id="pdf_parser",
+                label="Parser",
+                values=["PyMuPDF", "GROBID"],
                 initial_index=0,
-                tooltip="The parser to use for extracting text from PDFs. PyMuPDF: Faster, but less accurate. GROBID: Slower, but more accurate."
+                tooltip="The parser to use for extracting text from PDFs. PyMuPDF: Faster, but less accurate. GROBID: Slower, but more accurate.",
             ),
             TextInput(id="fetch_k", label="# of initial papers to fetch", initial="10"),
             TextInput(id="k", label="# of papers for context", initial="3"),
             TextInput(id="chunk_size", label="Chunk size", initial="1024"),
             TextInput(id="chunk_overlap", label="Chunk overlap", initial="100"),
-            
         ]
     ).send()
-    cl.user_session.set('settings', settings)
+    cl.user_session.set("settings", settings)
+
 
 def load_memory():
-    memory = ConversationBufferWindowMemory(memory_key='chat_history', 
-                                    input_key='input',
-                                    output_key='output',
-                                    return_messages=True,
-                                    k=cl.user_session.get('settings')['chat_history'],
-                                    )
-    cl.user_session.set('memory', memory)
+    memory = ConversationBufferWindowMemory(
+        memory_key="chat_history",
+        input_key="input",
+        output_key="output",
+        return_messages=True,
+        k=cl.user_session.get("settings")["chat_history"],
+    )
+    cl.user_session.set("memory", memory)
+
 
 def load_vectordb(
     persist_dir: str,
     collection_name: str,
-    ):
+):
     os.makedirs(persist_dir, exist_ok=True)
-    
-    embedding_model = cl.user_session.get('settings')['embedding_model']
+
+    embedding_model = cl.user_session.get("settings")["embedding_model"]
     base_embeddings = OpenAIEmbeddings(model=embedding_model)
-    
+
     # _ = chromadb.PersistentClient(persist_dir).create_collection(collection_name)
-    
+
     vectordb = chroma.Chroma(
         collection_name=collection_name,
         persist_directory=persist_dir,
-        embedding_function=base_embeddings)
-    cl.user_session.set('vectordb', vectordb)
+        embedding_function=base_embeddings,
+    )
+    cl.user_session.set("vectordb", vectordb)
 
 
 def load_bot():
     """
     Loads the bot with the tools and the language model
-    
+
     :param vectordb: the vector database
     :type vectordb: VectorStore
     :param settings: chat settings
     :type settings: dict[str, Any]
-    
+
     :return: the bot
     :rtype: Agent
     """
-    
+
     tools = load_tools()
     llm = load_llm()
-    memory = cl.user_session.get('memory')
+    memory = cl.user_session.get("memory")
     agent = initialize_agent(
         tools,
         llm,
         verbose=True,
-        agent = "chat-conversational-react-description",
-        agent_kwargs = {
-            'system_message': PREFIX,
-            'human_message': SUFFIX,
-            'format_instructions': FORMAT_INSTRUCTIONS,
-            },
-        memory = memory,
+        agent="chat-conversational-react-description",
+        agent_kwargs={
+            "system_message": PREFIX,
+            "human_message": SUFFIX,
+            "format_instructions": FORMAT_INSTRUCTIONS,
+        },
+        memory=memory,
         handle_parsing_errors=True,
-        return_intermediate_steps=True
-        )
-        
-    cl.user_session.set('bot', agent)
+        return_intermediate_steps=True,
+    )
+
+    cl.user_session.set("bot", agent)
     # return agent
+
 
 async def init_file_upload(
     ask_file_message: AskFileMessage,
     files: List[AskFileResponse],
-    ):
-    
-    settings = cl.user_session.get('settings')
-    vectordb = cl.user_session.get('vectordb')
-    
-    async with cl.Step(name = "PDF Processor", show_input=True) as step:
-        
-        step.elements = [cl.Text(name = "PDFs:", content = "\n".join(["- " + file.name for file in files]), display='inline')]
+):
+
+    settings = cl.user_session.get("settings")
+    vectordb = cl.user_session.get("vectordb")
+
+    async with cl.Step(name="PDF Processor", show_input=True) as step:
+
+        step.elements = [
+            cl.Text(
+                name="PDFs:",
+                content="\n".join(["- " + file.name for file in files]),
+                display="inline",
+            )
+        ]
         await step.update()
-        
-        cl.user_session.set('pdf_processor', ProcessPDF(
-            vectordb, 
-            settings['pdf_parser'],
-            int(settings['chunk_size']),
-            int(settings['chunk_overlap']))
+
+        cl.user_session.set(
+            "pdf_processor",
+            ProcessPDF(
+                vectordb,
+                settings["pdf_parser"],
+                int(settings["chunk_size"]),
+                int(settings["chunk_overlap"]),
+            ),
         )
-    
+
         os.makedirs("./pdfs", exist_ok=True)
         for file in files:
             os.rename(file.path, f"./pdfs/{file.name}")
             file.path = f"./pdfs/{file.name}"
 
-        process_pdf = cl.user_session.get('pdf_processor')            
+        process_pdf = cl.user_session.get("pdf_processor")
         await cl.make_async(process_pdf.process)([file.path for file in files])
-            
+
         ask_file_message.content = "Finished processing PDFs. Ask me anything!"
-        await ask_file_message.update()   
-    
-    
+        await ask_file_message.update()
+
+
 async def process_pdf_upload(files: List[ElementBased]):
-    if not all([file.mime == 'application/pdf' for file in files]):
+    if not all([file.mime == "application/pdf" for file in files]):
         raise ValueError("All files have to be PDFs.")
-    
-    settings = cl.user_session.get('settings')
-    vectordb = cl.user_session.get('vectordb')
-    
-    async with cl.Step(name = "PDF Processor", show_input=True) as step:
-        
-        step.elements = [cl.Text(name = "PDFs:", content = "\n".join(["- " + file.name for file in files]), display='inline')]
+
+    settings = cl.user_session.get("settings")
+    vectordb = cl.user_session.get("vectordb")
+
+    async with cl.Step(name="PDF Processor", show_input=True) as step:
+
+        step.elements = [
+            cl.Text(
+                name="PDFs:",
+                content="\n".join(["- " + file.name for file in files]),
+                display="inline",
+            )
+        ]
         await step.update()
-        
-        cl.user_session.set('pdf_processor', ProcessPDF(
-            vectordb, 
-            settings['pdf_parser'],
-            int(settings['chunk_size']),
-            int(settings['chunk_overlap']))
+
+        cl.user_session.set(
+            "pdf_processor",
+            ProcessPDF(
+                vectordb,
+                settings["pdf_parser"],
+                int(settings["chunk_size"]),
+                int(settings["chunk_overlap"]),
+            ),
         )
-        print(settings['pdf_parser'])
-    
+        print(settings["pdf_parser"])
+
         for file in files:
             os.rename(str(file.path), f"./pdfs/{file.name}")
             file.path = f"./pdfs/{file.name}"
 
-        process_pdf = cl.user_session.get('pdf_processor')            
+        process_pdf = cl.user_session.get("pdf_processor")
         await cl.make_async(process_pdf.process)([file.path for file in files])
-            
-        
-    
+
+
 # def summarize(query: str, documents: List[Document]) -> str:
 #     """Summarizes a list of documents by extracting key points per parent document retrieved.
 
@@ -256,10 +287,10 @@ async def process_pdf_upload(files: List[ElementBased]):
 #         str: The summary of the documents.
 #     """
 #     chunks = "\n\n".join([chunk.page_content + f"\nReference : {chunk.metadata['title']}, {chunk.metadata['paper_id']}" for chunk in documents])
-#     SUMMARIZE_INSTRUCTIONS = """Given the following documents: {chunks}, summarize the key points per parent document. 
+#     SUMMARIZE_INSTRUCTIONS = """Given the following documents: {chunks}, summarize the key points per parent document.
 #     Summary:
 #     """
-    
+
 #     summary_chain = LLMChain(
 #         llm = OpenAI(
 #             model="gpt-3.5-turbo",
@@ -271,7 +302,7 @@ async def process_pdf_upload(files: List[ElementBased]):
 #             input_variables=["chunks"],
 #             )
 #     )
-    
+
 #     summary = summary_chain.run({"chunks": chunks})
-    
+
 #     return summary

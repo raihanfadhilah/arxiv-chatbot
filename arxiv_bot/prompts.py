@@ -32,7 +32,7 @@ FORMAT_INSTRUCTIONS = """RESPONSE FORMAT INSTRUCTIONS
     }}}}
     
     """
-    
+
 SUFFIX = """TOOLS
     ------
     Assistant can ask the user to use tools to look up information that may be helpful in answering the users original question. The tools the human can use are:
@@ -73,11 +73,11 @@ SUFFIX = """TOOLS
     
     """
 
-    # TEMPLATE_TOOL_RESPONSE = """TOOL RESPONSE: 
-    # ---------------------
-    # {observation}
+# TEMPLATE_TOOL_RESPONSE = """TOOL RESPONSE:
+# ---------------------
+# {observation}
 
-    # USER'S INPUT
-    # --------------------
+# USER'S INPUT
+# --------------------
 
-    # Okay, so what is the response to my last comment? If using information obtained from the tools you must mention it explicitly without mentioning the tool names - I have forgotten all TOOL RESPONSES! Remember to respond with a markdown code snippet of a $JSON_BLOB with a single action, and NOTHING else."""
+# Okay, so what is the response to my last comment? If using information obtained from the tools you must mention it explicitly without mentioning the tool names - I have forgotten all TOOL RESPONSES! Remember to respond with a markdown code snippet of a $JSON_BLOB with a single action, and NOTHING else."""
