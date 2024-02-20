@@ -301,7 +301,7 @@ class ProcessPDF:
         else:
             return "".join(result[0])
         
-    def _extract_metadata(self, paper: str) -> dict:
+    def _extract_metadata(self, list_of_files: List[str]) -> List[dict[str,str]]:
         """
         Extract metadata from a PDF document using GROBID.
 
@@ -311,25 +311,58 @@ class ProcessPDF:
         :return: A dictionary containing the extracted metadata.
         :rtype: dict
         """
-        filename = paper.split("/")[-1].replace('.pdf', '')
-        entry_id = self._get_id_from_str(filename)
+        # filenames = [paper.split("/")[-1].replace('.pdf', '') for paper in list_of_files]
+        # entry_ids = [self._get_id_from_str(filename) for filename in filenames]
         
-        new_path = ""
-        if self.parser == "PyMuPDF":
-            old_path = f"./output/{entry_id}.grobid.tei.xml"
-            new_path = f"./output/{entry_id}.header.grobid.tei.xml"
-            os.rename(old_path, new_path)
-        elif self.parser == "GROBID":
-            new_path = f"./output/{entry_id}.grobid.tei.xml"
-        
-        tei_object = TEIFile(new_path)
-        return {
-            'paper_id': entry_id,
-            'title': tei_object.title, 
-            'authors': ", ".join([author for author in tei_object.authors]),
-            'date': tei_object.published,
-            'abstract': tei_object.abstract
-        }
+        files_to_process = []
+        for file in list_of_files:
+            filename = file.split("/")[-1].replace('pdf', '')
+            entry_id = self._get_id_from_str(filename)
+            if not os.path.exists(f"./output/{entry_id}.grobid.tei.xml"):
+                files_to_process.append(file)
+            else:
+                continue
+        if not files_to_process == []:
+            self.grobid_client.process_batch(
+                service="processHeaderDocument",
+                input_files=files_to_process,
+                input_path=os.path.dirname(files_to_process[0]),
+                output=f"./output/",
+                generateIDs=False,
+                n=10,
+                consolidate_header=False,
+                consolidate_citations=False,
+                include_raw_citations=False,
+                include_raw_affiliations=False,
+                tei_coordinates=False,
+                segment_sentences=False,
+                force=True,
+                verbose=False,
+            )
+        else: pass
+            
+        metadatas = []
+        for paper in list_of_files:
+            filename = paper.split("/")[-1].replace('.pdf', '')
+            entry_id = self._get_id_from_str(filename)
+            
+            new_path = ""
+            if self.parser == "PyMuPDF":
+                old_path = f"./output/{entry_id}.grobid.tei.xml"
+                new_path = f"./output/{entry_id}.header.grobid.tei.xml"
+                os.rename(old_path, new_path)
+            elif self.parser == "GROBID":
+                new_path = f"./output/{entry_id}.grobid.tei.xml"
+            
+            tei_object = TEIFile(new_path)
+            metadatas.append({
+                'paper_id': entry_id,
+                'title': tei_object.title, 
+                'authors': ", ".join([author for author in tei_object.authors]),
+                'date': tei_object.published,
+                'abstract': tei_object.abstract
+            })
+        return metadatas
         
     def _process_pymupdf(
         self,
@@ -345,33 +378,16 @@ class ProcessPDF:
         :return: A list of Document objects containing the processed content and metadata.
         :rtype: List[Document]
         """
-        docs = []
-        self.grobid_client.process_batch(
-            service="processHeaderDocument",
-            input_files=pdf_path,
-            input_path=os.path.dirname(pdf_path[0]),
-            output=f"./output/",
-            generateIDs=False,
-            n=10,
-            consolidate_header=False,
-            consolidate_citations=False,
-            include_raw_citations=False,
-            include_raw_affiliations=False,
-            tei_coordinates=False,
-            segment_sentences=False,
-            force=True,
-            verbose=False,
-        )
         
+        if not metadatas:
+            metadatas = self._extract_metadata(pdf_path)
+        
+        docs = []
         for idx, paper in enumerate(pdf_path):                               
             text = PyMuPDFParser(paper).process()
             chunks = self.text_splitter.split_text(text)
+            metadata = metadatas[idx]
             
-            metadata = {}
-            if not metadatas:
-                metadata = self._extract_metadata(paper)
-            else:
-                metadata = metadatas[idx]
                 
             for i, chunk in enumerate(chunks):
                 metadata['chunk_id'] = f"{metadata['paper_id']}-{i}"
@@ -417,18 +433,16 @@ class ProcessPDF:
         while not all([os.path.exists(f"./output/{paper.split('/')[-1].replace('.pdf', '')}.grobid.tei.xml") for paper in pdf_path]):
             time.sleep(1)
         
+        if not metadatas:
+            metadatas = self._extract_metadata(pdf_path)
+        
         docs = []
         for idx, paper in enumerate(pdf_path):
             filename = paper.split("/")[-1].replace('.pdf', '')
             id = self._get_id_from_str(filename)
             tei_object = TEIFile(f'./output/{id}.grobid.tei.xml')
-            chunks = self.text_splitter.split_text(tei_object.text)
-            
-            metadata = {}
-            if not metadatas:
-                metadata = self._extract_metadata(paper)
-            else:
-                metadata = metadatas[idx]
+            chunks = self.text_splitter.split_text(tei_object.text)          
+            metadata = metadatas[idx]
                 
             for i, chunk in enumerate(chunks):
                 metadata['chunk_id'] = f"{metadata['paper_id']}-{i}"
@@ -521,8 +535,6 @@ class IndexNewArxivPapers:
 
     google_api = GoogleSearchAPIWrapper()
     arxiv_client = arxiv.Client(delay_seconds=0)
-    chromadb_client = chromadb.PersistentClient("arxiv_vdb").get_or_create_collection("arxiv")
-
     def __init__(
         self,
         vectordb: VectorStore,
@@ -537,6 +549,7 @@ class IndexNewArxivPapers:
         self.vectordb = vectordb
         self.n_search_results = n_search_results
         self.chunk_size = chunk_size
+        self.chromadb_client = chromadb.PersistentClient('arxiv_vdb').get_collection('arxiv')
         self.chunk_overlap = chunk_overlap
         self.pdf_parser = pdf_parser
 
@@ -578,13 +591,14 @@ class IndexNewArxivPapers:
         self.ids = self._get_paper_ids(query)
         os.makedirs(f"./output", exist_ok=True)
         os.makedirs(f"./pdfs", exist_ok=True)
+        print(self.chromadb_client)
 
         for id in self.ids:
             if len(self.chromadb_client.get(where={"paper_id": id})["ids"]) > 0:
                 self.ids.remove(id)
             else:
                 continue
-
+                    
         papers = list(self.arxiv_client.results(arxiv.Search(id_list=self.ids)))
         metadatas = []
         for paper in papers:

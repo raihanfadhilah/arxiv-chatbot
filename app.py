@@ -1,6 +1,7 @@
 from arxiv_bot.functions import (
     clear_pdf,
     init_file_upload,
+    process_pdf_upload,
     load_bot,
     load_memory,
     load_vectordb,
@@ -9,6 +10,7 @@ from arxiv_bot.functions import (
 from arxiv_bot.search import ProcessPDF
 from dotenv import load_dotenv
 import chainlit as cl
+import os
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -36,6 +38,8 @@ async def start():
     PERSIST_DIR = "arxiv_vdb"
     
     clear_pdf()
+    os.makedirs("./pdfs", exist_ok=True)
+    os.makedirs("./output", exist_ok=True)
     await init_chat_settings()
     load_memory()
     load_vectordb(
@@ -44,42 +48,45 @@ async def start():
     )
     load_bot()
     
-    ## Ask user if they want to upload a file.
-    init_msg = cl.AskActionMessage(
-        content = "Welcome to arXiv AI Research Assistant! Would you like to upload some papers?",
-        actions = [
-            cl.Action(name = 'Yes', value = 'Yes', label='✅ Yes'),
-            cl.Action(name = 'No', value = 'No', label = '❌ No')
-        ]
-    )
+    # ## Ask user if they want to upload a file.
+    # init_msg = cl.AskActionMessage(
+    #     content = "Welcome to arXiv AI Research Assistant! Would you like to upload some papers?",
+    #     actions = [
+    #         cl.Action(name = 'Yes', value = 'Yes', label='✅ Yes'),
+    #         cl.Action(name = 'No', value = 'No', label = '❌ No')
+    #     ]
+    # )
     
-    upload_bool = await init_msg.send()
+    # upload_bool = await init_msg.send()
     
     
-    if upload_bool and upload_bool.get("value") == 'Yes':
+    # if upload_bool and upload_bool.get("value") == 'Yes':
         
-        files = None
-        ask_file_message = cl.AskFileMessage(
-            content = "Please upload the papers here.",
-            accept = [".pdf"],
-            max_size_mb = 10,
-            max_files = 10
-        )
-        files = await ask_file_message.send()
+    #     files = None
+    #     ask_file_message = cl.AskFileMessage(
+    #         content = "Please upload the papers here.",
+    #         accept = [".pdf"],
+    #         max_size_mb = 10,
+    #         max_files = 10
+    #     )
+    #     files = await ask_file_message.send()
         
-        if files:
-            await init_file_upload(ask_file_message, files)
+    #     if files:
+    #         await init_file_upload(ask_file_message, files)
     
-    else:
-        init_msg.content = "No worries! Ask me anything regarding a specific topic found on arXiv papers and I'll try my best to answer!"
-        init_msg.actions = []
-        await init_msg.update()
+    # else:
+    #     init_msg.content = "No worries! Ask me anything regarding a specific topic found on arXiv papers and I'll try my best to answer!"
+    #     init_msg.actions = []
+    #     await init_msg.update()
 
         
 @cl.on_message
-async def main(query):
+async def main(query: cl.Message):
     bot = cl.user_session.get('bot')
-        
+    
+    if query.elements:    
+        await process_pdf_upload([file for file in query.elements if file.mime == 'application/pdf'])
+    
     response = await bot.acall({"input": query.content}) #type: ignore
     answer = cl.Message(content=response['output'])
     intermediate_steps = response['intermediate_steps']
@@ -106,7 +113,7 @@ async def main(query):
                         cl.Text(name = metadata['title'], content = f"arXiv ID: {id}\nLink: {metadata['link']}", display='inline')
                     )    
                     
-    answer.elements = sources
+    answer.elements = sources #type: ignore
     await answer.send()
     
 # @cl.on_message

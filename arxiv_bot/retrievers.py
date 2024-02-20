@@ -289,13 +289,13 @@ class Retriever(BaseTool):
                 )
             
             documents = await retriever.aget_relevant_documents(query)
-            retrieved_information = "Retrieved the following documents:\n"
-            for idx, doc in enumerate(documents):
-                text = doc.page_content
-                ref = f"\n\n{idx+1}. {doc.metadata['title']}, arXiv ID: {doc.metadata['paper_id']}:\n"
-                retrieved_information += ref + text
+            
+            elements = []
+            for doc in documents:
+                elements.append(cl.Text(name = doc.metadata['title'], content = doc.page_content, display = 'inline'))
                 
-            step.output = retrieved_information
+            step.elements = elements
+            step.update()
             
         return documents
 

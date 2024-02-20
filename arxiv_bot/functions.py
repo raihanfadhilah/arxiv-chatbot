@@ -4,6 +4,7 @@ from arxiv_bot.search import ProcessPDF
 from chainlit.input_widget import Slider, Select, TextInput
 from chainlit.message import AskFileMessage
 from chainlit.types import AskFileResponse
+from chainlit.element import ElementBased
 from langchain.agents import initialize_agent
 from langchain.memory import ConversationBufferWindowMemory
 from langchain.vectorstores import chroma, VectorStore
@@ -140,7 +141,9 @@ def load_vectordb(
     
     embedding_model = cl.user_session.get('settings')['embedding_model']
     base_embeddings = OpenAIEmbeddings(model=embedding_model)
-
+    
+    # _ = chromadb.PersistentClient(persist_dir).create_collection(collection_name)
+    
     vectordb = chroma.Chroma(
         collection_name=collection_name,
         persist_directory=persist_dir,
@@ -213,6 +216,35 @@ async def init_file_upload(
         ask_file_message.content = "Finished processing PDFs. Ask me anything!"
         await ask_file_message.update()   
     
+    
+async def process_pdf_upload(files: List[ElementBased]):
+    if not all([file.mime == 'application/pdf' for file in files]):
+        raise ValueError("All files have to be PDFs.")
+    
+    settings = cl.user_session.get('settings')
+    vectordb = cl.user_session.get('vectordb')
+    
+    async with cl.Step(name = "PDF Processor", show_input=True) as step:
+        
+        step.elements = [cl.Text(name = "PDFs:", content = "\n".join(["- " + file.name for file in files]), display='inline')]
+        await step.update()
+        
+        cl.user_session.set('pdf_processor', ProcessPDF(
+            vectordb, 
+            settings['pdf_parser'],
+            int(settings['chunk_size']),
+            int(settings['chunk_overlap']))
+        )
+        print(settings['pdf_parser'])
+    
+        for file in files:
+            os.rename(str(file.path), f"./pdfs/{file.name}")
+            file.path = f"./pdfs/{file.name}"
+
+        process_pdf = cl.user_session.get('pdf_processor')            
+        await cl.make_async(process_pdf.process)([file.path for file in files])
+            
+        
     
 # def summarize(query: str, documents: List[Document]) -> str:
 #     """Summarizes a list of documents by extracting key points per parent document retrieved.
