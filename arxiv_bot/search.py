@@ -521,7 +521,6 @@ class IndexNewArxivPapers:
 
     google_api = GoogleSearchAPIWrapper()
     arxiv_client = arxiv.Client(delay_seconds=0)
-    chromadb_client = chromadb.PersistentClient("arxiv_vdb").get_or_create_collection("arxiv")
 
     def __init__(
         self,
@@ -539,6 +538,8 @@ class IndexNewArxivPapers:
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.pdf_parser = pdf_parser
+        self.chromadb_client = chromadb.PersistentClient("arxiv_vdb").get_or_create_collection("arxiv")
+         
 
     def _get_paper_ids(self, query: str) -> List[str]:
         """
