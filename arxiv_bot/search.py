@@ -535,6 +535,7 @@ class IndexNewArxivPapers:
 
     google_api = GoogleSearchAPIWrapper()
     arxiv_client = arxiv.Client(delay_seconds=0)
+
     def __init__(
         self,
         vectordb: VectorStore,
