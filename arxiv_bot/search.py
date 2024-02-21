@@ -570,17 +570,19 @@ class IndexNewArxivPapers:
         :raises IndexError: If no papers are found for the given query.
         """
         ARXIV_ID_REGEX = r"\d{4}\.\d{4,5}"
-        try:
-            ids = list(
-                {
-                    re.findall(ARXIV_ID_REGEX, result["link"])[0]
-                    for result in self.google_api.results(query, self.n_search_results)
-                }
-            )
-        except IndexError:
+
+        ids = set()
+        for result in self.google_api.results(query, self.n_search_results):
+            id = re.findall(ARXIV_ID_REGEX, result["link"])
+            if id:
+                ids.add(id[0])
+            else:
+                continue
+
+        if not ids:
             raise IndexError("No papers found, try a different query.")
 
-        return ids
+        return list(ids)
 
     def _run(self, query):
         """
@@ -591,11 +593,9 @@ class IndexNewArxivPapers:
         :return: The indexed documents.
         :rtype: List[Document]
         """
-        # with cl.Step():
         self.ids = self._get_paper_ids(query)
         os.makedirs(f"./output", exist_ok=True)
         os.makedirs(f"./pdfs", exist_ok=True)
-        print(self.chromadb_client)
 
         for id in self.ids:
             if len(self.chromadb_client.get(where={"paper_id": id})["ids"]) > 0:
@@ -638,5 +638,3 @@ class IndexNewArxivPapers:
 
     async def _arun(self, query: str):
         return self._run(query)
-
-    # test edit
