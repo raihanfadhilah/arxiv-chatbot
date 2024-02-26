@@ -1,3 +1,5 @@
+from dotenv import load_dotenv, find_dotenv
+import os
 from arxiv_bot.functions import (
     clear_pdf,
     init_file_upload,
@@ -8,17 +10,13 @@ from arxiv_bot.functions import (
     init_chat_settings,
 )
 from arxiv_bot.search import ProcessPDF
-from dotenv import load_dotenv
 import chainlit as cl
-import os
+from typing import Optional, Dict
 import warnings
 
 warnings.filterwarnings("ignore")
 
-try:
-    load_dotenv(override=True)
-except:
-    pass
+
 
 
 @cl.on_settings_update
@@ -53,6 +51,16 @@ async def start():
         persist_dir=PERSIST_DIR,
     )
     load_bot()
+    
+@cl.oauth_callback
+def oauth_callback(
+  provider_id: str,
+  token: str,
+  raw_user_data: Dict[str, str],
+  default_user: cl.User,
+) -> Optional[cl.User]:
+    return default_user
+    
 
 
 @cl.on_message
